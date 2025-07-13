@@ -1,14 +1,24 @@
-// pages/menu.js
+// pages/menu.js - Menu page with SEO
 import MenuSection from "@/components/MenuSection";
 import SEO from "@/components/SEO";
+import { generateMenuSchema, generateBreadcrumbSchema } from "@/lib/structuredData";
 import { getAllMenuItems } from "@/lib/sanity";
 
 export default function MenuPage({ menuItems }) {
+  const menuSchema = generateMenuSchema(menuItems);
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "https://blueheronsamuels.com/" },
+    { name: "Menu", url: "https://blueheronsamuels.com/menu" }
+  ]);
+
   return (
     <>
       <SEO
-        title="Menu | Blue Heron Café"
-        description="Browse our cozy café offerings — from hearty breakfasts to fresh lunches and baked goods."
+        title="Menu | Blue Heron Café - Fresh Breakfast, Lunch & Dinner in Samuels, ID"
+        description="Browse our menu of fresh, elevated homestyle cuisine. Breakfast served all day, gourmet lunch options, and dinner specials. Farm-to-table ingredients in Samuels, Idaho."
+        keywords="Blue Heron menu, breakfast Samuels Idaho, lunch Sandpoint, farm to table restaurant, fresh food menu, country dining Idaho"
+        url="/menu"
+        jsonLd={[menuSchema, breadcrumbSchema]}
       />
 
       <MenuSection

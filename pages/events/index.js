@@ -1,35 +1,35 @@
+// pages/events/index.js - Events page with SEO
 import Head from "next/head";
 import Link from "next/link";
 import { client } from "@/lib/sanity";
 import EventsCalendar from "@/components/EventsCalendar";
+import SEO from "@/components/SEO";
+import { generateBreadcrumbSchema } from "@/lib/structuredData";
 
 export default function EventsPage({ events }) {
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "https://blueheronsamuels.com/" },
+    { name: "Events", url: "https://blueheronsamuels.com/events" }
+  ]);
+
   const formatDate = (isoDate) => {
     const date = new Date(isoDate);
     return date.toLocaleDateString("en-US", {
       year: "numeric",
-      month: "long",
+      month: "long", 
       day: "numeric",
     });
   };
 
-  const formatTime = (timeString) => {
-    // Convert 24h to 12h format if needed
-    const [hours, minutes] = timeString.split(':');
-    const hour12 = ((parseInt(hours) + 11) % 12) + 1;
-    const ampm = parseInt(hours) >= 12 ? 'PM' : 'AM';
-    return `${hour12}:${minutes} ${ampm}`;
-  };
-
   return (
     <>
-      <Head>
-        <title>Events | Blue Heron Café</title>
-        <meta
-          name="description"
-          content="Experience live music and community gatherings at Blue Heron Café's stunning outdoor stage and patio in Samuels, Idaho."
-        />
-      </Head>
+      <SEO
+        title="Live Music Events | Blue Heron Café - Outdoor Stage & Patio in Samuels, ID"
+        description="Join us for live music and community events at our beautiful outdoor stage and patio. Check our calendar for upcoming concerts, gatherings, and seasonal celebrations in Samuels, Idaho."
+        keywords="live music Samuels Idaho, outdoor concerts Sandpoint, community events, Blue Heron events, outdoor stage Idaho, music venue"
+        url="/events"
+        jsonLd={breadcrumbSchema}
+      />
 
       <main className="pt-24 pb-32 min-h-screen bg-gradient-to-br from-emerald-50 via-white to-blue-50">
         {/* Hero Section */}

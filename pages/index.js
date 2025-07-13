@@ -1,31 +1,32 @@
-import MenuCarousel from "@/components/MenuCarousel";
+// pages/index.js - Homepage with SEO
+import SEO from "@/components/SEO";
+import { generateRestaurantSchema } from "@/lib/structuredData";
 import HeroSection from "../components/HeroSection";
+import MenuShowcase from "@/components/MenuShowcase";
 import EventsCarousel from "@/components/EventsCarousel";
 import AboutSection from "@/components/AboutSection";
 import GallerySection from "@/components/GallerySection";
 import Footer from "@/components/Footer";
-import SEO from "@/components/SEO";
-
-<SEO
-  title="Blue Heron Café | Samuels, ID"
-  description="Cozy country café offering fresh eats, baked goods, and local events. Located in Samuels, Idaho."
-  image="/images/blue-heron-hero.jpg"
-/>
-
 
 export default function Home() {
+  const restaurantSchema = generateRestaurantSchema();
+
   return (
-
     <>
-    <HeroSection />
-    <MenuCarousel />
-    <EventsCarousel />
-    <AboutSection />
-    <GallerySection />
-    <Footer />
-
-
-    
+      <SEO
+        title="Blue Heron Café | Fresh Country Dining in Samuels, Idaho"
+        description="Hidden gem café in Samuels, Idaho serving fresh, elevated homestyle food. Live music events, outdoor patio dining, and cozy atmosphere near Sandpoint."
+        keywords="restaurant Samuels Idaho, café Sandpoint, fresh food Idaho, live music events, outdoor dining, country store, homestyle cooking, farm to table"
+        url="/"
+        jsonLd={restaurantSchema}
+      />
+      
+      <HeroSection />
+      <MenuShowcase />
+      <EventsCarousel />
+      <AboutSection />
+      <GallerySection />
+      <Footer />
     </>
   );
 }

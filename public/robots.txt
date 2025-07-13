@@ -2,8 +2,13 @@
 User-agent: *
 Allow: /
 
+# *
+User-agent: *
+Disallow: /admin
+Disallow: /api
+
 # Host
-Host: https://blueheroncafe.com
+Host: https://blueheronsamuels.com
 
 # Sitemaps
-Sitemap: https://blueheroncafe.com/sitemap.xml
+Sitemap: https://blueheronsamuels.com/sitemap.xml

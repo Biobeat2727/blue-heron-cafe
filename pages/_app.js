@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import SplashScreen from "../components/SplashScreen";
 import Head from "next/head";
 import { useState, useEffect } from "react";
+import LocalBusinessSchema from "@/components/LocalBusinessSchema";
 
 export default function App({ Component, pageProps }) {
   const [showSplash, setShowSplash] = useState(true);
@@ -31,6 +32,8 @@ export default function App({ Component, pageProps }) {
         <meta name="description" content="A unique dining experience in Sandpoint, Idaho." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <LocalBusinessSchema />
 
       {/* Conditional rendering: Show splash only if showSplash is true AND hasVisited is false */}
       {showSplash && !hasVisited ? (

@@ -1,11 +1,26 @@
 // pages/about.js
+import SEO from "@/components/SEO";
+import { generateBreadcrumbSchema } from "@/lib/structuredData";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import GallerySection from "@/components/GallerySection";
 
 export default function AboutPage() {
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "https://blueheronsamuels.com/" },
+    { name: "About", url: "https://blueheronsamuels.com/about" }
+  ]);
+
   return (
     <>
+      <SEO
+        title="About Us | Blue Heron Café - Hidden Gem in Samuels, Idaho"
+        description="Discover the story behind Blue Heron Café, a hidden gem tucked behind Samuels Store. Fresh, elevated homestyle eats in a nature-inspired setting near Sandpoint, Idaho."
+        keywords="Blue Heron story, Samuels Idaho restaurant, hidden gem café, nature inspired dining, behind Samuels Store, Sandpoint area restaurant"
+        url="/about"
+        jsonLd={breadcrumbSchema}
+      />
+      
       <Navbar />
 
       {/* Hero Video Section */}
