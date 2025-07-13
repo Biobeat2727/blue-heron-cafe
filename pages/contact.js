@@ -1,5 +1,6 @@
-// pages/contact.js - Fixed Mobile Layout
+// pages/contact.js - Fixed Mobile Layout with Correct Hours and Full-Width Footer
 import { useState } from "react";
+
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -30,7 +31,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="pt-28 pb-16 px-6 min-h-screen bg-gradient-to-br from-cyan-50 to-blue-50">
+    <div className="pt-28 px-6 min-h-screen bg-gradient-to-br from-cyan-50 to-blue-50">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-cyan-900 font-serif">
@@ -116,7 +117,7 @@ export default function ContactPage() {
             </form>
           </div>
 
-          {/* Contact Info - Now Mobile Friendly */}
+          {/* Contact Info - Now Mobile Friendly with Correct Hours */}
           <div className="space-y-6">
             <div className="bg-white shadow-xl rounded-2xl p-6">
               <h2 className="text-xl font-bold text-cyan-800 mb-4 flex items-center">
@@ -126,11 +127,19 @@ export default function ContactPage() {
               <p className="text-gray-700 mb-2">486260 US-95</p>
               <p className="text-gray-700 mb-4">Sandpoint, ID 83864</p>
               
-              <h3 className="text-lg font-semibold text-cyan-800 mb-2 flex items-center">
+              <h3 className="text-lg font-semibold text-cyan-800 mb-3 flex items-center">
                 <span className="mr-2">🕒</span>
                 Hours
               </h3>
-              <p className="text-gray-700 mb-4">Mon – Sun: 7:00am – 3:00pm</p>
+              <div className="text-gray-700 space-y-1 mb-4">
+                <p><span className="font-medium">Sunday:</span> 6:00am – 2:00pm</p>
+                <p><span className="font-medium">Monday:</span> 6:00am – 2:00pm</p>
+                <p><span className="font-medium">Tuesday:</span> 6:00am – 7:30pm</p>
+                <p><span className="font-medium">Wednesday:</span> 6:00am – 7:30pm</p>
+                <p><span className="font-medium">Thursday:</span> 6:00am – 7:30pm</p>
+                <p><span className="font-medium">Friday:</span> 6:00am – 8:30pm</p>
+                <p><span className="font-medium">Saturday:</span> 6:00am – 8:30pm</p>
+              </div>
               
               <h3 className="text-lg font-semibold text-cyan-800 mb-2 flex items-center">
                 <span className="mr-2">📞</span>

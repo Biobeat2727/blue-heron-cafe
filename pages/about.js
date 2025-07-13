@@ -117,8 +117,6 @@ export default function AboutPage() {
         </h2>
         <GallerySection />
       </section>
-
-      <Footer />
     </>
   );
 }

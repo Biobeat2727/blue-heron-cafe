@@ -21,15 +21,24 @@ const Footer = () => {
             <li><Link href="/menu">Menu</Link></li>
             <li><Link href="/events">Events</Link></li>
             <li><Link href="/about">About</Link></li>
+            <li><Link href="/contact">Contact</Link></li>
           </ul>
         </div>
 
         {/* Contact / Hours */}
         <div>
-          <h3 className="text-lg font-semibold mb-2">Contact</h3>
-          <p className="text-sm">Samuels Store, ID 83864</p>
-          <p className="text-sm">Mon–Sat: 7am – 6pm</p>
-          <p className="text-sm">Phone: (208) 123-4567</p>
+          <h3 className="text-lg font-semibold mb-2">Contact & Hours</h3>
+          <p className="text-sm mb-2">486260 US-95, Sandpoint, ID 83864</p>
+          <div className="text-sm space-y-1 mb-2">
+            <p><span className="font-medium">Sun-Mon:</span> 6am–2pm</p>
+            <p><span className="font-medium">Tue-Thu:</span> 6am–7:30pm</p>
+            <p><span className="font-medium">Fri-Sat:</span> 6am–8:30pm</p>
+          </div>
+          <p className="text-sm">
+            <a href="tel:+12082631146" className="hover:text-cyan-300 transition-colors">
+              Phone: (208) 263-1146
+            </a>
+          </p>
         </div>
 
       </div>

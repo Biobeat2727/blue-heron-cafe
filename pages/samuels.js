@@ -100,8 +100,6 @@ export default function SamuelsPage() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </>
   );
 }

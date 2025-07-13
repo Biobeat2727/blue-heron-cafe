@@ -7,6 +7,7 @@ import StableEventsShowcase from "@/components/StableEventsShowcase";
 import AboutSection from "@/components/AboutSection";
 import GallerySection from "@/components/GallerySection";
 import Footer from "@/components/Footer";
+import ReviewsSection from "@/components/ReviewSection";
 
 export default function Home() {
   const restaurantSchema = generateRestaurantSchema();
@@ -26,6 +27,7 @@ export default function Home() {
       <StableEventsShowcase />
       <AboutSection />
       <GallerySection />
+      <ReviewsSection />
       <Footer />
     </>
   );

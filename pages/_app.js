@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer"; // Add this import
 import SplashScreen from "../components/SplashScreen";
 import Head from "next/head";
 import { useState, useEffect } from "react";
@@ -41,11 +42,10 @@ export default function App({ Component, pageProps }) {
       ) : (
         <>
           <Navbar />
-          {/* CORRECTED: Removed horizontal padding (px-*) from here.
-              Only pt-20 remains to push content below the navbar. */}
           <main className="pt-20">
             <Component {...pageProps} />
           </main>
+          <Footer /> {/* Add this line */}
         </>
       )}
     </>

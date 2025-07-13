@@ -1,35 +1,113 @@
-// pages/events/index.js - Events page with SEO
+// pages/events/index.js - Updated with client-side filtering as backup
+
 import Head from "next/head";
 import Link from "next/link";
-import { client } from "@/lib/sanity";
+import { client, getAllEvents } from "@/lib/sanity";
 import EventsCalendar from "@/components/EventsCalendar";
-import SEO from "@/components/SEO";
-import { generateBreadcrumbSchema } from "@/lib/structuredData";
 
 export default function EventsPage({ events }) {
-  const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Home", url: "https://blueheronsamuels.com/" },
-    { name: "Events", url: "https://blueheronsamuels.com/events" }
-  ]);
+  // Client-side filter as backup (in case Sanity query doesn't catch everything)
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Reset time to start of day
+  
+  const futureEvents = events.filter(event => {
+    const eventDate = new Date(event.date);
+    eventDate.setHours(0, 0, 0, 0);
+    return eventDate >= today;
+  });
 
   const formatDate = (isoDate) => {
     const date = new Date(isoDate);
     return date.toLocaleDateString("en-US", {
       year: "numeric",
-      month: "long", 
+      month: "long",
       day: "numeric",
     });
   };
 
+  const formatTime = (timeString) => {
+    // Convert 24h to 12h format if needed
+    const [hours, minutes] = timeString.split(':');
+    const hour12 = ((parseInt(hours) + 11) % 12) + 1;
+    const ampm = parseInt(hours) >= 12 ? 'PM' : 'AM';
+    return `${hour12}:${minutes} ${ampm}`;
+  };
+
+  // Show message if no upcoming events
+  if (futureEvents.length === 0) {
+    return (
+      <>
+        <Head>
+          <title>Events | Blue Heron Café</title>
+          <meta
+            name="description"
+            content="Experience live music and community gatherings at Blue Heron Café's stunning outdoor stage and patio in Samuels, Idaho."
+          />
+        </Head>
+
+        <main className="pt-24 pb-32 min-h-screen bg-gradient-to-br from-emerald-50 via-white to-blue-50">
+          {/* Hero Section */}
+          <div className="relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-emerald-600/10 to-blue-600/10 pointer-events-none"></div>
+            
+            <section className="text-center mb-16 px-6 max-w-5xl mx-auto relative">
+              <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
+                New Outdoor Stage & Patio Now Open!
+              </div>
+              
+              <h1 className="text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-emerald-700 via-blue-700 to-emerald-600 bg-clip-text text-transparent leading-tight">
+                Our Live Events
+              </h1>
+              
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed mb-8">
+                Join us at our beautiful new outdoor stage and patio area for unforgettable evenings of live music, community gatherings, and seasonal celebrations in the heart of Samuels, Idaho.
+              </p>
+            </section>
+          </div>
+
+          {/* No Events Message */}
+          <div className="px-6 max-w-4xl mx-auto text-center">
+            <div className="bg-white rounded-2xl shadow-lg p-12 border border-emerald-100">
+              <div className="text-6xl mb-6">🎵</div>
+              <h2 className="text-3xl font-bold text-gray-800 mb-4">
+                No Upcoming Events Scheduled
+              </h2>
+              <p className="text-lg text-gray-600 mb-8">
+                We're planning some amazing events for our outdoor stage and patio! 
+                Check back soon or follow us on social media for announcements.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a
+                  href="tel:+12082631146" // Use your actual number
+                  className="inline-flex items-center gap-2 bg-emerald-600 text-white px-6 py-3 rounded-lg hover:bg-emerald-700 transition font-semibold"
+                >
+                  📞 Call for Event Info
+                </a>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 border-2 border-emerald-600 text-emerald-600 px-6 py-3 rounded-lg hover:bg-emerald-600 hover:text-white transition font-semibold"
+                >
+                  📧 Contact Us
+                </Link>
+              </div>
+            </div>
+          </div>
+        </main>
+      </>
+    );
+  }
+
   return (
     <>
-      <SEO
-        title="Live Music Events | Blue Heron Café - Outdoor Stage & Patio in Samuels, ID"
-        description="Join us for live music and community events at our beautiful outdoor stage and patio. Check our calendar for upcoming concerts, gatherings, and seasonal celebrations in Samuels, Idaho."
-        keywords="live music Samuels Idaho, outdoor concerts Sandpoint, community events, Blue Heron events, outdoor stage Idaho, music venue"
-        url="/events"
-        jsonLd={breadcrumbSchema}
-      />
+      <Head>
+        <title>Events | Blue Heron Café</title>
+        <meta
+          name="description"
+          content="Experience live music and community gatherings at Blue Heron Café's stunning outdoor stage and patio in Samuels, Idaho."
+        />
+      </Head>
 
       <main className="pt-24 pb-32 min-h-screen bg-gradient-to-br from-emerald-50 via-white to-blue-50">
         {/* Hero Section */}
@@ -64,22 +142,22 @@ export default function EventsPage({ events }) {
           </section>
         </div>
 
-        {/* Events Calendar */}
+        {/* Events Calendar - Pass filtered events */}
         <div className="px-6 max-w-7xl mx-auto mb-16">
-          <EventsCalendar events={events} />
+          <EventsCalendar events={futureEvents} />
         </div>
 
         {/* Events Grid */}
         <div className="px-6 max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-12">
             <h2 className="text-4xl font-bold text-gray-900">
-              Upcoming Events
+              Upcoming Events ({futureEvents.length})
             </h2>
             <div className="h-px bg-gradient-to-r from-emerald-300 to-blue-300 flex-1 ml-8"></div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-            {events.map((event, index) => (
+            {futureEvents.map((event, index) => (
               <Link key={event._id} href={`/events/${event.slug.current}`}>
                 <div 
                   className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-emerald-200 transform hover:-translate-y-2"
@@ -146,11 +224,14 @@ export default function EventsPage({ events }) {
                 Ready to Experience Our Outdoor Stage?
               </h3>
               <p className="text-lg mb-6 text-emerald-100">
-                Book your table for the perfect evening under the stars with live music and great food.
+                Join us for an evening under the stars with live music and great food.
               </p>
-              <button className="bg-white text-emerald-600 font-bold py-3 px-8 rounded-full hover:bg-emerald-50 transition-colors shadow-lg">
-                Make a Reservation
-              </button>
+              <Link
+                href="/contact"
+                className="bg-white text-emerald-600 font-bold py-3 px-8 rounded-full hover:bg-emerald-50 transition-colors shadow-lg"
+              >
+                Get Event Updates
+              </Link>
             </div>
           </div>
         </div>
@@ -165,6 +246,7 @@ export async function getStaticProps() {
     title,
     date,
     time,
+    description,
     "slug": slug,
     "imageUrl": image.asset->url
   }`;
@@ -173,6 +255,6 @@ export async function getStaticProps() {
 
   return {
     props: { events },
-    revalidate: 60,
+    revalidate: 3600, // Revalidate every hour to ensure past events disappear
   };
 }

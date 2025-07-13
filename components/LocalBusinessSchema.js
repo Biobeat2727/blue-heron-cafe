@@ -22,7 +22,7 @@ export default function LocalBusinessSchema() {
       "latitude": 48.3686,
       "longitude": -116.5535
     },
-    "telephone": "(208) 555-1234",
+    "telephone": "(208) 263-1146",
     "email": "info@blueheronsamuels.com",
     "openingHours": ["Mo-Su 07:00-15:00"],
     "servesCuisine": ["American", "Country", "Farm-to-table"],
