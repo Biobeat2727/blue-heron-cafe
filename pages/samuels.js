@@ -39,7 +39,7 @@ export default function SamuelsPage() {
           viewport={{ once: true }}
         >
           <Image
-            src="/images/samuels/about.jpg"
+            src="/images/samuels/about1.jpg"
             alt="Inside Samuels Store"
             width={600}
             height={400}
@@ -56,8 +56,7 @@ export default function SamuelsPage() {
           <h2 className="text-3xl font-semibold mb-4 text-cyan-800 font-serif">More Than a Store</h2>
           <p className="text-gray-700 text-lg leading-relaxed">
             Tucked beside the Blue Heron Café, the Samuels Store offers a charming blend of local
-            convenience and country character. Whether you're fueling up at the pumps, grabbing a
-            fishing license, or picking up some snacks for the road, Samuels serves as a community
+            convenience and country character. Whether you're fueling up at the pumps, or picking up some snacks for the road, Samuels serves as a community
             hub for locals and travelers alike. Owned and operated alongside the Blue Heron,
             everything here reflects a commitment to small-town warmth and honest essentials.
           </p>
@@ -78,7 +77,7 @@ export default function SamuelsPage() {
           </motion.h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {["pump.jpg", "interior-1.jpg", "interior-2.jpg", "shelves.jpg", "local-products.jpg", "register.jpg"].map(
+            {["about1.jpg", "interior-1.jpg", "interior-2.jpg", "shelves.jpg", "local-products.jpg", "register.jpg", "sign.jpg"].map(
               (img, idx) => (
                 <motion.div
                   key={img}

@@ -3,7 +3,7 @@ import SEO from "@/components/SEO";
 import { generateRestaurantSchema } from "@/lib/structuredData";
 import HeroSection from "../components/HeroSection";
 import MenuShowcase from "@/components/MenuShowcase";
-import EventsCarousel from "@/components/EventsCarousel";
+import StableEventsShowcase from "@/components/StableEventsShowcase";
 import AboutSection from "@/components/AboutSection";
 import GallerySection from "@/components/GallerySection";
 import Footer from "@/components/Footer";
@@ -23,7 +23,7 @@ export default function Home() {
       
       <HeroSection />
       <MenuShowcase />
-      <EventsCarousel />
+      <StableEventsShowcase />
       <AboutSection />
       <GallerySection />
       <Footer />

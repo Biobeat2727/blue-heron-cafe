@@ -63,7 +63,7 @@ const MenuShowcase = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-cyan-700 via-emerald-600 to-cyan-800 bg-clip-text text-transparent font-serif">
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-cyan-700 font-serif" style={{ lineHeight: '1.2', paddingBottom: '8px' }}>
             Signature Favorites
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
