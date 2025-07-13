@@ -10,86 +10,84 @@ const MenuCarousel = () => {
     getFeaturedMenuItems().then(setItems);
   }, []);
 
-  return (
-    <section className="bg-white py-12">
-      <h2 className="text-3xl font-bold text-center mb-6">Featured Specials</h2>
+  const expandedItem = items.find((i) => i._id === expandedId);
 
-      <div className="px-4">
-        <div className="flex flex-wrap justify-center gap-6">
+  return (
+    <section className="bg-white py-16 px-4">
+      <div className="max-w-6xl mx-auto text-center">
+        <h2 className="text-4xl font-bold mb-10">Our Favorites</h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {items.map((item) => (
             <div
               key={item._id}
-              className="w-64 bg-emerald-50 rounded-lg shadow-md p-4 text-center cursor-pointer hover:scale-105 transition"
               onClick={() => setExpandedId(item._id)}
+              className="cursor-pointer bg-blue-100 rounded-xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden"
             >
               <img
                 src={item.imageUrl}
                 alt={item.title}
-                className="h-40 w-full object-cover rounded"
+                className="h-48 w-full object-cover"
               />
-              <div className="flex flex-col justify-between h-24 mt-3">
-                <h3 className="text-xl font-semibold">{item.title}</h3>
+              <div className="p-4">
+                <h3 className="text-xl font-bold">{item.title}</h3>
                 {item.price && (
-                  <p className="text-emerald-800 mt-2">{item.price}</p>
+                  <p className="text-yellow-700 mt-2 font-medium">{item.price}</p>
                 )}
               </div>
             </div>
           ))}
         </div>
-      </div>
 
-      <div className="text-center mt-8">
-        <a
-          href="/menu"
-          className="inline-block px-6 py-3 bg-emerald-600 text-white rounded-md text-lg font-semibold hover:bg-emerald-700 transition"
-        >
-          View Full Menu
-        </a>
+        <div className="mt-12">
+          <a
+            href="/menu"
+            className="inline-block px-6 py-3 bg-cyan-600 text-white rounded-md text-lg font-semibold hover:bg-cyan-700 transition"
+          >
+            View Full Menu
+          </a>
+        </div>
       </div>
 
       {/* Modal */}
       <AnimatePresence>
-        {expandedId && (
+        {expandedItem && (
           <motion.div
             key="modal"
-            className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center"
+            className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md h-[85vh] flex flex-col relative overflow-y-auto"
-              initial={{ scale: 0.85, opacity: 0 }}
+              className="bg-white rounded-xl shadow-2xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto relative"
+              initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.85, opacity: 0 }}
+              exit={{ scale: 0.95, opacity: 0 }}
               transition={{ duration: 0.3 }}
+              onClick={(e) => e.stopPropagation()}
             >
               <button
-                className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-2xl"
+                className="absolute top-3 right-4 text-gray-500 hover:text-gray-800 text-2xl"
                 onClick={() => setExpandedId(null)}
               >
                 ×
               </button>
 
-              {(() => {
-                const item = items.find((i) => i._id === expandedId);
-                if (!item) return null;
-
-                return (
-                  <>
-                    <img
-                      src={item.imageUrl}
-                      alt={item.title}
-                      className="w-full h-72 object-cover rounded-lg mb-6"
-                    />
-                    <h3 className="text-2xl font-bold mb-2">{item.title}</h3>
-                    <p className="text-emerald-800 font-semibold mb-4">
-                      {item.price}
-                    </p>
-                    <p className="text-gray-700">{item.description}</p>
-                  </>
-                );
-              })()}
+              <img
+                src={expandedItem.imageUrl}
+                alt={expandedItem.title}
+                className="w-full h-64 object-cover rounded-lg mb-6"
+              />
+              <h3 className="text-2xl font-bold mb-1">{expandedItem.title}</h3>
+              {expandedItem.price && (
+                <p className="text-cyan-700 font-semibold mb-4">
+                  {expandedItem.price}
+                </p>
+              )}
+              <p className="text-gray-700 whitespace-pre-line">
+                {expandedItem.description}
+              </p>
             </motion.div>
           </motion.div>
         )}

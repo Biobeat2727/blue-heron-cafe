@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="bg-emerald-900 text-white py-8 mt-12">
+    <footer className="bg-cyan-900 text-white py-8 mt-12">
       <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         
         {/* Logo / About */}
@@ -34,7 +34,7 @@ const Footer = () => {
 
       </div>
 
-      <div className="text-center text-xs mt-6 border-t border-emerald-700 pt-4">
+      <div className="text-center text-xs mt-6 border-t border-cyan-700 pt-4">
         © {new Date().getFullYear()} Blue Heron Café. All rights reserved.
       </div>
     </footer>

@@ -46,8 +46,8 @@ export default function MenuSection({ title, imageSrc, items }) {
             className="text-center text-sm text-gray-600 italic mb-8"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+            viewport={{ once: true, amount: 0.3 }}
           >
             {sectionNotes[title]}
           </motion.p>
@@ -64,11 +64,11 @@ export default function MenuSection({ title, imageSrc, items }) {
                       {sub.trim() !== "" && (
                         <>
                           <motion.h3
-                            className="text-2xl font-semibold text-emerald-800 mb-2 text-center"
+                            className="text-2xl font-semibold text-cyan-800 mb-2 text-center"
                             initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6 }}
-                            viewport={{ once: true }}
+                            transition={{ duration: 0.4 }}
+                            viewport={{ once: true, amount: 0.3 }}
                           >
                             {sub}
                           </motion.h3>
@@ -77,8 +77,8 @@ export default function MenuSection({ title, imageSrc, items }) {
                               className="text-sm text-gray-500 italic text-center mb-4"
                               initial={{ opacity: 0, y: 10 }}
                               whileInView={{ opacity: 1, y: 0 }}
-                              transition={{ duration: 0.6 }}
-                              viewport={{ once: true }}
+                              transition={{ duration: 0.4 }}
+                              viewport={{ once: true, amount: 0.3 }}
                             >
                               {subcategoryNotes[normalizedSub]}
                             </motion.p>
@@ -106,15 +106,15 @@ function AnimatedMenuList({ items }) {
       {items.map((item, index) => (
         <motion.li
           key={item._id}
-          className="border-b border-emerald-200 pb-4"
+          className="border-b border-cyan-200 pb-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: index * 0.1 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: index * 0.04 }}
+          viewport={{ once: true, amount: 0.2 }}
         >
           <div className="flex justify-between items-center text-lg font-semibold text-gray-900">
             <span>{item.title}</span>
-            {item.price && <span className="text-emerald-700">{item.price}</span>}
+            {item.price && <span className="text-cyan-700">{item.price}</span>}
           </div>
           {item.description && (
             <p className="text-sm text-gray-600 mt-1 italic">{item.description}</p>

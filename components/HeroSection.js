@@ -38,7 +38,7 @@ const HeroSection = () => {
 
         {/* Animated Tagline */}
         <motion.p
-          className="text-xl md:text-2xl mb-6 text-emerald-100"
+          className="text-xl md:text-2xl mb-6 text-cyan-100"
           initial={{ opacity: 0, y: 20 }} // Start slightly below and invisible
           animate={{ opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.5, ease: "easeInOut" } }} // Fade in and slide up (with a slight delay after headline)
         >
@@ -52,7 +52,7 @@ const HeroSection = () => {
         >
           <Link
             href="/menu"
-            className="inline-block px-6 py-3 bg-emerald-600 text-white rounded-md text-lg font-semibold hover:bg-emerald-700 transition"
+            className="inline-block px-6 py-3 bg-cyan-600 text-white rounded-md text-lg font-semibold hover:bg-cyan-700 transition"
           >
             View Menu
           </Link>

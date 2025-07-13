@@ -4,7 +4,7 @@ import EventsCarousel from "@/components/EventsCarousel";
 import AboutSection from "@/components/AboutSection";
 import GallerySection from "@/components/GallerySection";
 import Footer from "@/components/Footer";
-import SEO from "@/components/seo";
+import SEO from "@/components/SEO";
 
 <SEO
   title="Blue Heron Café | Samuels, ID"

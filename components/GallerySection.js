@@ -49,7 +49,7 @@ const GallerySection = () => {
       <div className="text-center mt-10">
         <a
           href="/gallery"
-          className="inline-block px-6 py-3 bg-emerald-600 text-white rounded-md text-lg font-semibold hover:bg-emerald-700 transition"
+          className="inline-block px-6 py-3 bg-cyan-600 text-white rounded-md text-lg font-semibold hover:bg-cyan-700 transition"
         >
           View Full Gallery
         </a>

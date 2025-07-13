@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const AboutSection = () => {
   return (
-    <section className="bg-emerald-50 py-16 px-6">
+    <section className="bg-cyan-50 py-16 px-6">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10">
         {/* Text Content */}
         <div className="md:w-1/2 text-center md:text-left">
@@ -15,7 +15,7 @@ const AboutSection = () => {
           </p>
           <Link
             href="/about"
-            className="inline-block px-6 py-3 bg-emerald-600 text-white rounded-md text-lg font-semibold hover:bg-emerald-700 transition"
+            className="inline-block px-6 py-3 bg-cyan-600 text-white rounded-md text-lg font-semibold hover:bg-cyan-700 transition"
           >
             Learn More About Us
           </Link>
