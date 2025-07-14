@@ -77,7 +77,7 @@ export default function SamuelsPage() {
           </motion.h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {["about1.jpg", "interior-1.jpg", "interior-2.jpg", "shelves.jpg", "local-products.jpg", "register.jpg", "sign.JPG"].map(
+            {["about1.JPG", "interior-1.jpg", "interior-2.jpg", "shelves.jpg", "local-products.jpg", "register.jpg", "sign.JPG"].map(
               (img, idx) => (
                 <motion.div
                   key={img}
