@@ -247,13 +247,6 @@ const MenuShowcase = () => {
                   >
                     View Full Menu
                   </Link>
-                  <Link
-                    href="/contact"
-                    className="flex-1 bg-gray-100 text-gray-700 text-center py-3 px-6 rounded-lg font-semibold hover:bg-gray-200 transition-colors"
-                    onClick={() => setSelectedItem(null)}
-                  >
-                    Make Reservation
-                  </Link>
                 </div>
               </div>
             </motion.div>
