@@ -19,7 +19,7 @@ const MenuShowcase = () => {
     { id: "breakfast", name: "Breakfast", icon: "🥞" },
     { id: "lunch", name: "Lunch", icon: "🥗" },
     { id: "dinner", name: "Dinner", icon: "🍽️" },
-    { id: "baked", name: "Desserts", icon: "🧁" }
+    { id: "desserts", name: "Desserts", icon: "🧁" }
   ];
 
   const filteredItems = activeCategory === "all" 
@@ -67,7 +67,7 @@ const MenuShowcase = () => {
             Signature Favorites
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Discover the dishes that make Blue Heron Café special — fresh, elevated comfort food that brings people together.
+            Discover the dishes that make Blue Heron Café special. Fresh, elevated comfort food that brings people together.
           </p>
         </motion.div>
 

@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useAnimation } from "framer-motion";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   const controls = useAnimation();
   const [lastY, setLastY] = useState(0);
   const [scrollTimeout, setScrollTimeout] = useState(null);
@@ -12,15 +13,27 @@ const Navbar = () => {
     const handleScroll = () => {
       const currentY = window.scrollY;
       const delta = currentY - lastY;
+      
+      setScrollY(currentY); // Track scroll position for logo scaling
 
       if (Math.abs(delta) > 25) {
         if (delta > 0 && currentY > 100) {
-          controls.start({ y: -100, opacity: 0 });
+          // Scrolling down
+          controls.start({ 
+            y: -100, 
+            opacity: 0,
+            transition: { duration: 0.2, ease: "easeOut" }
+          });
         } else {
+          // Scrolling up
           if (scrollTimeout) clearTimeout(scrollTimeout);
           const timeout = setTimeout(() => {
-            controls.start({ y: 0, opacity: 1 });
-          }, 100);
+            controls.start({ 
+              y: 0, 
+              opacity: 1,
+              transition: { duration: 0.3, ease: "easeOut" }
+            });
+          }, 50);
           setScrollTimeout(timeout);
         }
         setLastY(currentY);
@@ -35,22 +48,24 @@ const Navbar = () => {
   }, [lastY, controls, scrollTimeout]);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  
+  // Determine if logo should be compact
+  const isCompact = scrollY > 50;
 
   return (
     <motion.nav
       animate={controls}
       initial={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="bg-gradient-to-b from-black to-cyan-700 fixed top-0 w-full z-50 shadow-md h-20 overflow-visible"
+      className="bg-gradient-to-b from-black to-cyan-700 fixed top-0 w-full z-50 shadow-md h-20"
     >
       <div className="max-w-6xl mx-auto h-full px-6 flex items-center justify-between relative">
 
-        {/* Left Links */}
-        <div className="hidden md:flex gap-4 text-white text-lg font-medium absolute left-1/4 -translate-x-1/2">
-
-          <Link href="/menu">Menu</Link>
-          <Link href="/events">Events</Link>
-          <Link href="/gallery">Gallery</Link>
+        {/* Left Links - Back to Original Position */}
+        <div className="hidden md:flex gap-4 text-white text-lg font-medium absolute left-6">
+          <Link href="/menu" className="hover:text-cyan-200 transition-colors">Menu</Link>
+          <Link href="/events" className="hover:text-cyan-200 transition-colors">Events</Link>
+          <Link href="/gallery" className="hover:text-cyan-200 transition-colors">Gallery</Link>
         </div>
 
         {/* Mobile Hamburger */}
@@ -64,28 +79,39 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Centered Logo */}
+        {/* Centered Logo with Scaling and Hover Effects */}
         <div className="absolute left-1/2 top-0 transform -translate-x-1/2 z-50">
-          <Link href="/" className="pointer-events-auto block">
-            <img
-              src="/images/blue-heron-vertical-logo.png"
-              alt="Blue Heron Logo"
-              className="h-28 w-auto"
-            />
+          <Link href="/" className="pointer-events-auto block group">
+            <motion.div
+              className="relative"
+              animate={{ 
+                scale: isCompact ? 0.95 : 1,
+              }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            >
+              {/* Subtle glow effect on hover */}
+              <div className="absolute inset-0 bg-cyan-400/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+              <motion.img
+                src="/images/blue-heron-vertical-logo.png"
+                alt="Blue Heron Logo"
+                className="relative z-10 w-auto drop-shadow-lg h-28"
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.2 }}
+              />
+            </motion.div>
           </Link>
         </div>
 
-        {/* Right Links */}
-        <div className="hidden md:flex gap-4 text-white text-lg font-medium absolute right-1/4 translate-x-1/2">
-
-          
-          <Link href="/about">About</Link>
-          <Link href="/contact">Contact</Link>
-          <Link href="/samuels">Samuels Store</Link>
+        {/* Right Links - Back to Original Position */}
+        <div className="hidden md:flex gap-4 text-white text-lg font-medium absolute right-6">
+          <Link href="/about" className="hover:text-cyan-200 transition-colors">About</Link>
+          <Link href="/contact" className="hover:text-cyan-200 transition-colors">Contact</Link>
+          <Link href="/samuels" className="hover:text-cyan-200 transition-colors">Samuels Store</Link>
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer - Keep Original */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div

@@ -19,6 +19,7 @@ export default function MenuSection({ title, imageSrc, items }) {
   };
 
   const sectionNotes = {
+    Tidbits: "Split Meals or Extra Plates charge: $2",
     Dinner: "Starts @4pm. All *Entrees come with your choice of soup or salad, mashed potatoes or smashed baby yellows, and fresh steamed vegetables.",
   };
 

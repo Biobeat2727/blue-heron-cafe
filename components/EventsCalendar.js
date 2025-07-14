@@ -1,8 +1,8 @@
-// components/EventsCalendar.js
-import { useMemo, useRef } from "react"; // Combined imports
-import { motion, useScroll, useTransform } from "framer-motion";
+// components/EventsCalendar.js - Now actually functional!
+import { useMemo, useRef, useState } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Calendar from "react-calendar";
-import 'react-calendar/dist/Calendar.css'; // Essential for default styles
+import 'react-calendar/dist/Calendar.css';
 
 const formatDate = (date) => date.toISOString().split("T")[0];
 
@@ -11,6 +11,9 @@ const EventsCalendar = ({ events }) => {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const scale = useTransform(scrollYProgress, [0, 1], [1.1, 1]);
   const opacity = useTransform(scrollYProgress, [0, 1], [0.6, 1]);
+  
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [showEventPopup, setShowEventPopup] = useState(false);
 
   const eventDates = useMemo(() => {
     const map = {};
@@ -21,6 +24,15 @@ const EventsCalendar = ({ events }) => {
     });
     return map;
   }, [events]);
+
+  const formatEventDate = (isoDate) => {
+    const date = new Date(isoDate);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
 
   const tileContent = ({ date, view }) => {
     const dateStr = formatDate(date);
@@ -48,14 +60,36 @@ const EventsCalendar = ({ events }) => {
   const handleClickDay = (value) => {
     const clickedDate = formatDate(value);
     const eventsOnDate = eventDates[clickedDate];
-    if (!eventsOnDate || eventsOnDate.length === 0) return; // Added check for empty array
-
-    const targetId = `event-${eventsOnDate[0]._id}`; // Assuming _id exists and is unique
-    const targetEl = document.getElementById(targetId);
-    if (targetEl) {
-      targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Added block: 'start' for better UX
+    
+    if (!eventsOnDate || eventsOnDate.length === 0) {
+      setShowEventPopup(false);
+      return;
     }
+
+    setSelectedDate(clickedDate);
+    setShowEventPopup(true);
+
+    // Also scroll to the first event of that date in the main events grid
+    setTimeout(() => {
+      const targetId = `event-${eventsOnDate[0]._id}`;
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        targetEl.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center',
+          inline: 'nearest'
+        });
+        
+        // Add a brief highlight effect
+        targetEl.classList.add('ring-4', 'ring-cyan-300', 'ring-opacity-75');
+        setTimeout(() => {
+          targetEl.classList.remove('ring-4', 'ring-cyan-300', 'ring-opacity-75');
+        }, 2000);
+      }
+    }, 100);
   };
+
+  const selectedEvents = selectedDate ? eventDates[selectedDate] || [] : [];
 
   return (
     <section ref={ref} className="relative w-full py-24 bg-gradient-to-b from-slate-50 to-white">
@@ -81,17 +115,14 @@ const EventsCalendar = ({ events }) => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true, amount: 0.3 }}
           >
-            Click on any highlighted date to view scheduled events and jump to them below.
+            Click on any highlighted date to view event details and jump to them below.
           </motion.p>
         </motion.div>
 
         {/* Calendar Container */}
-        {/* The outer div ensures its content is horizontally centered */}
         <div className="flex justify-center">
           <motion.div
-            // `mx-auto` ensures this block element is centered within its flex parent
-            // `w-full max-w-lg` sets its maximum width and makes it fill available space up to that max
-            className="w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden border border-cyan-100 mx-auto"
+            className="w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden border border-cyan-100 mx-auto relative"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -101,19 +132,14 @@ const EventsCalendar = ({ events }) => {
             {/* Calendar Header */}
             <div className="bg-gradient-to-r from-cyan-600 to-cyan-700 p-6 text-white text-center">
               <h3 className="text-xl font-semibold">Upcoming Events</h3>
-              <p className="text-cyan-100 text-sm mt-1">Select a date to view details</p>
+              <p className="text-cyan-100 text-sm mt-1">Click a date to see event details</p>
             </div>
 
             {/* Calendar Body */}
-            {/* Removed the inner flex centering here, as `react-calendar` is block-level */}
             <div className="p-6">
-              {/* The Calendar component itself will be centered via mx-auto, filling its parent's width */}
               <Calendar
                 onClickDay={handleClickDay}
                 tileContent={tileContent}
-                // `w-full` makes it take up 100% of its parent's width
-                // `mx-auto` centers the calendar if it doesn't take 100% of the parent (e.g., if max-width was applied to the calendar itself, but here it's on the parent container)
-                // Removed redundant inline styles for width, margin, display as Tailwind handles it
                 className="w-full border-0 bg-transparent custom-blue-heron-calendar mx-auto"
               />
             </div>
@@ -135,12 +161,98 @@ const EventsCalendar = ({ events }) => {
                 </div>
               </div>
             </div>
+
+            {/* Event Popup */}
+            <AnimatePresence>
+              {showEventPopup && selectedEvents.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.8, y: 20 }}
+                  className="absolute inset-x-4 top-4 bg-white rounded-xl shadow-2xl border-2 border-cyan-200 z-50 max-h-80 overflow-y-auto"
+                >
+                  <div className="p-4">
+                    <div className="flex justify-between items-center mb-3">
+                      <h4 className="font-bold text-lg text-cyan-800">
+                        {formatEventDate(selectedDate)}
+                      </h4>
+                      <button
+                        onClick={() => setShowEventPopup(false)}
+                        className="text-gray-400 hover:text-red-500 text-xl font-bold w-6 h-6 flex items-center justify-center"
+                      >
+                        ×
+                      </button>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      {selectedEvents.map((event) => (
+                        <div key={event._id} className="border-l-4 border-cyan-500 pl-3 py-2">
+                          <a 
+                            href={`/events/${event.slug?.current || event.slug}`}
+                            className="block hover:bg-gray-50 rounded p-2 -m-2 transition-colors"
+                          >
+                            <h5 className="font-semibold text-gray-900 hover:text-cyan-700">{event.title}</h5>
+                            <p className="text-sm text-gray-600 flex items-center gap-1">
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              </svg>
+                              {event.time}
+                            </p>
+                            {event.description && (
+                              <p className="text-sm text-gray-700 mt-1 line-clamp-2">
+                                {event.description.length > 80 
+                                  ? event.description.substring(0, 80) + "..." 
+                                  : event.description}
+                              </p>
+                            )}
+                            <p className="text-xs text-cyan-600 mt-1 flex items-center gap-1">
+                              Click to view full details
+                              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                              </svg>
+                            </p>
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    {selectedEvents.length === 1 ? (
+                      <a
+                        href={`/events/${selectedEvents[0].slug?.current || selectedEvents[0].slug}`}
+                        className="w-full mt-4 bg-cyan-600 text-white py-2 px-4 rounded-lg text-sm font-semibold hover:bg-cyan-700 transition-colors block text-center"
+                      >
+                        View Full Event Details
+                      </a>
+                    ) : (
+                      <button
+                        onClick={() => {
+                          setShowEventPopup(false);
+                          // Scroll to events section for multiple events
+                          const eventsSection = document.getElementById('events-grid') || 
+                                              document.querySelector('[data-events-section]') ||
+                                              document.querySelector('.grid') ||
+                                              document.querySelector('main > div:last-child');
+                          
+                          if (eventsSection) {
+                            eventsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                          } else {
+                            window.scrollBy({ top: 600, behavior: 'smooth' });
+                          }
+                        }}
+                        className="w-full mt-4 bg-cyan-600 text-white py-2 px-4 rounded-lg text-sm font-semibold hover:bg-cyan-700 transition-colors"
+                      >
+                        View All Events for This Day
+                      </button>
+                    )}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         </div>
       </div>
 
-      {/* Custom Styles */}
-      {/* Moved some of the inline width/margin resets into the CSS for cleaner separation */}
+      {/* Custom Styles - Same as before */}
       <style jsx global>{`
         .custom-blue-heron-calendar {
           font-family: inherit;
@@ -176,14 +288,14 @@ const EventsCalendar = ({ events }) => {
         .custom-blue-heron-calendar .react-calendar__month-view__weekdays,
         .custom-blue-heron-calendar .react-calendar__month-view__days {
           width: 100% !important;
-          margin-left: auto !important; /* Ensures internal centering */
-          margin-right: auto !important; /* Ensures internal centering */
+          margin-left: auto !important;
+          margin-right: auto !important;
           padding: 0 !important;
         }
 
         .custom-blue-heron-calendar .react-calendar__month-view__weekdays {
           margin-bottom: 8px !important;
-          display: table !important; /* Force table display for correct column layout */
+          display: table !important;
           table-layout: fixed !important;
           border-spacing: 0 !important;
         }
@@ -201,7 +313,7 @@ const EventsCalendar = ({ events }) => {
         }
 
         .custom-blue-heron-calendar .react-calendar__month-view__days {
-          display: table !important; /* Force table display for correct cell layout */
+          display: table !important;
           table-layout: fixed !important;
           border-spacing: 2px !important;
         }

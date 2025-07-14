@@ -36,6 +36,12 @@ export default function MenuPage({ menuItems }) {
       />
 
       <MenuSection
+        title="Tidbits"
+        imageSrc="/images/menu-categories/tidbits.jpg"
+        items={menuItems.filter((item) => item.category === "tidbits")}
+        />
+
+      <MenuSection
         title="Dinner"
         imageSrc="/images/menu-categories/dinner.jpg"
         items={menuItems.filter((item) => item.category === "dinner")}
@@ -44,8 +50,13 @@ export default function MenuPage({ menuItems }) {
       <MenuSection
         title="Desserts"
         imageSrc="/images/menu-categories/dessert.jpg"
-        items={menuItems.filter((item) => item.category === "baked")}
+        items={menuItems.filter((item) => item.category === "desserts")}
       />
+      <MenuSection 
+        title="Drinks"
+        imageSrc="/images/menu-categories/drinks.jpg"
+        items={menuItems.filter((item) => item.category === "drinks")}
+      />  
     </>
   );
 }
