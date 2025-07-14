@@ -1,5 +1,3 @@
-// pages/events/index.js - Updated with client-side filtering as backup
-
 import Head from "next/head";
 import Link from "next/link";
 import { client, getAllEvents } from "@/lib/sanity";
@@ -16,11 +14,25 @@ export default function EventsPage({ events }) {
     return eventDate >= today;
   });
 
+  // Fixed timezone-safe date formatting
   const formatDate = (isoDate) => {
+    // If it's a string in YYYY-MM-DD format, parse it as local date
+    if (typeof isoDate === 'string') {
+      const [year, month, day] = isoDate.split('-').map(Number);
+      // Create date at noon local time to avoid timezone shifts
+      const localDate = new Date(year, month - 1, day, 12, 0, 0);
+      return localDate.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    }
+    
+    // Fallback for Date objects
     const date = new Date(isoDate);
     return date.toLocaleDateString("en-US", {
       year: "numeric",
-      month: "long",
+      month: "long", 
       day: "numeric",
     });
   };
@@ -162,6 +174,7 @@ export default function EventsPage({ events }) {
                 <div 
                   className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-emerald-200 transform hover:-translate-y-2"
                   style={{ animationDelay: `${index * 100}ms` }}
+                  data-event-date={event.date} // Added for calendar clicking
                 >
                   <div className="relative aspect-[5/3] w-full overflow-hidden">
                     <img
