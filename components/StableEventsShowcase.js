@@ -1,4 +1,4 @@
-// components/StableEventsShowcase.js - Professional but stable version with date filtering
+// components/StableEventsShowcase.js - Fixed timezone issues
 import { useEffect, useState } from "react";
 import { getUpcomingEvents } from "@/lib/sanity";
 import { AnimatePresence } from "framer-motion";
@@ -30,21 +30,67 @@ const StableEventsShowcase = () => {
     });
   }, []);
 
+  // Fixed timezone-safe date formatting
   const formatDate = (isoDate) => {
+    // If it's a string in YYYY-MM-DD format, parse it as local date
+    if (typeof isoDate === 'string') {
+      const [year, month, day] = isoDate.split('-').map(Number);
+      // Create date at noon local time to avoid timezone shifts
+      const localDate = new Date(year, month - 1, day, 12, 0, 0);
+      return localDate.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    }
+    
+    // Fallback for Date objects
     const date = new Date(isoDate);
     return date.toLocaleDateString("en-US", {
       year: "numeric",
-      month: "long",
+      month: "long", 
       day: "numeric",
     });
   };
 
+  // Fixed timezone-safe short date formatting
   const formatDateShort = (isoDate) => {
+    // If it's a string in YYYY-MM-DD format, parse it as local date
+    if (typeof isoDate === 'string') {
+      const [year, month, day] = isoDate.split('-').map(Number);
+      // Create date at noon local time to avoid timezone shifts
+      const localDate = new Date(year, month - 1, day, 12, 0, 0);
+      return {
+        month: localDate.toLocaleDateString("en-US", { month: "short" }),
+        day: localDate.getDate()
+      };
+    }
+    
+    // Fallback for Date objects
     const date = new Date(isoDate);
     return {
       month: date.toLocaleDateString("en-US", { month: "short" }),
       day: date.getDate()
     };
+  };
+
+  // Fixed timezone-safe "today" check
+  const isEventToday = (eventDateString) => {
+    const today = new Date();
+    
+    if (typeof eventDateString === 'string') {
+      const [year, month, day] = eventDateString.split('-').map(Number);
+      const eventDate = new Date(year, month - 1, day, 12, 0, 0);
+      
+      return (
+        today.getFullYear() === eventDate.getFullYear() &&
+        today.getMonth() === eventDate.getMonth() &&
+        today.getDate() === eventDate.getDate()
+      );
+    }
+    
+    const eventDate = new Date(eventDateString);
+    return today.toDateString() === eventDate.toDateString();
   };
 
   // Show loading state
@@ -86,11 +132,7 @@ const StableEventsShowcase = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {events.map((event) => {
               const dateInfo = formatDateShort(event.date);
-              
-              // Check if event is today
-              const today = new Date();
-              const eventDate = new Date(event.date);
-              const isToday = today.toDateString() === eventDate.toDateString();
+              const isToday = isEventToday(event.date);
               
               return (
                 <div
