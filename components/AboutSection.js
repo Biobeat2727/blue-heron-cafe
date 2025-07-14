@@ -24,7 +24,7 @@ const AboutSection = () => {
         {/* Image */}
         <div className="md:w-1/2">
           <img
-            src="/images/about-owner2.jpg"
+            src="/images/about-owner2.JPG"
             alt="Owner of Blue Heron Café"
             className="rounded-lg shadow-lg w-full h-auto object-cover"
           />
