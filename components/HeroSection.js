@@ -48,7 +48,7 @@ const HeroSection = () => {
         style={{ y, opacity }}
       >
         <img
-          src="/images/blue-heron-hero2.JPG"
+          src="/images/blue-heron-hero2.webp"
           alt="Scenic view of Sandpoint, Idaho near Lake Pend Oreille"
           className="w-full h-full object-cover"
           loading="eager"
