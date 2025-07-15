@@ -1,4 +1,4 @@
-// pages/index.js - Homepage with SEO
+// pages/index.js - Homepage with Enhanced SEO
 import SEO from "@/components/SEO";
 import { generateRestaurantSchema } from "@/lib/structuredData";
 import HeroSection from "../components/HeroSection";
@@ -17,8 +17,10 @@ export default function Home() {
       <SEO
         title="Blue Heron Café | Fresh Country Dining in Samuels, Idaho"
         description="Hidden gem café in Samuels, Idaho serving fresh, elevated homestyle food. Live music events, outdoor patio dining, and cozy atmosphere near Sandpoint."
+        image="/images/og-image.jpg" // Make sure this exists and is 1200x630px
         keywords="restaurant Samuels Idaho, café Sandpoint, fresh food Idaho, live music events, outdoor dining, country store, homestyle cooking, farm to table"
-        url="/"
+        url="https://blueheronsamuels.com"
+        type="website"
         jsonLd={restaurantSchema}
       />
       
