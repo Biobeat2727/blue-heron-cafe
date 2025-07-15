@@ -1,10 +1,10 @@
-// components/SEO.js - Enhanced Version
+// components/SEO.js - Enhanced Version with OG Image Properties
 import Head from "next/head";
 
 export default function SEO({
   title = "Blue Heron Café | Fresh Country Dining in Samuels, Idaho",
   description = "Hidden gem café in Samuels, Idaho serving fresh, elevated homestyle food. Live music events, outdoor patio dining, and cozy atmosphere near Sandpoint.",
-  image = "/images/blue-heron-hero.jpg",
+  image = "/images/og-image.jpg", // Changed to a dedicated OG image
   url = "https://blueheronsamuels.com",
   type = "website",
   keywords = "restaurant Samuels Idaho, café Sandpoint, fresh food Idaho, live music events, outdoor dining, country store, homestyle cooking",
@@ -13,7 +13,7 @@ export default function SEO({
   noindex = false,
   jsonLd
 }) {
-  const siteUrl = "https://blueheronsamuels.com"; // Replace with your actual domain
+  const siteUrl = "https://blueheronsamuels.com";
   const fullUrl = url.startsWith('http') ? url : `${siteUrl}${url}`;
   const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
   const canonicalUrl = canonical || fullUrl;
@@ -30,10 +30,14 @@ export default function SEO({
       {/* Robots */}
       {noindex && <meta name="robots" content="noindex,nofollow" />}
       
-      {/* Open Graph */}
+      {/* Open Graph - Enhanced with image properties */}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={fullImageUrl} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="Blue Heron Café - Cozy country dining in Samuels, Idaho with outdoor patio and live events" />
+      <meta property="og:image:type" content="image/jpeg" />
       <meta property="og:url" content={fullUrl} />
       <meta property="og:type" content={type} />
       <meta property="og:site_name" content="Blue Heron Café" />
@@ -44,6 +48,7 @@ export default function SEO({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={fullImageUrl} />
+      <meta name="twitter:image:alt" content="Blue Heron Café - Cozy country dining in Samuels, Idaho" />
       
       {/* Geographic SEO */}
       <meta name="geo.region" content="US-ID" />
