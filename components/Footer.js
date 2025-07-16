@@ -37,7 +37,7 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-2">Follow Us</h3>
           <div className="flex space-x-4">
             <a
-              href="https://facebook.com/blueheroncafe"
+              href="https://facebook.com/blueheronsandpoint"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white hover:text-cyan-300 transition-colors"
@@ -48,7 +48,7 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              href="https://instagram.com/blueheroncafe"
+              href="https://instagram.com/blue.heroncafe"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white hover:text-cyan-300 transition-colors"

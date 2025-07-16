@@ -61,7 +61,7 @@ const Navbar = () => {
     >
       <div className="max-w-6xl mx-auto h-full px-6 flex items-center justify-between relative">
 
-        {/* Left Links - Back to Original Position */}
+        {/* Left Links - Desktop Only */}
         <div className="hidden md:flex gap-4 text-white text-lg font-medium absolute left-6">
           <Link href="/menu" className="hover:text-cyan-200 transition-colors">Menu</Link>
           <Link href="/events" className="hover:text-cyan-200 transition-colors">Events</Link>
@@ -72,10 +72,15 @@ const Navbar = () => {
         <div className="md:hidden flex items-center">
           <button
             onClick={toggleMenu}
-            className="text-white text-3xl focus:outline-none"
+            className="text-white text-3xl focus:outline-none transition-transform duration-200"
             aria-label="Toggle menu"
           >
-            &#9776;
+            <motion.div
+              animate={{ rotate: isMenuOpen ? 90 : 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              {isMenuOpen ? "✕" : "☰"}
+            </motion.div>
           </button>
         </div>
 
@@ -103,7 +108,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Right Links - Back to Original Position */}
+        {/* Right Links - Desktop Only */}
         <div className="hidden md:flex gap-4 text-white text-lg font-medium absolute right-6">
           <Link href="/about" className="hover:text-cyan-200 transition-colors">About</Link>
           <Link href="/contact" className="hover:text-cyan-200 transition-colors">Contact</Link>
@@ -111,33 +116,42 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Drawer - Keep Original */}
+      {/* Mobile Dropdown Menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="md:hidden fixed top-0 right-0 h-full w-56 bg-black/90 backdrop-blur-md shadow-2xl z-50 rounded-l-xl p-6 flex flex-col gap-6"
+            className="md:hidden bg-black/95 backdrop-blur-md border-t border-cyan-600/30 overflow-hidden"
           >
-            <button
-              onClick={toggleMenu}
-              className="text-white hover:text-red-400 text-2xl self-end"
-              aria-label="Close menu"
-            >
-              ✕
-            </button>
-            {["Home", "Menu", "Events", "Gallery", "About", "Contact"].map((label) => (
-              <Link
-                key={label}
-                href={label === "Home" ? "/" : `/${label.toLowerCase()}`}
-                onClick={toggleMenu}
-                className="text-white text-lg font-semibold hover:text-cyan-300 w-full text-center px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition"
-              >
-                {label}
-              </Link>
-            ))}
+            <div className="px-6 py-4 space-y-2">
+              {[
+                { label: "Home", href: "/" },
+                { label: "Menu", href: "/menu" },
+                { label: "Events", href: "/events" },
+                { label: "Gallery", href: "/gallery" },
+                { label: "About", href: "/about" },
+                { label: "Contact", href: "/contact" },
+                { label: "Samuels Store", href: "/samuels" }
+              ].map((item, index) => (
+                <motion.div
+                  key={item.label}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2, delay: index * 0.05 }}
+                >
+                  <Link
+                    href={item.href}
+                    onClick={toggleMenu}
+                    className="block text-white text-lg font-semibold hover:text-cyan-300 hover:bg-white/10 px-4 py-3 rounded-lg transition-all duration-200"
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
