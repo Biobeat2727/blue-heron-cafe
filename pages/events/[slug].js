@@ -1,8 +1,9 @@
-// pages/events/[slug].js - Modern event detail page
+// pages/events/[slug].js - Enhanced with Working Poster Lightbox
+import { useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { client } from "@/lib/sanity";
 import imageUrlBuilder from "@sanity/image-url";
 
@@ -13,6 +14,7 @@ function urlFor(source) {
 
 export default function EventDetail({ event }) {
   const router = useRouter();
+  const [showPosterLightbox, setShowPosterLightbox] = useState(false);
 
   if (router.isFallback) {
     return (
@@ -204,7 +206,7 @@ export default function EventDetail({ event }) {
               >
                 <h2 className="text-2xl font-bold text-gray-900 mb-6 font-serif">Event Details</h2>
                 {description && (
-                  <div className="prose prose-lg text-gray-700 leading-relaxed">
+                  <div className="prose prose-lg text-gray-700 leading-relaxed mb-8">
                     {description.split('\n').map((paragraph, index) => (
                       <p key={index} className="mb-4">
                         {paragraph}
@@ -214,9 +216,50 @@ export default function EventDetail({ event }) {
                 )}
                 
                 {!description && (
-                  <p className="text-gray-600 italic">
+                  <p className="text-gray-600 italic mb-8">
                     More details about this event will be available soon. Contact us for more information!
                   </p>
+                )}
+
+                {/* Event Poster Section */}
+                {image && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
+                    className="mt-8"
+                  >
+                    <h3 className="text-xl font-bold text-gray-900 mb-4 font-serif">Event Poster</h3>
+                    <div 
+                      className="relative group cursor-pointer"
+                      onClick={() => {
+                        console.log("Poster clicked!"); // Debug log
+                        setShowPosterLightbox(true);
+                      }}
+                    >
+                      <img
+                        src={urlFor(image).width(600).url()}
+                        alt={`${title} Event Poster`}
+                        className="w-full max-w-md mx-auto rounded-xl shadow-lg transition-all duration-300 group-hover:shadow-2xl group-hover:scale-105"
+                      />
+                      
+                      {/* Overlay with zoom icon */}
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 rounded-xl flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        <div className="bg-white/90 backdrop-blur-sm rounded-full p-3 shadow-lg">
+                          <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                          </svg>
+                        </div>
+                      </div>
+                      
+                      {/* Click to view text */}
+                      <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="bg-black/70 backdrop-blur-sm text-white text-sm px-3 py-2 rounded-lg text-center">
+                          Click to view full poster
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
                 )}
               </motion.div>
             </div>
@@ -345,6 +388,52 @@ export default function EventDetail({ event }) {
           </div>
         </div>
       </main>
+
+      {/* Custom Poster Lightbox Modal */}
+      <AnimatePresence>
+        {showPosterLightbox && image && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+            onClick={() => setShowPosterLightbox(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              className="relative max-w-4xl max-h-[90vh] w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setShowPosterLightbox(false)}
+                className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors z-10"
+              >
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+
+              {/* Poster Image */}
+              <img
+                src={urlFor(image).width(1200).url()}
+                alt={`${title} Event Poster`}
+                className="w-full h-auto max-h-[90vh] object-contain rounded-lg shadow-2xl"
+              />
+
+              {/* Poster Info */}
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">
+                <h3 className="text-white text-xl font-bold mb-2">{title}</h3>
+                <p className="text-white/80 text-sm">
+                  {formatDate(date)} • {formatTime(time)} • Blue Heron Café
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
