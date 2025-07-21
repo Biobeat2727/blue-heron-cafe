@@ -6,6 +6,14 @@ import SEO from "@/components/SEO";
 import { generateMenuSchema, generateBreadcrumbSchema } from "@/lib/structuredData";
 import { getAllMenuItems } from "@/lib/sanity";
 
+import breakfastImg from "@/public/images/menu-categories/breakfast.jpg";
+import lunchImg from "@/public/images/menu-categories/lunch.jpg";
+import tidbitsImg from "@/public/images/menu-categories/tidbits.jpg";
+import dinnerImg from "@/public/images/menu-categories/dinner.jpg";
+import dessertsImg from "@/public/images/menu-categories/dessert.jpg";
+import drinksImg from "@/public/images/menu-categories/drinks.jpg";
+
+
 export default function MenuPage({ menuItems }) {
   const [activeSection, setActiveSection] = useState("");
   const [showJumpButton, setShowJumpButton] = useState(false);
@@ -14,13 +22,14 @@ export default function MenuPage({ menuItems }) {
   const [scrollTimeout, setScrollTimeout] = useState(null);
 
   const menuSections = [
-    { id: "breakfast", title: "Breakfast", icon: "🥞", image: "/images/menu-categories/breakfast.jpg" },
-    { id: "lunch", title: "Lunch", icon: "🥗", image: "/images/menu-categories/lunch.jpg" },
-    { id: "tidbits", title: "Tidbits", icon: "🍤", image: "/images/menu-categories/tidbits.jpg" },
-    { id: "dinner", title: "Dinner", icon: "🍽️", image: "/images/menu-categories/dinner.jpg" },
-    { id: "desserts", title: "Desserts", icon: "🧁", image: "/images/menu-categories/dessert.jpg" },
-    { id: "drinks", title: "Drinks", icon: "🥤", image: "/images/menu-categories/drinks.jpg" }
-  ];
+  { id: "breakfast", title: "Breakfast", icon: "🥞", image: breakfastImg },
+  { id: "lunch", title: "Lunch", icon: "🥗", image: lunchImg },
+  { id: "tidbits", title: "Tidbits", icon: "🍤", image: tidbitsImg },
+  { id: "dinner", title: "Dinner", icon: "🍽️", image: dinnerImg },
+  { id: "desserts", title: "Desserts", icon: "🧁", image: dessertsImg },
+  { id: "drinks", title: "Drinks", icon: "🥤", image: drinksImg },
+];
+
 
   // Intersection Observer to track active section
   useEffect(() => {
@@ -114,9 +123,9 @@ export default function MenuPage({ menuItems }) {
 
       {/* Hero Section with Quick Navigation */}
       <section className="pt-24 pb-16 bg-gradient-to-br from-sky-50 via-white to-cyan-50">
-        <div className="max-w-6xl mx-auto px-6 text-center">
+        <div className="max-w-6xl px-6 mx-auto text-center">
           <motion.h1 
-            className="text-5xl md:text-6xl font-bold mb-6 text-sky-800 font-serif"
+            className="mb-6 font-serif text-5xl font-bold md:text-6xl text-sky-800"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -124,7 +133,7 @@ export default function MenuPage({ menuItems }) {
             Our Menu
           </motion.h1>
           <motion.p 
-            className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto"
+            className="max-w-2xl mx-auto mb-12 text-xl text-gray-600"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -134,7 +143,7 @@ export default function MenuPage({ menuItems }) {
 
           {/* Quick Navigation Cards */}
           <motion.div 
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-4xl mx-auto"
+            className="grid max-w-4xl grid-cols-2 gap-4 mx-auto md:grid-cols-3 lg:grid-cols-6"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -152,7 +161,7 @@ export default function MenuPage({ menuItems }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.5 + (index * 0.1) }}
               >
-                <div className="text-3xl mb-2 group-hover:scale-110 transition-transform duration-200">
+                <div className="mb-2 text-3xl transition-transform duration-200 group-hover:scale-110">
                   {section.icon}
                 </div>
                 <div className="text-sm font-semibold text-gray-700 group-hover:text-sky-700">
@@ -178,7 +187,7 @@ export default function MenuPage({ menuItems }) {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            className="fixed bottom-6 right-6 z-40"
+            className="fixed z-40 bottom-6 right-6"
           >
             {/* Navigation Panel */}
             <AnimatePresence>
@@ -187,9 +196,9 @@ export default function MenuPage({ menuItems }) {
                   initial={{ opacity: 0, scale: 0.9, y: 20 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                  className="absolute bottom-16 right-0 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-sky-200 p-3 space-y-2 min-w-48"
+                  className="absolute right-0 p-3 space-y-2 border shadow-2xl bottom-16 bg-white/95 backdrop-blur-md rounded-2xl border-sky-200 min-w-48"
                 >
-                  <div className="text-xs font-semibold text-sky-700 px-2 py-1 text-center border-b border-sky-100 mb-2">
+                  <div className="px-2 py-1 mb-2 text-xs font-semibold text-center border-b text-sky-700 border-sky-100">
                     Jump to Section
                   </div>
                   {menuSections.map((section) => (
@@ -215,7 +224,7 @@ export default function MenuPage({ menuItems }) {
             {/* Magnifying Glass Button */}
             <motion.button
               onClick={toggleNavPanel}
-              className="bg-sky-500/80 hover:bg-sky-600/90 backdrop-blur-sm text-white p-4 rounded-full shadow-xl transition-all duration-300 border border-sky-400/30"
+              className="p-4 text-white transition-all duration-300 border rounded-full shadow-xl bg-sky-500/80 hover:bg-sky-600/90 backdrop-blur-sm border-sky-400/30"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
