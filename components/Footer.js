@@ -2,12 +2,12 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="bg-cyan-900 text-white py-8 mt-12">
-      <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+    <footer className="py-8 mt-12 text-white bg-cyan-900">
+      <div className="grid max-w-6xl grid-cols-1 gap-6 px-4 mx-auto sm:grid-cols-2 md:grid-cols-4">
         
         {/* Logo / About */}
         <div>
-          <h2 className="text-xl font-bold mb-2">Blue Heron Café</h2>
+          <h2 className="mb-2 text-xl font-bold">Blue Heron Café</h2>
           <p className="text-sm">
             A cozy country store and café in Samuels, Idaho. Stop in for fresh bites, coffee, and community.
           </p>
@@ -15,7 +15,7 @@ const Footer = () => {
 
         {/* Navigation Links */}
         <div>
-          <h3 className="text-lg font-semibold mb-2">Quick Links</h3>
+          <h3 className="mb-2 text-lg font-semibold">Quick Links</h3>
           <ul className="space-y-1 text-sm">
             <li><Link href="/">Home</Link></li>
             <li><Link href="/menu">Menu</Link></li>
@@ -26,21 +26,21 @@ const Footer = () => {
 
         {/* Contact / Hours */}
         <div>
-          <h3 className="text-lg font-semibold mb-2">Contact</h3>
+          <h3 className="mb-2 text-lg font-semibold">Contact</h3>
           <p className="text-sm">Samuels Store, ID 83864</p>
           <p className="text-sm">Mon–Sat: 7am – 6pm</p>
-          <p className="text-sm">Phone: (208) 123-4567</p>
+          <p className="text-sm">Phone: (208) 263-1146</p>
         </div>
 
         {/* Social Media */}
         <div>
-          <h3 className="text-lg font-semibold mb-2">Follow Us</h3>
+          <h3 className="mb-2 text-lg font-semibold">Follow Us</h3>
           <div className="flex space-x-4">
             <a
               href="https://facebook.com/blueheronsandpoint"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:text-cyan-300 transition-colors"
+              className="text-white transition-colors hover:text-cyan-300"
               aria-label="Facebook"
             >
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -51,7 +51,7 @@ const Footer = () => {
               href="https://instagram.com/blue.heroncafe"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:text-cyan-300 transition-colors"
+              className="text-white transition-colors hover:text-cyan-300"
               aria-label="Instagram"
             >
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -59,14 +59,14 @@ const Footer = () => {
               </svg>
             </a>
           </div>
-          <p className="text-xs mt-2 text-cyan-200">
+          <p className="mt-2 text-xs text-cyan-200">
             Stay updated with our latest events and menu specials!
           </p>
         </div>
 
       </div>
 
-      <div className="text-center text-xs mt-6 border-t border-cyan-700 pt-4">
+      <div className="pt-4 mt-6 text-xs text-center border-t border-cyan-700">
         © {new Date().getFullYear()} Blue Heron Café. All rights reserved.
       </div>
     </footer>
