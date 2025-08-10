@@ -146,7 +146,7 @@ export default function ContactPage() {
                 Phone
               </h3>
               <a href="tel:+12082631146" className="text-lg font-semibold text-cyan-600 hover:text-cyan-700">
-                (208) 555-1234
+                (208) 263-1146
               </a>
             </div>
 
