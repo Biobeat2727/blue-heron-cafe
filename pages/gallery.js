@@ -2,31 +2,33 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useEffect, useState } from "react";
-import { getAllGalleryImages } from "@/lib/sanity";
+import { getAllGalleryImages, getGalleryCategories } from "@/lib/sanity";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
 export default function GalleryPage() {
   const [images, setImages] = useState([]);
   const [filteredImages, setFilteredImages] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
 
-  const categories = [
-    { value: 'all', label: 'All Photos' },
-    { value: 'aerial-view', label: 'Aerial View' },
-    { value: 'customer-appreciation-party', label: 'Customer Appreciation Party' },
-    { value: 'cafe', label: 'Cafe' },
-  ];
-
   useEffect(() => {
-    async function fetchImages() {
-      const data = await getAllGalleryImages();
-      setImages(data);
-      setFilteredImages(data);
+    async function fetchData() {
+      const [imagesData, categoriesData] = await Promise.all([
+        getAllGalleryImages(),
+        getGalleryCategories()
+      ]);
+      
+      setImages(imagesData);
+      setFilteredImages(imagesData);
+      setCategories([
+        { value: 'all', label: 'All Photos' },
+        ...categoriesData
+      ]);
     }
-    fetchImages();
+    fetchData();
   }, []);
 
   useEffect(() => {
