@@ -4,15 +4,8 @@ import { client, getAllEvents } from "@/lib/sanity";
 import EventsCalendar from "@/components/EventsCalendar";
 
 export default function EventsPage({ events }) {
-  // Client-side filter as backup (in case Sanity query doesn't catch everything)
-  const today = new Date();
-  today.setHours(0, 0, 0, 0); // Reset time to start of day
-  
-  const futureEvents = events.filter(event => {
-    const eventDate = new Date(event.date);
-    eventDate.setHours(0, 0, 0, 0);
-    return eventDate >= today;
-  });
+  // Use events directly since backend filtering now handles date logic properly
+  const futureEvents = events;
 
   // Fixed timezone-safe date formatting
   const formatDate = (isoDate) => {
@@ -254,17 +247,8 @@ export default function EventsPage({ events }) {
 }
 
 export async function getStaticProps() {
-  const query = `*[_type == "event"] | order(date asc) {
-    _id,
-    title,
-    date,
-    time,
-    description,
-    "slug": slug,
-    "imageUrl": image.asset->url
-  }`;
-
-  const events = await client.fetch(query);
+  // Use getAllEvents which now has proper date filtering
+  const events = await getAllEvents();
 
   return {
     props: { events },

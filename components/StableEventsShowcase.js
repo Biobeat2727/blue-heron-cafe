@@ -12,16 +12,8 @@ const StableEventsShowcase = () => {
 
   useEffect(() => {
     getUpcomingEvents().then((data) => {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      
-      const futureEvents = data.filter(event => {
-        const eventDate = new Date(event.date);
-        eventDate.setHours(0, 0, 0, 0);
-        return eventDate >= today;
-      });
-      
-      setEvents(futureEvents);
+      // Remove client-side filtering since backend now handles it properly
+      setEvents(data);
       setLoading(false);
     }).catch((error) => {
       console.error('Error fetching events:', error);
