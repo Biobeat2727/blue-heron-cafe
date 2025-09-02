@@ -198,7 +198,7 @@ const StableEventsShowcase = () => {
 
                     <div className="mt-4 flex items-center justify-between">
                       <Link
-                        href={`/events/${event.slug?.current || event.slug}`}
+                        href={`/events/${event.slug}`}
                         className="text-emerald-600 font-medium hover:text-emerald-700 transition-colors flex items-center gap-1"
                       >
                         <span>Learn More</span>
@@ -391,7 +391,7 @@ const StableEventsShowcase = () => {
 
                 <div className="flex gap-4">
                   <Link
-                    href={`/events/${selectedEvent.slug?.current || selectedEvent.slug}`}
+                    href={`/events/${selectedEvent.slug}`}
                     className="flex-1 bg-emerald-600 text-white text-center py-3 px-6 rounded-lg font-semibold hover:bg-emerald-700 transition-colors"
                     onClick={() => setSelectedEvent(null)}
                   >

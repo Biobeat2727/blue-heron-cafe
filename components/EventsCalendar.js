@@ -253,7 +253,7 @@ const EventsCalendar = ({ events = [] }) => {
                     {event.slug && (
                       <div className="flex justify-end">
                         <Link
-                          href={`/events/${event.slug.current}`}
+                          href={`/events/${event.slug}`}
                           className="inline-flex items-center gap-2 bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 transition font-medium"
                           onClick={closeModal}
                         >

@@ -163,7 +163,7 @@ export default function EventsPage({ events }) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
             {futureEvents.map((event, index) => (
-              <Link key={event._id} href={`/events/${event.slug.current}`}>
+              <Link key={event._id} href={`/events/${event.slug}`}>
                 <div 
                   className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-emerald-200 transform hover:-translate-y-2"
                   style={{ animationDelay: `${index * 100}ms` }}
