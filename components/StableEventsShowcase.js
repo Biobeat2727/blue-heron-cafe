@@ -1,5 +1,5 @@
 // Enhanced StableEventsShowcase with Poster Lightbox
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { getUpcomingEvents } from "@/lib/sanity";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
@@ -9,6 +9,96 @@ const StableEventsShowcase = () => {
   const [selectedPoster, setSelectedPoster] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [seasonPosterOpen, setSeasonPosterOpen] = useState(false);
+  const containerRef = useRef(null);
+  const imgRef = useRef(null);
+  const stRef = useRef({ s: 1, tx: 0, ty: 0, ox: 0, oy: 0 });
+
+  const applyTransform = () => {
+    if (!imgRef.current) return;
+    const { s, tx, ty } = stRef.current;
+    imgRef.current.style.transform = `translate(${tx}px, ${ty}px) scale(${s})`;
+  };
+
+  const closeSeasonPoster = () => {
+    if (imgRef.current) imgRef.current.style.transform = '';
+    stRef.current = { s: 1, tx: 0, ty: 0, ox: 0, oy: 0 };
+    setSeasonPosterOpen(false);
+  };
+
+  useEffect(() => {
+    if (!seasonPosterOpen) return;
+    const container = containerRef.current;
+    if (!container) return;
+
+    requestAnimationFrame(() => {
+      if (!imgRef.current || !containerRef.current) return;
+      const ir = imgRef.current.getBoundingClientRect();
+      const cr = containerRef.current.getBoundingClientRect();
+      stRef.current.ox = ir.left - cr.left;
+      stRef.current.oy = ir.top - cr.top;
+    });
+
+    const t = { dist: null, mid: null, pos: null };
+    const D = (ts) => Math.hypot(ts[1].clientX - ts[0].clientX, ts[1].clientY - ts[0].clientY);
+    const Mid = (ts) => ({ x: (ts[0].clientX + ts[1].clientX) / 2, y: (ts[0].clientY + ts[1].clientY) / 2 });
+
+    const onStart = (e) => {
+      e.preventDefault();
+      const ts = Array.from(e.touches);
+      if (ts.length === 2) {
+        t.dist = D(ts); t.mid = Mid(ts); t.pos = null;
+      } else {
+        t.dist = null; t.mid = null;
+        t.pos = { x: ts[0].clientX, y: ts[0].clientY };
+      }
+    };
+
+    const onMove = (e) => {
+      e.preventDefault();
+      const ts = Array.from(e.touches);
+      const cr = container.getBoundingClientRect();
+      const { s, tx, ty, ox, oy } = stRef.current;
+
+      if (ts.length === 2 && t.dist) {
+        const d = D(ts), m = Mid(ts);
+        const ratio = d / t.dist;
+        const newS = Math.min(Math.max(s * ratio, 1), 6);
+        const fx = m.x - cr.left, fy = m.y - cr.top;
+        stRef.current.tx = fx - ox - (fx - ox - tx) * (newS / s);
+        stRef.current.ty = fy - oy - (fy - oy - ty) * (newS / s);
+        stRef.current.s = newS;
+        stRef.current.tx += m.x - t.mid.x;
+        stRef.current.ty += m.y - t.mid.y;
+        t.dist = d; t.mid = m;
+        applyTransform();
+      } else if (ts.length === 1) {
+        const p = { x: ts[0].clientX, y: ts[0].clientY };
+        if (t.pos) {
+          stRef.current.tx += p.x - t.pos.x;
+          stRef.current.ty += p.y - t.pos.y;
+          applyTransform();
+        }
+        t.pos = p;
+      }
+    };
+
+    const onEnd = (e) => {
+      const ts = Array.from(e.touches);
+      t.dist = null; t.mid = null;
+      t.pos = ts.length >= 1 ? { x: ts[0].clientX, y: ts[0].clientY } : null;
+    };
+
+    container.addEventListener('touchstart', onStart, { passive: false });
+    container.addEventListener('touchmove', onMove, { passive: false });
+    container.addEventListener('touchend', onEnd, { passive: false });
+
+    return () => {
+      container.removeEventListener('touchstart', onStart);
+      container.removeEventListener('touchmove', onMove);
+      container.removeEventListener('touchend', onEnd);
+    };
+  }, [seasonPosterOpen]);
 
   useEffect(() => {
     getUpcomingEvents().then((data) => {
@@ -107,6 +197,22 @@ const StableEventsShowcase = () => {
           <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
             Join us for live music, community gatherings, and seasonal celebrations at our beautiful outdoor stage and patio.
           </p>
+        </div>
+
+        {/* Season Poster */}
+        <div className="mb-16 max-w-3xl mx-auto">
+          <button
+            onClick={() => setSeasonPosterOpen(true)}
+            className="w-full focus:outline-none group"
+            aria-label="View full-size events poster"
+          >
+            <img
+              src="/images/hero/SUMMER SUNSET.png"
+              alt="Upcoming shows at Blue Heron Café"
+              className="w-full rounded-2xl shadow-xl transition-transform duration-300 group-hover:scale-[1.02]"
+            />
+            <p className="text-sm text-emerald-600 mt-2 font-medium">Tap to view full size</p>
+          </button>
         </div>
 
         {/* Events Grid */}
@@ -279,6 +385,54 @@ const StableEventsShowcase = () => {
           </div>
         )}
       </div>
+
+      {/* Season Poster Lightbox */}
+      {seasonPosterOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center"
+          onClick={closeSeasonPoster}
+        >
+          <button
+            onClick={closeSeasonPoster}
+            className="absolute top-4 right-4 text-white text-4xl font-bold leading-none hover:text-gray-300 z-10"
+            aria-label="Close"
+          >
+            &times;
+          </button>
+          <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/60 text-sm z-10 pointer-events-none">
+            Pinch to zoom · Drag to pan · Double-tap to reset
+          </p>
+          <div
+            ref={containerRef}
+            className="w-full h-full flex items-center justify-center overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+            onDoubleClick={() => {
+              stRef.current.s = 1;
+              stRef.current.tx = 0;
+              stRef.current.ty = 0;
+              applyTransform();
+            }}
+            style={{ touchAction: "none" }}
+          >
+            <img
+              ref={imgRef}
+              src="/images/hero/SUMMER SUNSET.png"
+              alt="Upcoming shows at Blue Heron Café"
+              style={{
+                transformOrigin: "0 0",
+                maxWidth: "95vw",
+                maxHeight: "95vh",
+                width: "auto",
+                height: "auto",
+                borderRadius: "0.75rem",
+                userSelect: "none",
+                WebkitUserDrag: "none",
+              }}
+              draggable={false}
+            />
+          </div>
+        </div>
+      )}
 
       {/* Poster Lightbox */}
       <AnimatePresence>
