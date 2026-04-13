@@ -1,11 +1,58 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useState, useRef } from "react";
 import { client, getAllEvents } from "@/lib/sanity";
 import EventsCalendar from "@/components/EventsCalendar";
 
 export default function EventsPage({ events }) {
   // Use events directly since backend filtering now handles date logic properly
   const futureEvents = events;
+  const [posterOpen, setPosterOpen] = useState(false);
+  const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const touchRef = useRef({ dist: null, lastPos: null });
+
+  const closePoster = () => {
+    setPosterOpen(false);
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
+  };
+
+  const getTouchDist = (touches) =>
+    Math.hypot(touches[1].clientX - touches[0].clientX, touches[1].clientY - touches[0].clientY);
+
+  const handleTouchStart = (e) => {
+    if (e.touches.length === 2) {
+      touchRef.current.dist = getTouchDist(Array.from(e.touches));
+    } else if (e.touches.length === 1) {
+      touchRef.current.lastPos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }
+  };
+
+  const handleTouchMove = (e) => {
+    if (e.touches.length === 2) {
+      const dist = getTouchDist(Array.from(e.touches));
+      if (touchRef.current.dist) {
+        const ratio = dist / touchRef.current.dist;
+        setZoom((prev) => Math.min(Math.max(prev * ratio, 1), 6));
+      }
+      touchRef.current.dist = dist;
+    } else if (e.touches.length === 1) {
+      const { clientX, clientY } = e.touches[0];
+      if (touchRef.current.lastPos) {
+        setPan((prev) => ({
+          x: prev.x + clientX - touchRef.current.lastPos.x,
+          y: prev.y + clientY - touchRef.current.lastPos.y,
+        }));
+      }
+      touchRef.current.lastPos = { x: clientX, y: clientY };
+    }
+  };
+
+  const handleTouchEnd = () => {
+    touchRef.current.dist = null;
+    touchRef.current.lastPos = null;
+  };
 
   // Fixed timezone-safe date formatting
   const formatDate = (isoDate) => {
@@ -128,7 +175,23 @@ export default function EventsPage({ events }) {
             <h1 className="text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-emerald-700 via-blue-700 to-emerald-600 bg-clip-text text-transparent leading-tight">
               Come Enjoy Our Live Events
             </h1>
-            
+
+            {/* Season Poster */}
+            <div className="mb-8 max-w-3xl mx-auto">
+              <button
+                onClick={() => setPosterOpen(true)}
+                className="w-full focus:outline-none group"
+                aria-label="View full-size events poster"
+              >
+                <img
+                  src="/images/hero/SUMMER SUNSET.png"
+                  alt="Upcoming shows at Blue Heron Café"
+                  className="w-full rounded-2xl shadow-xl transition-transform duration-300 group-hover:scale-[1.02]"
+                />
+                <p className="text-sm text-emerald-600 mt-2 font-medium">Tap to view full size</p>
+              </button>
+            </div>
+
             <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed mb-8">
               Join us at our beautiful new outdoor stage and patio area for unforgettable evenings of live music, community gatherings, and seasonal celebrations in the heart of Samuels, Idaho.
             </p>
@@ -242,6 +305,57 @@ export default function EventsPage({ events }) {
           </div>
         </div>
       </main>
+
+      {/* Poster Lightbox */}
+      {posterOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center"
+          onClick={closePoster}
+        >
+          {/* Close button */}
+          <button
+            onClick={closePoster}
+            className="absolute top-4 right-4 text-white text-4xl font-bold leading-none hover:text-gray-300 z-10"
+            aria-label="Close"
+          >
+            &times;
+          </button>
+
+          {/* Hint */}
+          <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/60 text-sm z-10 pointer-events-none">
+            Pinch to zoom · Drag to pan · Double-tap to reset
+          </p>
+
+          {/* Zoomable image container */}
+          <div
+            className="w-full h-full flex items-center justify-center overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            onDoubleClick={() => { setZoom(1); setPan({ x: 0, y: 0 }); }}
+            style={{ touchAction: "none", cursor: zoom > 1 ? "grab" : "default" }}
+          >
+            <img
+              src="/images/hero/SUMMER SUNSET.png"
+              alt="Upcoming shows at Blue Heron Café"
+              style={{
+                transform: `scale(${zoom}) translate(${pan.x / zoom}px, ${pan.y / zoom}px)`,
+                transformOrigin: "center",
+                transition: touchRef.current.dist ? "none" : "transform 0.15s ease",
+                maxWidth: "95vw",
+                maxHeight: "95vh",
+                width: "auto",
+                height: "auto",
+                borderRadius: "0.75rem",
+                userSelect: "none",
+                WebkitUserDrag: "none",
+              }}
+              draggable={false}
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 }
