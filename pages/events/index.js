@@ -39,19 +39,27 @@ export default function EventsPage({ events }) {
       touchRef.current.dist = dist;
     } else if (e.touches.length === 1) {
       const { clientX, clientY } = e.touches[0];
-      if (touchRef.current.lastPos) {
-        setPan((prev) => ({
-          x: prev.x + clientX - touchRef.current.lastPos.x,
-          y: prev.y + clientY - touchRef.current.lastPos.y,
-        }));
+      if (!touchRef.current.lastPos) {
+        // First move after lifting a finger — just anchor, don't jump
+        touchRef.current.lastPos = { x: clientX, y: clientY };
+        return;
       }
+      setPan((prev) => ({
+        x: prev.x + clientX - touchRef.current.lastPos.x,
+        y: prev.y + clientY - touchRef.current.lastPos.y,
+      }));
       touchRef.current.lastPos = { x: clientX, y: clientY };
     }
   };
 
-  const handleTouchEnd = () => {
+  const handleTouchEnd = (e) => {
     touchRef.current.dist = null;
-    touchRef.current.lastPos = null;
+    // If one finger remains (pinch → drag transition), capture its position
+    if (e.touches.length === 1) {
+      touchRef.current.lastPos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    } else {
+      touchRef.current.lastPos = null;
+    }
   };
 
   // Fixed timezone-safe date formatting
