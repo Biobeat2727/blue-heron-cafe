@@ -8,59 +8,113 @@ export default function EventsPage({ events }) {
   // Use events directly since backend filtering now handles date logic properly
   const futureEvents = events;
   const [posterOpen, setPosterOpen] = useState(false);
-  const [zoom, setZoom] = useState(1);
-  const [pan, setPan] = useState({ x: 0, y: 0 });
-  const touchRef = useRef({ dist: null, lastPos: null });
+  const containerRef = useRef(null);
+  const imgRef = useRef(null);
+  // s=scale, tx/ty=translation, ox/oy=image layout offset relative to container
+  const stRef = useRef({ s: 1, tx: 0, ty: 0, ox: 0, oy: 0 });
+
+  const applyTransform = () => {
+    if (!imgRef.current) return;
+    const { s, tx, ty } = stRef.current;
+    imgRef.current.style.transform = `translate(${tx}px, ${ty}px) scale(${s})`;
+  };
 
   const closePoster = () => {
+    if (imgRef.current) imgRef.current.style.transform = '';
+    stRef.current = { s: 1, tx: 0, ty: 0, ox: 0, oy: 0 };
     setPosterOpen(false);
-    setZoom(1);
-    setPan({ x: 0, y: 0 });
   };
 
-  const getTouchDist = (touches) =>
-    Math.hypot(touches[1].clientX - touches[0].clientX, touches[1].clientY - touches[0].clientY);
+  useEffect(() => {
+    if (!posterOpen) return;
+    const container = containerRef.current;
+    if (!container) return;
 
-  const handleTouchStart = (e) => {
-    if (e.touches.length === 2) {
-      touchRef.current.dist = getTouchDist(Array.from(e.touches));
-    } else if (e.touches.length === 1) {
-      touchRef.current.lastPos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-    }
-  };
+    // Capture image layout position before any touch transforms
+    requestAnimationFrame(() => {
+      if (!imgRef.current || !containerRef.current) return;
+      const ir = imgRef.current.getBoundingClientRect();
+      const cr = containerRef.current.getBoundingClientRect();
+      stRef.current.ox = ir.left - cr.left;
+      stRef.current.oy = ir.top - cr.top;
+    });
 
-  const handleTouchMove = (e) => {
-    if (e.touches.length === 2) {
-      const dist = getTouchDist(Array.from(e.touches));
-      if (touchRef.current.dist) {
-        const ratio = dist / touchRef.current.dist;
-        setZoom((prev) => Math.min(Math.max(prev * ratio, 1), 6));
+    const t = { dist: null, mid: null, pos: null };
+    const D = (ts) => Math.hypot(ts[1].clientX - ts[0].clientX, ts[1].clientY - ts[0].clientY);
+    const Mid = (ts) => ({ x: (ts[0].clientX + ts[1].clientX) / 2, y: (ts[0].clientY + ts[1].clientY) / 2 });
+
+    const onStart = (e) => {
+      e.preventDefault();
+      const ts = Array.from(e.touches);
+      if (ts.length === 2) {
+        t.dist = D(ts);
+        t.mid = Mid(ts);
+        t.pos = null;
+      } else {
+        t.dist = null;
+        t.mid = null;
+        t.pos = { x: ts[0].clientX, y: ts[0].clientY };
       }
-      touchRef.current.dist = dist;
-    } else if (e.touches.length === 1) {
-      const { clientX, clientY } = e.touches[0];
-      if (!touchRef.current.lastPos) {
-        // First move after lifting a finger — just anchor, don't jump
-        touchRef.current.lastPos = { x: clientX, y: clientY };
-        return;
-      }
-      setPan((prev) => ({
-        x: prev.x + clientX - touchRef.current.lastPos.x,
-        y: prev.y + clientY - touchRef.current.lastPos.y,
-      }));
-      touchRef.current.lastPos = { x: clientX, y: clientY };
-    }
-  };
+    };
 
-  const handleTouchEnd = (e) => {
-    touchRef.current.dist = null;
-    // If one finger remains (pinch → drag transition), capture its position
-    if (e.touches.length === 1) {
-      touchRef.current.lastPos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-    } else {
-      touchRef.current.lastPos = null;
-    }
-  };
+    const onMove = (e) => {
+      e.preventDefault();
+      const ts = Array.from(e.touches);
+      const cr = container.getBoundingClientRect();
+      const { s, tx, ty, ox, oy } = stRef.current;
+
+      if (ts.length === 2 && t.dist) {
+        const d = D(ts);
+        const m = Mid(ts);
+        const ratio = d / t.dist;
+        const newS = Math.min(Math.max(s * ratio, 1), 6);
+
+        // Focal point relative to container
+        const fx = m.x - cr.left;
+        const fy = m.y - cr.top;
+
+        // Keep the pinch focal point fixed under the fingers
+        // With transform-origin:0 0, a container point (fx,fy) is at image offset
+        // (fx - ox - tx) / s, so newTx = fx - ox - (fx - ox - tx) * (newS / s)
+        stRef.current.tx = fx - ox - (fx - ox - tx) * (newS / s);
+        stRef.current.ty = fy - oy - (fy - oy - ty) * (newS / s);
+        stRef.current.s = newS;
+
+        // Also pan by midpoint delta
+        stRef.current.tx += m.x - t.mid.x;
+        stRef.current.ty += m.y - t.mid.y;
+
+        t.dist = d;
+        t.mid = m;
+        applyTransform();
+      } else if (ts.length === 1) {
+        const p = { x: ts[0].clientX, y: ts[0].clientY };
+        if (t.pos) {
+          stRef.current.tx += p.x - t.pos.x;
+          stRef.current.ty += p.y - t.pos.y;
+          applyTransform();
+        }
+        t.pos = p;
+      }
+    };
+
+    const onEnd = (e) => {
+      const ts = Array.from(e.touches);
+      t.dist = null;
+      t.mid = null;
+      t.pos = ts.length >= 1 ? { x: ts[0].clientX, y: ts[0].clientY } : null;
+    };
+
+    container.addEventListener('touchstart', onStart, { passive: false });
+    container.addEventListener('touchmove', onMove, { passive: false });
+    container.addEventListener('touchend', onEnd, { passive: false });
+
+    return () => {
+      container.removeEventListener('touchstart', onStart);
+      container.removeEventListener('touchmove', onMove);
+      container.removeEventListener('touchend', onEnd);
+    };
+  }, [posterOpen]);
 
   // Fixed timezone-safe date formatting
   const formatDate = (isoDate) => {
@@ -336,21 +390,23 @@ export default function EventsPage({ events }) {
 
           {/* Zoomable image container */}
           <div
+            ref={containerRef}
             className="w-full h-full flex items-center justify-center overflow-hidden"
             onClick={(e) => e.stopPropagation()}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-            onDoubleClick={() => { setZoom(1); setPan({ x: 0, y: 0 }); }}
-            style={{ touchAction: "none", cursor: zoom > 1 ? "grab" : "default" }}
+            onDoubleClick={() => {
+              stRef.current.s = 1;
+              stRef.current.tx = 0;
+              stRef.current.ty = 0;
+              applyTransform();
+            }}
+            style={{ touchAction: "none" }}
           >
             <img
+              ref={imgRef}
               src="/images/hero/SUMMER SUNSET.png"
               alt="Upcoming shows at Blue Heron Café"
               style={{
-                transform: `scale(${zoom}) translate(${pan.x / zoom}px, ${pan.y / zoom}px)`,
-                transformOrigin: "center",
-                transition: touchRef.current.dist ? "none" : "transform 0.15s ease",
+                transformOrigin: "0 0",
                 maxWidth: "95vw",
                 maxHeight: "95vh",
                 width: "auto",
