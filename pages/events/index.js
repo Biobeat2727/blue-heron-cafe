@@ -252,6 +252,6 @@ export async function getStaticProps() {
 
   return {
     props: { events },
-    revalidate: 3600, // Revalidate every hour to ensure past events disappear
+    revalidate: 60, // Revalidate every minute to pick up new/changed events quickly
   };
 }
