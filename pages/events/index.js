@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { client, getAllEvents } from "@/lib/sanity";
 import EventsCalendar from "@/components/EventsCalendar";
 
