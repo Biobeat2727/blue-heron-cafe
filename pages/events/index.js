@@ -159,49 +159,49 @@ export default function EventsPage({ events }) {
           />
         </Head>
 
-        <main className="pt-24 pb-32 min-h-screen bg-gradient-to-br from-emerald-50 via-white to-blue-50">
+        <main className="min-h-screen pt-24 pb-32 bg-gradient-to-br from-emerald-50 via-white to-blue-50">
           {/* Hero Section */}
           <div className="relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-emerald-600/10 to-blue-600/10 pointer-events-none"></div>
+            <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-emerald-600/10 to-blue-600/10"></div>
             
-            <section className="text-center mb-16 px-6 max-w-5xl mx-auto relative">
-              <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
-                <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
+            <section className="relative max-w-5xl px-6 mx-auto mb-16 text-center">
+              <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-medium rounded-full bg-emerald-100 text-emerald-800">
+                <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
                 New Outdoor Stage & Patio Now Open!
               </div>
               
-              <h1 className="text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-emerald-700 via-blue-700 to-emerald-600 bg-clip-text text-transparent leading-tight">
+              <h1 className="mb-6 text-6xl font-bold leading-tight text-transparent lg:text-7xl bg-gradient-to-r from-emerald-700 via-blue-700 to-emerald-600 bg-clip-text">
                 Our Live Events
               </h1>
               
-              <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed mb-8">
+              <p className="max-w-3xl mx-auto mb-8 text-xl leading-relaxed text-gray-700">
                 Join us at our beautiful new outdoor stage and patio area for unforgettable evenings of live music, community gatherings, and seasonal celebrations in the heart of Samuels, Idaho.
               </p>
             </section>
           </div>
 
           {/* No Events Message */}
-          <div className="px-6 max-w-4xl mx-auto text-center">
-            <div className="bg-white rounded-2xl shadow-lg p-12 border border-emerald-100">
-              <div className="text-6xl mb-6">🎵</div>
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">
+          <div className="max-w-4xl px-6 mx-auto text-center">
+            <div className="p-12 bg-white border shadow-lg rounded-2xl border-emerald-100">
+              <div className="mb-6 text-6xl">🎵</div>
+              <h2 className="mb-4 text-3xl font-bold text-gray-800">
                 No Upcoming Events Scheduled
               </h2>
-              <p className="text-lg text-gray-600 mb-8">
+              <p className="mb-8 text-lg text-gray-600">
                 We're planning some amazing events for our outdoor stage and patio! 
                 Check back soon or follow us on social media for announcements.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col justify-center gap-4 sm:flex-row">
                 <a
                   href="tel:+12082631146" // Use your actual number
-                  className="inline-flex items-center gap-2 bg-emerald-600 text-white px-6 py-3 rounded-lg hover:bg-emerald-700 transition font-semibold"
+                  className="inline-flex items-center gap-2 px-6 py-3 font-semibold text-white transition rounded-lg bg-emerald-600 hover:bg-emerald-700"
                 >
                   📞 Call for Event Info
                 </a>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 border-2 border-emerald-600 text-emerald-600 px-6 py-3 rounded-lg hover:bg-emerald-600 hover:text-white transition font-semibold"
+                  className="inline-flex items-center gap-2 px-6 py-3 font-semibold transition border-2 rounded-lg border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white"
                 >
                   📧 Contact Us
                 </Link>
@@ -223,74 +223,74 @@ export default function EventsPage({ events }) {
         />
       </Head>
 
-      <main className="pt-24 pb-32 min-h-screen bg-gradient-to-br from-emerald-50 via-white to-blue-50">
+      <main className="min-h-screen pt-24 pb-32 bg-gradient-to-br from-emerald-50 via-white to-blue-50">
         {/* Hero Section */}
         <div className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-emerald-600/10 to-blue-600/10 pointer-events-none"></div>
+          <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-emerald-600/10 to-blue-600/10"></div>
           
-          <section className="text-center mb-16 px-6 max-w-5xl mx-auto relative">
-            <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full text-sm font-medium mb-6 animate-pulse">
-              <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
+          <section className="relative max-w-5xl px-6 mx-auto mb-16 text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-medium rounded-full bg-emerald-100 text-emerald-800 animate-pulse">
+              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
               New Outdoor Stage & Patio Now Open!
             </div>
             
-            <h1 className="text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-emerald-700 via-blue-700 to-emerald-600 bg-clip-text text-transparent leading-tight">
+            <h1 className="mb-6 text-6xl font-bold leading-tight text-transparent lg:text-7xl bg-gradient-to-r from-emerald-700 via-blue-700 to-emerald-600 bg-clip-text">
               Come Enjoy Our Live Events
             </h1>
 
             {/* Season Poster */}
-            <div className="mb-8 max-w-3xl mx-auto">
+            <div className="max-w-3xl mx-auto mb-8">
               <button
                 onClick={() => setPosterOpen(true)}
                 className="w-full focus:outline-none group"
                 aria-label="View full-size events poster"
               >
                 <img
-                  src="/images/hero/SUMMER SUNSET.png"
+                  src="/images/hero/summer_sunset.png"
                   alt="Upcoming shows at Blue Heron Café"
                   className="w-full rounded-2xl shadow-xl transition-transform duration-300 group-hover:scale-[1.02]"
                 />
-                <p className="text-sm text-emerald-600 mt-2 font-medium">Tap to view full size</p>
+                <p className="mt-2 text-sm font-medium text-emerald-600">Tap to view full size</p>
               </button>
             </div>
 
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed mb-8">
+            <p className="max-w-3xl mx-auto mb-8 text-xl leading-relaxed text-gray-700">
               Join us at our beautiful new outdoor stage and patio area for unforgettable evenings of live music, community gatherings, and seasonal celebrations in the heart of Samuels, Idaho.
             </p>
             
             <div className="flex flex-wrap justify-center gap-4 mb-12">
-              <div className="bg-white/80 backdrop-blur-sm rounded-lg px-6 py-3 shadow-lg border border-emerald-100">
-                <span className="text-emerald-600 font-semibold">🎵 Live Music</span>
+              <div className="px-6 py-3 border rounded-lg shadow-lg bg-white/80 backdrop-blur-sm border-emerald-100">
+                <span className="font-semibold text-emerald-600">🎵 Live Music</span>
               </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-lg px-6 py-3 shadow-lg border border-emerald-100">
-                <span className="text-emerald-600 font-semibold">🌿 Garden Patio</span>
+              <div className="px-6 py-3 border rounded-lg shadow-lg bg-white/80 backdrop-blur-sm border-emerald-100">
+                <span className="font-semibold text-emerald-600">🌿 Garden Patio</span>
               </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-lg px-6 py-3 shadow-lg border border-emerald-100">
-                <span className="text-emerald-600 font-semibold">🎭 Community Events</span>
+              <div className="px-6 py-3 border rounded-lg shadow-lg bg-white/80 backdrop-blur-sm border-emerald-100">
+                <span className="font-semibold text-emerald-600">🎭 Community Events</span>
               </div>
             </div>
           </section>
         </div>
 
         {/* Events Calendar - Pass filtered events */}
-        <div className="px-6 max-w-7xl mx-auto mb-16">
+        <div className="px-6 mx-auto mb-16 max-w-7xl">
           <EventsCalendar events={futureEvents} />
         </div>
 
         {/* Events Grid */}
-        <div className="px-6 max-w-7xl mx-auto">
+        <div className="px-6 mx-auto max-w-7xl">
           <div className="flex items-center justify-between mb-12">
             <h2 className="text-4xl font-bold text-gray-900">
               Upcoming Events ({futureEvents.length})
             </h2>
-            <div className="h-px bg-gradient-to-r from-emerald-300 to-blue-300 flex-1 ml-8"></div>
+            <div className="flex-1 h-px ml-8 bg-gradient-to-r from-emerald-300 to-blue-300"></div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
             {futureEvents.map((event, index) => (
               <Link key={event._id} href={`/events/${event.slug}`}>
                 <div 
-                  className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-emerald-200 transform hover:-translate-y-2"
+                  className="overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-lg group rounded-2xl hover:shadow-2xl hover:border-emerald-200 hover:-translate-y-2"
                   style={{ animationDelay: `${index * 100}ms` }}
                   data-event-date={event.date} // Added for calendar clicking
                 >
@@ -298,23 +298,23 @@ export default function EventsPage({ events }) {
                     <img
                       src={event.imageUrl}
                       alt={event.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="absolute top-4 right-4 bg-emerald-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:opacity-100"></div>
+                    <div className="absolute px-3 py-1 text-sm font-medium text-white rounded-full top-4 right-4 bg-emerald-600">
                       Outdoor Stage
                     </div>
                   </div>
                   
                   <div className="p-6">
                     <div className="flex items-center gap-2 mb-3">
-                      <div className="w-3 h-3 bg-emerald-500 rounded-full"></div>
-                      <span className="text-sm font-medium text-emerald-600 uppercase tracking-wide">
+                      <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
+                      <span className="text-sm font-medium tracking-wide uppercase text-emerald-600">
                         {formatDate(event.date)}
                       </span>
                     </div>
                     
-                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors duration-300 line-clamp-2">
+                    <h3 className="mb-2 text-xl font-bold text-gray-900 transition-colors duration-300 group-hover:text-emerald-600 line-clamp-2">
                       {event.title}
                     </h3>
                     
@@ -336,9 +336,9 @@ export default function EventsPage({ events }) {
                   </div>
                   
                   <div className="px-6 pb-6">
-                    <div className="flex items-center text-emerald-600 font-medium group-hover:text-emerald-700 transition-colors">
+                    <div className="flex items-center font-medium transition-colors text-emerald-600 group-hover:text-emerald-700">
                       <span className="mr-2">Learn More</span>
-                      <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 transition-transform transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </div>
@@ -349,17 +349,17 @@ export default function EventsPage({ events }) {
           </div>
 
           {/* Call to Action */}
-          <div className="text-center mt-20">
-            <div className="bg-gradient-to-r from-emerald-600 to-blue-600 rounded-2xl p-8 text-white max-w-4xl mx-auto">
-              <h3 className="text-3xl font-bold mb-4">
+          <div className="mt-20 text-center">
+            <div className="max-w-4xl p-8 mx-auto text-white bg-gradient-to-r from-emerald-600 to-blue-600 rounded-2xl">
+              <h3 className="mb-4 text-3xl font-bold">
                 Ready to Experience Our Outdoor Stage?
               </h3>
-              <p className="text-lg mb-6 text-emerald-100">
+              <p className="mb-6 text-lg text-emerald-100">
                 Join us for an evening under the stars with live music and great food.
               </p>
               <Link
                 href="/contact"
-                className="bg-white text-emerald-600 font-bold py-3 px-8 rounded-full hover:bg-emerald-50 transition-colors shadow-lg"
+                className="px-8 py-3 font-bold transition-colors bg-white rounded-full shadow-lg text-emerald-600 hover:bg-emerald-50"
               >
                 Get Event Updates
               </Link>
@@ -371,27 +371,27 @@ export default function EventsPage({ events }) {
       {/* Poster Lightbox */}
       {posterOpen && (
         <div
-          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90"
           onClick={closePoster}
         >
           {/* Close button */}
           <button
             onClick={closePoster}
-            className="absolute top-4 right-4 text-white text-4xl font-bold leading-none hover:text-gray-300 z-10"
+            className="absolute z-10 text-4xl font-bold leading-none text-white top-4 right-4 hover:text-gray-300"
             aria-label="Close"
           >
             &times;
           </button>
 
           {/* Hint */}
-          <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/60 text-sm z-10 pointer-events-none">
+          <p className="absolute z-10 text-sm -translate-x-1/2 pointer-events-none bottom-4 left-1/2 text-white/60">
             Pinch to zoom · Drag to pan · Double-tap to reset
           </p>
 
           {/* Zoomable image container */}
           <div
             ref={containerRef}
-            className="w-full h-full flex items-center justify-center overflow-hidden"
+            className="flex items-center justify-center w-full h-full overflow-hidden"
             onClick={(e) => e.stopPropagation()}
             onDoubleClick={() => {
               stRef.current.s = 1;
@@ -403,7 +403,7 @@ export default function EventsPage({ events }) {
           >
             <img
               ref={imgRef}
-              src="/images/hero/SUMMER SUNSET.png"
+              src="/images/hero/summer_sunset.png"
               alt="Upcoming shows at Blue Heron Café"
               style={{
                 transformOrigin: "0 0",
