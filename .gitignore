@@ -12,3 +12,5 @@ studio/.sanity/
 .DS_Store
 .env
 .env.local
+
+SANITY_TOKEN=skKuMFpxBnQwr6EZAKU1fuDnNRoX8H6HGBipyz3ljYyJ6UY9WxLZ9LZ0SiSyKcb1sC6ajA37GyK0giFuogWlbg2jBh8Fa9pV2ioIS1nk6oI44MJyIJfCZ0QgDnSJ7vvueEq4uhmSZrM0KXreLEJPCvziUWz4mWNhLkqz8ySZJUwxZLJZEW44
