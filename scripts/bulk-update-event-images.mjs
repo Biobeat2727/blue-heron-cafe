@@ -1,5 +1,5 @@
 import { createClient } from '@sanity/client'
-import { createReadStream } from 'fs'
+import { readFileSync } from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import * as dotenv from 'dotenv'
@@ -19,7 +19,7 @@ const client = createClient({
 async function bulkUpdateEventImages() {
   // 1. Upload the new image once
   const imagePath = path.resolve(__dirname, '../public/images/hero/summer_sunset.png') // <-- change this
-  const imageAsset = await client.assets.upload('image', createReadStream(imagePath), {
+  const imageAsset = await client.assets.upload('image', readFileSync(imagePath), {
     filename: 'your-new-image.jpg',
   })
   console.log('Uploaded image asset:', imageAsset._id)
