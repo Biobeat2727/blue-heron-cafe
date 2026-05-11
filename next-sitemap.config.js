@@ -15,9 +15,7 @@ module.exports = {
         disallow: ['/admin', '/api'],
       },
     ],
-    additionalSitemaps: [
-      'https://blueheronsamuels.com/sitemap.xml',
-    ],
+    additionalSitemaps: [],
   },
   // Custom transformation for event pages
   transform: async (config, path) => {
@@ -59,6 +57,22 @@ module.exports = {
         ...defaultTransform,
         priority: 0.6,
         changefreq: 'weekly',
+      };
+    }
+
+    if (path === '/gallery' || path === '/contact' || path === '/samuels') {
+      return {
+        ...defaultTransform,
+        priority: 0.7,
+        changefreq: 'monthly',
+      };
+    }
+
+    if (path === '/about') {
+      return {
+        ...defaultTransform,
+        priority: 0.7,
+        changefreq: 'monthly',
       };
     }
 

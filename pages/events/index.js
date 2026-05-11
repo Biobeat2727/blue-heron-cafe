@@ -1,4 +1,5 @@
-import Head from "next/head";
+import SEO from "@/components/SEO";
+import { generateBreadcrumbSchema } from "@/lib/structuredData";
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { client, getAllEvents } from "@/lib/sanity";
@@ -151,13 +152,16 @@ export default function EventsPage({ events }) {
   if (futureEvents.length === 0) {
     return (
       <>
-        <Head>
-          <title>Events | Blue Heron Café</title>
-          <meta
-            name="description"
-            content="Experience live music and community gatherings at Blue Heron Café's stunning outdoor stage and patio in Samuels, Idaho."
-          />
-        </Head>
+        <SEO
+          title="Live Events | Blue Heron Café — Outdoor Stage in Samuels, Idaho"
+          description="Join us for live music, community gatherings, and seasonal events at Blue Heron Café's outdoor stage and patio in Samuels, Idaho near Sandpoint."
+          keywords="live music near Sandpoint Idaho, outdoor events Samuels ID, Blue Heron Café events, North Idaho live music venue, concerts near Sandpoint"
+          url="/events"
+          jsonLd={generateBreadcrumbSchema([
+            { name: "Home", url: "https://blueheronsamuels.com" },
+            { name: "Events", url: "https://blueheronsamuels.com/events" },
+          ])}
+        />
 
         <main className="min-h-screen pt-24 pb-32 bg-gradient-to-br from-emerald-50 via-white to-blue-50">
           {/* Hero Section */}
@@ -215,13 +219,16 @@ export default function EventsPage({ events }) {
 
   return (
     <>
-      <Head>
-        <title>Events | Blue Heron Café</title>
-        <meta
-          name="description"
-          content="Experience live music and community gatherings at Blue Heron Café's stunning outdoor stage and patio in Samuels, Idaho."
-        />
-      </Head>
+      <SEO
+        title="Live Events | Blue Heron Café — Outdoor Stage in Samuels, Idaho"
+        description="Join us for live music, community gatherings, and seasonal events at Blue Heron Café's outdoor stage and patio in Samuels, Idaho near Sandpoint."
+        keywords="live music near Sandpoint Idaho, outdoor events Samuels ID, Blue Heron Café events, North Idaho live music venue, concerts near Sandpoint"
+        url="/events"
+        jsonLd={generateBreadcrumbSchema([
+          { name: "Home", url: "https://blueheronsamuels.com" },
+          { name: "Events", url: "https://blueheronsamuels.com/events" },
+        ])}
+      />
 
       <main className="min-h-screen pt-24 pb-32 bg-gradient-to-br from-emerald-50 via-white to-blue-50">
         {/* Hero Section */}

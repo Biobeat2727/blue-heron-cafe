@@ -8,10 +8,14 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Blue Heron Café | Samuels, ID</title>
-        <meta name="description" content="A cozy country café offering fresh eats, baked goods, and local events. Located in Samuels, Idaho." />
-        <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://cdn.sanity.io" />
+        <link rel="dns-prefetch" href="https://cdn.sanity.io" />
+        <meta name="theme-color" content="#0891b2" />
+        <meta name="application-name" content="Blue Heron Café" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="google-site-verification" content="1-Zu45mEGNPfPJ9Ae5dpx5N7PxexQO8dbLsAbz0NzHo" />
       </Head>
 
       <LocalBusinessSchema />

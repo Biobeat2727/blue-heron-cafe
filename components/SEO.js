@@ -70,12 +70,13 @@ export default function SEO({
       <link rel="manifest" href="/site.webmanifest" />
       
       {/* JSON-LD Structured Data */}
-      {jsonLd && (
+      {jsonLd && (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).map((schema, i) => (
         <script
+          key={i}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
-      )}
+      ))}
     </Head>
   );
 }

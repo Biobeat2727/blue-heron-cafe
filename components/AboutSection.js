@@ -25,7 +25,7 @@ const AboutSection = () => {
         <div className="md:w-1/2">
           <img
             src="/images/about-owner2.JPG"
-            alt="Owner of Blue Heron Café"
+            alt="Owner of Blue Heron Café in Samuels, Idaho — fresh homestyle dining near Sandpoint"
             className="rounded-lg shadow-lg w-full h-auto object-cover"
           />
         </div>

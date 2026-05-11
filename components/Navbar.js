@@ -128,7 +128,7 @@ const Navbar = () => {
               
               <motion.img
                 src="/images/blue-heron-vertical-logo.png"
-                alt="Blue Heron Logo"
+                alt="Blue Heron Café — restaurant and live music venue in Samuels, Idaho near Sandpoint"
                 className="relative z-10 w-auto transition-all duration-300 drop-shadow-2xl h-28 filter group-hover:brightness-110"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}

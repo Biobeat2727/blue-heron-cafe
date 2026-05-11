@@ -38,7 +38,7 @@ const GallerySection = () => {
             <img
               key={img._id}
               src={img.imageUrl}
-              alt={img.caption || "Gallery image"}
+              alt={img.caption || "Blue Heron Café dining, events, and outdoor patio in Samuels, Idaho"}
               className="rounded-lg cursor-pointer hover:opacity-80 transition"
               onClick={() => handleImageClick(idx)}
             />
@@ -61,7 +61,7 @@ const GallerySection = () => {
         index={index}
         slides={images.map((img) => ({
           src: img.imageUrl,
-          alt: img.caption || "Gallery image",
+          alt: img.caption || "Blue Heron Café dining, events, and outdoor patio in Samuels, Idaho",
         }))}
       />
     </section>

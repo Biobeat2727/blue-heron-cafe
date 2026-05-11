@@ -24,7 +24,26 @@ export default function LocalBusinessSchema() {
     },
     "telephone": "(208) 263-1146",
     "email": "info@blueheronsamuels.com",
-    "openingHours": ["Mo-Su 07:00-15:00"],
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Sunday", "Monday"],
+        "opens": "06:00",
+        "closes": "14:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Tuesday", "Wednesday", "Thursday"],
+        "opens": "06:00",
+        "closes": "19:30"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Friday", "Saturday"],
+        "opens": "06:00",
+        "closes": "20:30"
+      }
+    ],
     "servesCuisine": ["American", "Country", "Farm-to-table"],
     "priceRange": "$$",
     "acceptsReservations": true,
@@ -60,9 +79,13 @@ export default function LocalBusinessSchema() {
     },
     "areaServed": [
       "Samuels",
-      "Sandpoint", 
+      "Sandpoint",
       "Bonner County",
       "North Idaho"
+    ],
+    "sameAs": [
+      "https://www.facebook.com/blueheronsandpoint",
+      "https://www.instagram.com/blue.heroncafe"
     ]
   };
 

@@ -1,4 +1,6 @@
 // pages/gallery.js
+import SEO from "@/components/SEO";
+import { generateBreadcrumbSchema } from "@/lib/structuredData";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useEffect, useState } from "react";
@@ -46,11 +48,21 @@ export default function GalleryPage() {
 
   return (
     <>
+      <SEO
+        title="Photo Gallery | Blue Heron Café — Samuels, Idaho"
+        description="Browse photos of Blue Heron Café's outdoor patio, live music events, fresh food, and cozy atmosphere in Samuels, Idaho near Sandpoint."
+        keywords="Blue Heron Café photos, Samuels Idaho cafe gallery, outdoor dining North Idaho, live music venue Sandpoint area"
+        url="/gallery"
+        jsonLd={generateBreadcrumbSchema([
+          { name: "Home", url: "https://blueheronsamuels.com" },
+          { name: "Gallery", url: "https://blueheronsamuels.com/gallery" },
+        ])}
+      />
       <Navbar />
       <section className="pt-24 pb-16 bg-white">
         <div className="max-w-6xl mx-auto px-6">
           <h1 className="text-4xl font-bold text-center mb-8 text-cyan-700">
-            Photo Gallery
+            Photo Gallery | Blue Heron Café
           </h1>
           
           <div className="flex flex-wrap justify-center gap-2 mb-8">

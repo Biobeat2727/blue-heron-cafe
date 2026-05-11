@@ -49,7 +49,7 @@ const HeroSection = () => {
       >
         <img
           src="/images/blue-heron-hero2.webp"
-          alt="Scenic view of Sandpoint, Idaho near Lake Pend Oreille"
+          alt="Blue Heron Café outdoor patio and live music stage in Samuels, Idaho near Sandpoint"
           className="w-full h-full object-cover"
           loading="eager"
         />

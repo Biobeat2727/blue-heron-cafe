@@ -28,7 +28,7 @@ const Footer = () => {
         {/* Contact / Hours */}
         <div>
           <h3 className="mb-2 text-lg font-semibold">Contact</h3>
-          <p className="text-sm">Samuels Store, ID 83864</p>
+          <p className="text-sm">486260 US-95, Samuels, ID 83864</p>
           <p className="text-sm">Mon–Sat: 7am – 6pm</p>
           <a href="tel:+12082631146" className="text-sm">Phone: (208) 263-1146</a>
         </div>

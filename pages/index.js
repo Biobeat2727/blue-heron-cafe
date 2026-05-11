@@ -1,6 +1,6 @@
 // pages/index.js - Homepage with Enhanced SEO
 import SEO from "@/components/SEO";
-import { generateRestaurantSchema } from "@/lib/structuredData";
+import { generateRestaurantSchema, generateFAQSchema } from "@/lib/structuredData";
 import HeroSection from "../components/HeroSection";
 import MenuShowcase from "@/components/MenuShowcase";
 import StableEventsShowcase from "@/components/StableEventsShowcase";
@@ -18,10 +18,10 @@ export default function Home() {
         title="Blue Heron Café | Fresh Country Dining in Samuels, Idaho"
         description="Hidden gem café in Samuels, Idaho serving fresh, elevated homestyle food. Live music events, outdoor patio dining, and cozy atmosphere near Sandpoint."
         image="/images/og-image.jpg" // Make sure this exists and is 1200x630px
-        keywords="restaurant Samuels Idaho, café Sandpoint, fresh food Idaho, live music events, outdoor dining, country store, homestyle cooking, farm to table"
+        keywords="restaurant Samuels Idaho, café Sandpoint, fresh food Idaho, live music events, outdoor dining, country store, homestyle cooking, farm to table, lunch in Sandpoint Idaho, breakfast near Sandpoint, cafe near Sandpoint Idaho, lunch Samuels Idaho, outdoor dining Sandpoint area, live music Sandpoint Idaho, hidden gem restaurant North Idaho, country cafe Bonner County"
         url="https://blueheronsamuels.com"
         type="website"
-        jsonLd={restaurantSchema}
+        jsonLd={[restaurantSchema, generateFAQSchema()]}
       />
       
       <HeroSection />
