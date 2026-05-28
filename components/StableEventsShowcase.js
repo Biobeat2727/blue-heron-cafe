@@ -1,11 +1,19 @@
 // Enhanced StableEventsShowcase with Poster Lightbox
 import { useEffect, useState, useRef } from "react";
-import { getUpcomingEvents } from "@/lib/sanity";
+import { getUpcomingEvents, getSponsors } from "@/lib/sanity";
+import imageUrlBuilder from "@sanity/image-url";
+import { client } from "@/lib/sanity";
+
+const builder = imageUrlBuilder(client);
+function urlFor(source) {
+  return builder.image(source);
+}
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 
 const StableEventsShowcase = () => {
   const [events, setEvents] = useState([]);
+  const [sponsors, setSponsors] = useState([]);
   const [selectedPoster, setSelectedPoster] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -101,15 +109,17 @@ const StableEventsShowcase = () => {
   }, [seasonPosterOpen]);
 
   useEffect(() => {
-    getUpcomingEvents().then((data) => {
-      // Remove client-side filtering since backend now handles it properly
-      setEvents(data);
-      setLoading(false);
-    }).catch((error) => {
-      console.error('Error fetching events:', error);
-      setEvents([]);
-      setLoading(false);
-    });
+    Promise.all([getUpcomingEvents(), getSponsors()])
+      .then(([eventsData, sponsorsData]) => {
+        setEvents(eventsData);
+        setSponsors(sponsorsData);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching events:', error);
+        setEvents([]);
+        setLoading(false);
+      });
   }, []);
 
   const formatDate = (isoDate) => {
@@ -214,6 +224,33 @@ const StableEventsShowcase = () => {
             <p className="mt-2 text-sm font-medium text-emerald-600">Tap to view full size</p>
           </button>
         </div>
+
+        {/* Sponsors Strip */}
+        {sponsors.length > 0 && (
+          <div className="py-8 mb-12 border-t border-b border-gray-100">
+            <p className="mb-5 text-xs font-bold tracking-widest text-center text-gray-400 uppercase">
+              Thanks to our sponsors
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-8">
+              {sponsors.map((sponsor, i) => {
+                const logo = (
+                  <img
+                    src={urlFor(sponsor.logo).height(80).format('png').url()}
+                    alt={sponsor.name || 'Sponsor'}
+                    className="object-contain h-10 max-w-[130px] grayscale opacity-60 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
+                  />
+                );
+                return sponsor.url ? (
+                  <a key={i} href={sponsor.url} target="_blank" rel="noopener noreferrer" title={sponsor.name}>
+                    {logo}
+                  </a>
+                ) : (
+                  <span key={i}>{logo}</span>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Events Grid */}
         {events.length > 0 ? (

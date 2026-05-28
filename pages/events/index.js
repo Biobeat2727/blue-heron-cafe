@@ -2,10 +2,17 @@ import SEO from "@/components/SEO";
 import { generateBreadcrumbSchema } from "@/lib/structuredData";
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
-import { client, getAllEvents } from "@/lib/sanity";
+import { getAllEvents, getSponsors } from "@/lib/sanity";
+import imageUrlBuilder from "@sanity/image-url";
+import { client } from "@/lib/sanity";
+
+const builder = imageUrlBuilder(client);
+function urlFor(source) {
+  return builder.image(source);
+}
 import EventsCalendar from "@/components/EventsCalendar";
 
-export default function EventsPage({ events }) {
+export default function EventsPage({ events, sponsors }) {
   // Use events directly since backend filtering now handles date logic properly
   const futureEvents = events;
   const [posterOpen, setPosterOpen] = useState(false);
@@ -355,6 +362,33 @@ export default function EventsPage({ events }) {
             ))}
           </div>
 
+          {/* Sponsors Section */}
+          {sponsors && sponsors.length > 0 && (
+            <div className="py-10 mt-16 border-t border-gray-100">
+              <p className="mb-6 text-xs font-bold tracking-widest text-center text-gray-400 uppercase">
+                Thanks to our sponsors
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-8">
+                {sponsors.map((sponsor, i) => {
+                  const logo = (
+                    <img
+                      src={urlFor(sponsor.logo).height(80).format('png').url()}
+                      alt={sponsor.name || 'Sponsor'}
+                      className="object-contain h-10 max-w-[130px] grayscale opacity-60 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
+                    />
+                  );
+                  return sponsor.url ? (
+                    <a key={i} href={sponsor.url} target="_blank" rel="noopener noreferrer" title={sponsor.name}>
+                      {logo}
+                    </a>
+                  ) : (
+                    <span key={i}>{logo}</span>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
           {/* Call to Action */}
           <div className="mt-20 text-center">
             <div className="max-w-4xl p-8 mx-auto text-white bg-gradient-to-r from-emerald-600 to-blue-600 rounded-2xl">
@@ -432,11 +466,13 @@ export default function EventsPage({ events }) {
 }
 
 export async function getStaticProps() {
-  // Use getAllEvents which now has proper date filtering
-  const events = await getAllEvents();
+  const [events, sponsors] = await Promise.all([
+    getAllEvents(),
+    getSponsors(),
+  ]);
 
   return {
-    props: { events },
-    revalidate: 60, // Revalidate every minute to pick up new/changed events quickly
+    props: { events, sponsors },
+    revalidate: 60,
   };
 }

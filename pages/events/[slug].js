@@ -4,7 +4,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { motion, AnimatePresence } from "framer-motion";
-import { client } from "@/lib/sanity";
+import { client, getSponsors } from "@/lib/sanity";
 import imageUrlBuilder from "@sanity/image-url";
 
 const builder = imageUrlBuilder(client);
@@ -12,7 +12,7 @@ function urlFor(source) {
   return builder.image(source);
 }
 
-export default function EventDetail({ event }) {
+export default function EventDetail({ event, sponsors }) {
   const router = useRouter();
   const [showPosterLightbox, setShowPosterLightbox] = useState(false);
 
@@ -408,6 +408,35 @@ export default function EventDetail({ event }) {
           </div>
         </div>
 
+        {/* Sponsors Section */}
+        {sponsors && sponsors.length > 0 && (
+          <div className="py-10 border-t border-gray-100 bg-white/60">
+            <div className="max-w-4xl px-6 mx-auto">
+              <p className="mb-6 text-xs font-bold tracking-widest text-center text-gray-400 uppercase">
+                Thanks to our sponsors
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-8">
+                {sponsors.map((sponsor, i) => {
+                  const logo = (
+                    <img
+                      src={urlFor(sponsor.logo).height(80).format('png').url()}
+                      alt={sponsor.name || 'Sponsor'}
+                      className="object-contain h-10 max-w-[130px] grayscale opacity-60 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
+                    />
+                  );
+                  return sponsor.url ? (
+                    <a key={i} href={sponsor.url} target="_blank" rel="noopener noreferrer" title={sponsor.name}>
+                      {logo}
+                    </a>
+                  ) : (
+                    <span key={i}>{logo}</span>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Related Events Section */}
         <div className="py-16 bg-gradient-to-r from-cyan-50 to-emerald-50">
           <div className="max-w-6xl px-6 mx-auto text-center">
@@ -480,7 +509,7 @@ export default function EventDetail({ event }) {
 }
 
 export async function getStaticProps({ params }) {
-  const query = `*[_type == "event" && slug.current == $slug][0]{
+  const eventQuery = `*[_type == "event" && slug.current == $slug][0]{
     title,
     description,
     date,
@@ -490,10 +519,13 @@ export async function getStaticProps({ params }) {
     openGraphImage
   }`;
 
-  const event = await client.fetch(query, { slug: params.slug });
+  const [event, sponsors] = await Promise.all([
+    client.fetch(eventQuery, { slug: params.slug }),
+    getSponsors(),
+  ]);
 
   return {
-    props: { event },
+    props: { event, sponsors },
     revalidate: 60,
   };
 }
