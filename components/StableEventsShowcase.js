@@ -235,9 +235,9 @@ const StableEventsShowcase = () => {
               {sponsors.map((sponsor, i) => {
                 const logo = (
                   <img
-                    src={urlFor(sponsor.logo).height(80).format('png').url()}
+                    src={urlFor(sponsor.logo).height(128).format('png').url()}
                     alt={sponsor.name || 'Sponsor'}
-                    className="object-contain h-10 max-w-[130px] grayscale opacity-60 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
+                    className="object-contain h-16 max-w-[200px] grayscale opacity-60 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
                   />
                 );
                 return sponsor.url ? (
