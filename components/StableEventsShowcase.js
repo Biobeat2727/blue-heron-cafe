@@ -217,7 +217,7 @@ const StableEventsShowcase = () => {
             aria-label="View full-size events poster"
           >
             <img
-              src="/images/hero/summer_sunset.png"
+              src="/images/hero/summer_sunset.jpg"
               alt="Upcoming shows at Blue Heron Café"
               className="w-full rounded-2xl shadow-xl transition-transform duration-300 group-hover:scale-[1.02]"
             />
@@ -453,7 +453,7 @@ const StableEventsShowcase = () => {
           >
             <img
               ref={imgRef}
-              src="/images/hero/summer_sunset.png"
+              src="/images/hero/summer_sunset.jpg"
               alt="Upcoming shows at Blue Heron Café"
               style={{
                 transformOrigin: "0 0",
