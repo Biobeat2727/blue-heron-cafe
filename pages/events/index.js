@@ -170,7 +170,7 @@ export default function EventsPage({ events, sponsors }) {
           ])}
         />
 
-        <main className="min-h-screen pt-24 pb-32 bg-gradient-to-br from-emerald-50 via-white to-blue-50">
+        <main className="min-h-screen pb-32 bg-gradient-to-br from-emerald-50 via-white to-blue-50">
           {/* Hero Section */}
           <div className="relative overflow-hidden">
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-emerald-600/10 to-blue-600/10"></div>
@@ -237,12 +237,12 @@ export default function EventsPage({ events, sponsors }) {
         ])}
       />
 
-      <main className="min-h-screen pt-24 pb-32 bg-gradient-to-br from-emerald-50 via-white to-blue-50">
+      <main className="min-h-screen pb-32 bg-gradient-to-br from-emerald-50 via-white to-blue-50">
         {/* Hero Section */}
         <div className="relative overflow-hidden">
           <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-emerald-600/10 to-blue-600/10"></div>
           
-          <section className="relative max-w-5xl px-6 mx-auto mb-16 text-center">
+          <section className="relative max-w-5xl px-6 mx-auto mt-10 mb-16 text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-medium rounded-full bg-emerald-100 text-emerald-800 animate-pulse">
               <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
               New Outdoor Stage & Patio Now Open!
