@@ -110,20 +110,22 @@ const HeroSection = () => {
           {/* Hours */}
           <motion.div
             variants={itemVariants}
-            className="mt-8 inline-block backdrop-blur-sm bg-black/40 rounded-2xl px-5 py-4 w-full max-w-xs sm:max-w-none sm:w-auto"
+            className="mt-8 inline-block backdrop-blur-sm bg-black/40 rounded-2xl px-5 py-4 w-full max-w-sm sm:max-w-none sm:w-auto"
           >
             <p className="text-cyan-300 text-xs font-semibold uppercase tracking-widest mb-3">Hours of Operation</p>
 
-            {/* Mobile: 1-col list */}
-            <div className="flex flex-col gap-1 sm:hidden">
-              {HOURS.map(({ day, range }) => {
+            {/* Mobile: 2-col grid */}
+            <div className="grid grid-cols-2 gap-1 sm:hidden">
+              {HOURS.map(({ day, range }, i) => {
                 const isToday = day === TODAY_SHORT;
+                const isLast = i === HOURS.length - 1;
                 return (
-                  <div key={day} className={`flex items-center justify-center gap-2 rounded-lg px-2 py-1.5 ${isToday ? "bg-cyan-500" : ""}`}>
-                    <span className={`text-sm font-bold ${isToday ? "text-white" : "text-cyan-300"}`}>
-                      {day}
-                    </span>
-                    <span className="text-white/50 text-xs">–</span>
+                  <div
+                    key={day}
+                    className={`flex items-center justify-center gap-1.5 rounded-lg px-2 py-1.5 ${isLast ? "col-span-2" : ""} ${isToday ? "bg-cyan-500" : ""}`}
+                  >
+                    <span className={`text-sm font-bold ${isToday ? "text-white" : "text-cyan-300"}`}>{day}</span>
+                    <span className="text-white/40 text-xs">–</span>
                     <span className="text-sm text-white">{range}</span>
                     {isToday && <span className="text-white/70 text-xs">★</span>}
                   </div>
