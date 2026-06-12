@@ -3,6 +3,18 @@ import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
+const HOURS = [
+  { day: "Sun", range: "6am – 2pm" },
+  { day: "Mon", range: "6am – 2pm" },
+  { day: "Tue", range: "6am – 7:30pm" },
+  { day: "Wed", range: "6am – 7:30pm" },
+  { day: "Thu", range: "6am – 7:30pm" },
+  { day: "Fri", range: "6am – 8:30pm" },
+  { day: "Sat", range: "6am – 8:30pm" },
+];
+
+const TODAY_SHORT = new Date().toLocaleDateString("en-US", { weekday: "short" });
+
 const HeroSection = () => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -94,11 +106,54 @@ const HeroSection = () => {
               Upcoming Events
             </Link>
           </motion.div>
+
+          {/* Hours */}
+          <motion.div
+            variants={itemVariants}
+            className="mt-8 inline-block backdrop-blur-sm bg-black/40 rounded-2xl px-5 py-4 w-full max-w-xs sm:max-w-none sm:w-auto"
+          >
+            <p className="text-cyan-300 text-xs font-semibold uppercase tracking-widest mb-3">Hours of Operation</p>
+
+            {/* Mobile: 1-col list */}
+            <div className="flex flex-col gap-1 sm:hidden">
+              {HOURS.map(({ day, range }) => {
+                const isToday = day === TODAY_SHORT;
+                return (
+                  <div key={day} className={`flex items-center justify-center gap-2 rounded-lg px-2 py-1.5 ${isToday ? "bg-cyan-500" : ""}`}>
+                    <span className={`text-sm font-bold ${isToday ? "text-white" : "text-cyan-300"}`}>
+                      {day}
+                    </span>
+                    <span className="text-white/50 text-xs">–</span>
+                    <span className="text-sm text-white">{range}</span>
+                    {isToday && <span className="text-white/70 text-xs">★</span>}
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Desktop: 7-col grid */}
+            <div className="hidden sm:grid grid-cols-7 gap-1.5">
+              {HOURS.map(({ day, range }) => {
+                const isToday = day === TODAY_SHORT;
+                return (
+                  <div
+                    key={day}
+                    className={`flex flex-col items-center rounded-lg px-2 py-2 ${
+                      isToday ? "bg-cyan-500 text-white" : "text-white/80"
+                    }`}
+                  >
+                    <span className={`text-xs font-bold mb-1 ${isToday ? "text-white" : "text-cyan-300"}`}>{day}</span>
+                    <span className="text-xs leading-tight text-center whitespace-nowrap">{range}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.div>
         </motion.div>
 
         {/* Scroll Indicator */}
         <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-8 left-0 right-0 flex justify-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2, duration: 0.8 }}

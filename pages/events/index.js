@@ -302,12 +302,13 @@ export default function EventsPage({ events, sponsors }) {
 
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
             {futureEvents.map((event, index) => (
-              <Link key={event._id} href={`/events/${event.slug}`}>
-                <div 
-                  className="overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-lg group rounded-2xl hover:shadow-2xl hover:border-emerald-200 hover:-translate-y-2"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                  data-event-date={event.date} // Added for calendar clicking
-                >
+              <div
+                key={event._id}
+                className="overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-lg group rounded-2xl hover:shadow-2xl hover:border-emerald-200 hover:-translate-y-2"
+                style={{ animationDelay: `${index * 100}ms` }}
+                data-event-date={event.date}
+              >
+                <Link href={`/events/${event.slug}`}>
                   <div className="relative aspect-[5/3] w-full overflow-hidden">
                     <img
                       src={event.imageUrl}
@@ -319,7 +320,7 @@ export default function EventsPage({ events, sponsors }) {
                       Outdoor Stage
                     </div>
                   </div>
-                  
+
                   <div className="p-6">
                     <div className="flex items-center gap-2 mb-3">
                       <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
@@ -327,11 +328,11 @@ export default function EventsPage({ events, sponsors }) {
                         {formatDate(event.date)}
                       </span>
                     </div>
-                    
+
                     <h3 className="mb-2 text-xl font-bold text-gray-900 transition-colors duration-300 group-hover:text-emerald-600 line-clamp-2">
                       {event.title}
                     </h3>
-                    
+
                     <div className="flex items-center gap-4 text-sm text-gray-600">
                       <div className="flex items-center gap-1">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -348,17 +349,30 @@ export default function EventsPage({ events, sponsors }) {
                       </div>
                     </div>
                   </div>
-                  
-                  <div className="px-6 pb-6">
-                    <div className="flex items-center font-medium transition-colors text-emerald-600 group-hover:text-emerald-700">
-                      <span className="mr-2">Learn More</span>
-                      <svg className="w-4 h-4 transition-transform transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </Link>
+
+                <div className="px-6 pb-6 flex items-center justify-between gap-3">
+                  <Link href={`/events/${event.slug}`} className="flex items-center font-medium transition-colors text-emerald-600 hover:text-emerald-700">
+                    <span className="mr-2">Learn More</span>
+                    <svg className="w-4 h-4 transition-transform transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                  {event.ticketUrl && (
+                    <a
+                      href={event.ticketUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white transition-colors rounded-lg bg-emerald-600 hover:bg-emerald-700"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
                       </svg>
-                    </div>
-                  </div>
+                      Get Tickets
+                    </a>
+                  )}
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
 
