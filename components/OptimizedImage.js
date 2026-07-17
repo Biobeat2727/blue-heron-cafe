@@ -19,12 +19,10 @@ const OptimizedImage = ({
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  // For Sanity images, optimize the URL
+  // For Sanity images, optimize the URL (unless it's already optimized upstream)
   const optimizeSanityUrl = (url) => {
-    if (url && url.includes('cdn.sanity.io')) {
-      // Add Sanity optimization parameters
-      const separator = url.includes('?') ? '&' : '?';
-      return `${url}${separator}w=1200&h=800&fit=crop&auto=format&q=${quality}`;
+    if (url && url.includes('cdn.sanity.io') && !url.includes('?')) {
+      return `${url}?w=1200&h=800&fit=crop&auto=format&q=${quality}`;
     }
     return url;
   };
