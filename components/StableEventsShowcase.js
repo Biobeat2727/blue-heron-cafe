@@ -178,10 +178,10 @@ const StableEventsShowcase = () => {
 
   if (loading) {
     return (
-      <section className="py-24 bg-gradient-to-b from-slate-50 via-emerald-25 to-white">
+      <section className="py-24 bg-gradient-to-b from-slate-50 via-sky-50 to-white">
         <div className="px-6 mx-auto max-w-7xl">
           <div className="mb-16 text-center">
-            <h2 className="mb-6 font-serif text-5xl font-bold md:text-6xl text-emerald-700">
+            <h2 className="mb-6 font-serif text-5xl font-bold md:text-6xl text-cyan-700">
               Upcoming Events
             </h2>
             <p className="max-w-2xl mx-auto text-xl leading-relaxed text-gray-600">
@@ -189,7 +189,7 @@ const StableEventsShowcase = () => {
             </p>
           </div>
           <div className="flex items-center justify-center h-32">
-            <div className="w-12 h-12 border-b-2 rounded-full animate-spin border-emerald-600"></div>
+            <div className="w-12 h-12 border-b-2 rounded-full animate-spin border-cyan-600"></div>
           </div>
         </div>
       </section>
@@ -197,11 +197,11 @@ const StableEventsShowcase = () => {
   }
 
   return (
-    <section className="py-24 bg-gradient-to-b from-slate-50 via-emerald-25 to-white">
+    <section className="py-24 bg-gradient-to-b from-slate-50 via-sky-50 to-white">
       <div className="px-6 mx-auto max-w-7xl">
         {/* Header */}
         <div className="mb-16 text-center">
-          <h2 className="mb-6 font-serif text-5xl font-bold md:text-6xl text-emerald-700">
+          <h2 className="mb-6 font-serif text-5xl font-bold md:text-6xl text-cyan-700">
             Upcoming Events
           </h2>
           <p className="max-w-2xl mx-auto text-xl leading-relaxed text-gray-600">
@@ -213,7 +213,7 @@ const StableEventsShowcase = () => {
         <div className="max-w-3xl mx-auto mb-16">
           <button
             onClick={() => setSeasonPosterOpen(true)}
-            className="w-full rounded-2xl group focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-400"
+            className="w-full rounded-2xl group focus:outline-none focus-visible:ring-4 focus-visible:ring-sky-400"
             aria-label="View full-size events poster"
           >
             <img
@@ -221,7 +221,7 @@ const StableEventsShowcase = () => {
               alt="Upcoming shows at Blue Heron Café"
               className="w-full rounded-2xl shadow-xl transition-transform duration-300 group-hover:scale-[1.02]"
             />
-            <p className="mt-2 text-sm font-medium text-emerald-600">Tap to view full size</p>
+            <p className="mt-2 text-sm font-medium text-cyan-600">Tap to view full size</p>
           </button>
         </div>
 
@@ -262,7 +262,7 @@ const StableEventsShowcase = () => {
               return (
                 <div
                   key={event._id}
-                  className="overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-lg group rounded-2xl hover:shadow-2xl hover:border-emerald-200 hover:-translate-y-2"
+                  className="overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-lg group rounded-2xl hover:shadow-2xl hover:border-sky-200 hover:-translate-y-2"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <div className="relative aspect-[5/3] w-full overflow-hidden">
@@ -279,7 +279,7 @@ const StableEventsShowcase = () => {
                         console.log('Poster button clicked for:', event.title); // Debug log
                         setSelectedPoster(event);
                       }}
-                      className="absolute z-10 flex items-center gap-1 px-3 py-1 text-sm font-medium text-gray-700 transition-all duration-200 rounded-full top-4 left-4 bg-white/90 hover:bg-white hover:text-emerald-600"
+                      className="absolute z-10 flex items-center gap-1 px-3 py-1 text-sm font-medium text-gray-700 transition-all duration-200 rounded-full top-4 left-4 bg-white/90 hover:bg-white hover:text-cyan-600"
                     >
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -292,7 +292,7 @@ const StableEventsShowcase = () => {
                     
                     {/* Date Badge */}
                     <div className={`absolute top-4 right-4 ${isToday ? 'bg-red-500' : 'bg-white/95'} backdrop-blur-sm rounded-xl overflow-hidden shadow-lg`}>
-                      <div className={`${isToday ? 'bg-red-600' : 'bg-emerald-600'} text-white text-center py-1 px-3`}>
+                      <div className={`${isToday ? 'bg-red-600' : 'bg-cyan-600'} text-white text-center py-1 px-3`}>
                         <span className="text-xs font-semibold tracking-wide uppercase">
                           {isToday ? 'TODAY' : dateInfo.month}
                         </span>
@@ -303,14 +303,14 @@ const StableEventsShowcase = () => {
                     </div>
 
                     {/* Live Event Badge */}
-                    <div className={`absolute bottom-4 right-4 ${isToday ? 'bg-red-500 animate-pulse' : 'bg-emerald-500'} text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1`}>
+                    <div className={`absolute bottom-4 right-4 ${isToday ? 'bg-red-500 animate-pulse' : 'bg-sky-500'} text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1`}>
                       <span className="w-2 h-2 bg-white rounded-full"></span>
                       {isToday ? 'Today!' : 'Live Event'}
                     </div>
                   </div>
                   
                   <div className="p-6">
-                    <h3 className="mb-2 text-xl font-bold text-gray-900 transition-colors group-hover:text-emerald-700">
+                    <h3 className="mb-2 text-xl font-bold text-gray-900 transition-colors group-hover:text-cyan-700">
                       {event.title}
                     </h3>
                     
@@ -342,7 +342,7 @@ const StableEventsShowcase = () => {
                     <div className="flex items-center justify-between mt-4">
                       <Link
                         href={`/events/${event.slug}`}
-                        className="flex items-center gap-1 font-medium transition-colors text-emerald-600 hover:text-emerald-700"
+                        className="flex items-center gap-1 font-medium transition-colors text-cyan-600 hover:text-cyan-700"
                       >
                         <span>Learn More</span>
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -368,7 +368,7 @@ const StableEventsShowcase = () => {
               <div className="flex flex-col justify-center gap-4 sm:flex-row">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold text-white transition-colors rounded-lg bg-emerald-600 hover:bg-emerald-700"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold text-white transition-colors rounded-lg bg-cyan-600 hover:bg-cyan-700"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -388,7 +388,7 @@ const StableEventsShowcase = () => {
 
         {/* Call to Action */}
         {events.length > 0 && (
-          <div className="relative p-12 overflow-visible text-center text-white bg-gradient-to-r from-emerald-600 to-cyan-600 rounded-3xl">
+          <div className="relative p-12 overflow-visible text-center text-white bg-gradient-to-r from-cyan-600 to-cyan-600 rounded-3xl">
             <div className="relative z-10">
               <h3 className="mb-6 text-3xl font-bold leading-normal md:text-4xl">
                 Experience Our Outdoor Stage
@@ -400,7 +400,7 @@ const StableEventsShowcase = () => {
               <div className="flex flex-col justify-center gap-4 sm:flex-row">
                 <Link
                   href="/events"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-bold transition-all duration-300 bg-white shadow-lg text-emerald-700 rounded-xl hover:bg-gray-50"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-bold transition-all duration-300 bg-white shadow-lg text-cyan-700 rounded-xl hover:bg-gray-50"
                 >
                   <span>View All Events</span>
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -410,7 +410,7 @@ const StableEventsShowcase = () => {
                 
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-bold text-white transition-all duration-300 bg-transparent border-2 border-white rounded-xl hover:bg-white hover:text-emerald-700"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-bold text-white transition-all duration-300 bg-transparent border-2 border-white rounded-xl hover:bg-white hover:text-cyan-700"
                 >
                   <span>Book Private Event</span>
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -542,7 +542,7 @@ const StableEventsShowcase = () => {
                 
                 {/* Date Badge in Modal */}
                 <div className="absolute overflow-hidden shadow-lg top-4 left-4 bg-white/95 backdrop-blur-sm rounded-xl">
-                  <div className="px-3 py-1 text-center text-white bg-emerald-600">
+                  <div className="px-3 py-1 text-center text-white bg-cyan-600">
                     <span className="text-xs font-semibold tracking-wide uppercase">
                       {formatDateShort(selectedEvent.date).month}
                     </span>
@@ -583,7 +583,7 @@ const StableEventsShowcase = () => {
                 <div className="flex gap-4">
                   <Link
                     href={`/events/${selectedEvent.slug}`}
-                    className="flex-1 px-6 py-3 font-semibold text-center text-white transition-colors rounded-lg bg-emerald-600 hover:bg-emerald-700"
+                    className="flex-1 px-6 py-3 font-semibold text-center text-white transition-colors rounded-lg bg-cyan-600 hover:bg-cyan-700"
                     onClick={() => setSelectedEvent(null)}
                   >
                     View Full Details

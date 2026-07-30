@@ -51,7 +51,7 @@ const MenuShowcase = () => {
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 left-10 w-32 h-32 bg-cyan-600 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-40 h-40 bg-emerald-500 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-40 h-40 bg-sky-500 rounded-full blur-3xl" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6">
@@ -175,7 +175,7 @@ const MenuShowcase = () => {
         >
           <Link
             href="/menu"
-            className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-cyan-600 to-emerald-600 text-white rounded-xl text-lg font-semibold hover:from-cyan-700 hover:to-emerald-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-cyan-600 to-sky-600 text-white rounded-xl text-lg font-semibold hover:from-cyan-700 hover:to-sky-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
           >
             <span>Explore Full Menu</span>
             <svg 

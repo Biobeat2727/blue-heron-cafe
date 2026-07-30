@@ -145,7 +145,7 @@ export default function EventDetail({ event, sponsors }) {
         )}
       </Head>
 
-      <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50">
+      <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50">
         {/* Hero Section */}
         <div className="relative overflow-hidden">
           {image && (
@@ -172,7 +172,7 @@ export default function EventDetail({ event, sponsors }) {
                     Past Event
                   </div>
                 ) : (
-                  <div className="px-4 py-2 text-sm font-semibold text-white rounded-full bg-emerald-500">
+                  <div className="px-4 py-2 text-sm font-semibold text-white rounded-full bg-sky-500">
                     Upcoming
                   </div>
                 )}
@@ -207,7 +207,7 @@ export default function EventDetail({ event, sponsors }) {
 
                     {subtitle && (
                       <motion.p
-                        className="mb-4 text-xl font-semibold md:text-2xl text-emerald-300 drop-shadow-lg"
+                        className="mb-4 text-xl font-semibold md:text-2xl text-sky-300 drop-shadow-lg"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.4 }}
@@ -401,7 +401,7 @@ export default function EventDetail({ event, sponsors }) {
                       href={ticketUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center w-full gap-2 px-6 py-3 font-semibold text-center text-white transition-colors rounded-lg bg-emerald-600 hover:bg-emerald-700"
+                      className="flex items-center justify-center w-full gap-2 px-6 py-3 font-semibold text-center text-white transition-colors rounded-lg bg-cyan-600 hover:bg-cyan-700"
                     >
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
@@ -453,7 +453,7 @@ export default function EventDetail({ event, sponsors }) {
                         alert('Event details copied to clipboard!');
                       }
                     }}
-                    className="flex items-center justify-center w-full gap-2 px-6 py-3 font-semibold text-center transition-colors rounded-lg bg-emerald-100 text-emerald-700 hover:bg-emerald-200"
+                    className="flex items-center justify-center w-full gap-2 px-6 py-3 font-semibold text-center transition-colors rounded-lg bg-sky-100 text-cyan-700 hover:bg-sky-200"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
@@ -496,7 +496,7 @@ export default function EventDetail({ event, sponsors }) {
         )}
 
         {/* Related Events Section */}
-        <div className="py-16 bg-gradient-to-r from-cyan-50 to-emerald-50">
+        <div className="py-16 bg-gradient-to-r from-cyan-50 to-sky-50">
           <div className="max-w-6xl px-6 mx-auto text-center">
             <h3 className="mb-6 font-serif text-3xl font-bold text-cyan-800">
               More Events at Blue Heron Café

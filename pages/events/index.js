@@ -170,30 +170,30 @@ export default function EventsPage({ events, sponsors }) {
           ])}
         />
 
-        <main className="min-h-screen pb-32 bg-gradient-to-br from-emerald-50 via-white to-blue-50">
+        <main className="min-h-screen pb-32 bg-gradient-to-br from-sky-50 via-white to-blue-50">
           {/* Hero Section */}
           <div className="relative overflow-hidden">
-            <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-emerald-600/10 to-blue-600/10"></div>
+            <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-cyan-600/10 to-blue-600/10"></div>
             
             <section className="relative max-w-5xl px-6 mx-auto mb-16 text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-medium rounded-full bg-emerald-100 text-emerald-800">
-                <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-                New Outdoor Stage & Patio Now Open!
+              <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-medium rounded-full bg-sky-100 text-cyan-800">
+                <span className="w-2 h-2 rounded-full bg-sky-500"></span>
+                Live music all summer on the outdoor stage
               </div>
               
-              <h1 className="mb-6 text-6xl font-bold leading-tight text-transparent lg:text-7xl bg-gradient-to-r from-emerald-700 via-blue-700 to-emerald-600 bg-clip-text">
+              <h1 className="mb-6 font-serif text-5xl font-bold md:text-6xl text-sky-800">
                 Our Live Events
               </h1>
               
               <p className="max-w-3xl mx-auto mb-8 text-xl leading-relaxed text-gray-700">
-                Join us at our beautiful new outdoor stage and patio area for unforgettable evenings of live music, community gatherings, and seasonal celebrations in the heart of Samuels, Idaho.
+                Join us at the outdoor stage and patio for live music and community events in the heart of Samuels, Idaho.
               </p>
             </section>
           </div>
 
           {/* No Events Message */}
           <div className="max-w-4xl px-6 mx-auto text-center">
-            <div className="p-12 bg-white border shadow-lg rounded-2xl border-emerald-100">
+            <div className="p-12 bg-white border shadow-lg rounded-2xl border-sky-100">
               <div className="mb-6 text-6xl">🎵</div>
               <h2 className="mb-4 text-3xl font-bold text-gray-800">
                 No Upcoming Events Scheduled
@@ -206,13 +206,13 @@ export default function EventsPage({ events, sponsors }) {
               <div className="flex flex-col justify-center gap-4 sm:flex-row">
                 <a
                   href="tel:+12082631146" // Use your actual number
-                  className="inline-flex items-center gap-2 px-6 py-3 font-semibold text-white transition rounded-lg bg-emerald-600 hover:bg-emerald-700"
+                  className="inline-flex items-center gap-2 px-6 py-3 font-semibold text-white transition rounded-lg bg-cyan-600 hover:bg-cyan-700"
                 >
                   📞 Call for Event Info
                 </a>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 px-6 py-3 font-semibold transition border-2 rounded-lg border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white"
+                  className="inline-flex items-center gap-2 px-6 py-3 font-semibold transition border-2 rounded-lg border-cyan-600 text-cyan-600 hover:bg-cyan-600 hover:text-white"
                 >
                   📧 Contact Us
                 </Link>
@@ -237,18 +237,18 @@ export default function EventsPage({ events, sponsors }) {
         ])}
       />
 
-      <main className="min-h-screen pb-32 bg-gradient-to-br from-emerald-50 via-white to-blue-50">
+      <main className="min-h-screen pb-32 bg-gradient-to-br from-sky-50 via-white to-blue-50">
         {/* Hero Section */}
         <div className="relative overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-emerald-600/10 to-blue-600/10"></div>
+          <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-cyan-600/10 to-blue-600/10"></div>
           
           <section className="relative max-w-5xl px-6 mx-auto mt-10 mb-16 text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-medium rounded-full bg-emerald-100 text-emerald-800 animate-pulse">
-              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-              New Outdoor Stage & Patio Now Open!
+            <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-medium rounded-full bg-sky-100 text-cyan-800">
+              <span className="w-2 h-2 rounded-full bg-sky-500"></span>
+              Live music all summer on the outdoor stage
             </div>
             
-            <h1 className="mb-6 text-6xl font-bold leading-tight text-transparent lg:text-7xl bg-gradient-to-r from-emerald-700 via-blue-700 to-emerald-600 bg-clip-text">
+            <h1 className="mb-6 font-serif text-5xl font-bold md:text-6xl text-sky-800">
               Come Enjoy Our Live Events
             </h1>
 
@@ -256,7 +256,7 @@ export default function EventsPage({ events, sponsors }) {
             <div className="max-w-3xl mx-auto mb-8">
               <button
                 onClick={() => setPosterOpen(true)}
-                className="w-full rounded-2xl group focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-400"
+                className="w-full rounded-2xl group focus:outline-none focus-visible:ring-4 focus-visible:ring-sky-400"
                 aria-label="View full-size events poster"
               >
                 <img
@@ -264,23 +264,23 @@ export default function EventsPage({ events, sponsors }) {
                   alt="Upcoming shows at Blue Heron Café"
                   className="w-full rounded-2xl shadow-xl transition-transform duration-300 group-hover:scale-[1.02]"
                 />
-                <p className="mt-2 text-sm font-medium text-emerald-600">Tap to view full size</p>
+                <p className="mt-2 text-sm font-medium text-cyan-600">Tap to view full size</p>
               </button>
             </div>
 
             <p className="max-w-3xl mx-auto mb-8 text-xl leading-relaxed text-gray-700">
-              Join us at our beautiful new outdoor stage and patio area for unforgettable evenings of live music, community gatherings, and seasonal celebrations in the heart of Samuels, Idaho.
+              Join us at the outdoor stage and patio for live music and community events in the heart of Samuels, Idaho.
             </p>
             
             <div className="flex flex-wrap justify-center gap-4 mb-12">
-              <div className="px-6 py-3 border rounded-lg shadow-lg bg-white/80 backdrop-blur-sm border-emerald-100">
-                <span className="font-semibold text-emerald-600">🎵 Live Music</span>
+              <div className="px-6 py-3 border rounded-lg shadow-lg bg-white/80 backdrop-blur-sm border-sky-100">
+                <span className="font-semibold text-cyan-600">🎵 Live Music</span>
               </div>
-              <div className="px-6 py-3 border rounded-lg shadow-lg bg-white/80 backdrop-blur-sm border-emerald-100">
-                <span className="font-semibold text-emerald-600">🌿 Garden Patio</span>
+              <div className="px-6 py-3 border rounded-lg shadow-lg bg-white/80 backdrop-blur-sm border-sky-100">
+                <span className="font-semibold text-cyan-600">🌿 Garden Patio</span>
               </div>
-              <div className="px-6 py-3 border rounded-lg shadow-lg bg-white/80 backdrop-blur-sm border-emerald-100">
-                <span className="font-semibold text-emerald-600">🎭 Community Events</span>
+              <div className="px-6 py-3 border rounded-lg shadow-lg bg-white/80 backdrop-blur-sm border-sky-100">
+                <span className="font-semibold text-cyan-600">🎭 Community Events</span>
               </div>
             </div>
           </section>
@@ -297,14 +297,14 @@ export default function EventsPage({ events, sponsors }) {
             <h2 className="text-4xl font-bold text-gray-900">
               Upcoming Events ({futureEvents.length})
             </h2>
-            <div className="flex-1 h-px ml-8 bg-gradient-to-r from-emerald-300 to-blue-300"></div>
+            <div className="flex-1 h-px ml-8 bg-gradient-to-r from-sky-300 to-blue-300"></div>
           </div>
 
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
             {futureEvents.map((event, index) => (
               <div
                 key={event._id}
-                className="overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-lg group rounded-2xl hover:shadow-2xl hover:border-emerald-200 hover:-translate-y-2"
+                className="overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-lg group rounded-2xl hover:shadow-2xl hover:border-sky-200 hover:-translate-y-2"
                 style={{ animationDelay: `${index * 100}ms` }}
                 data-event-date={event.date}
               >
@@ -316,20 +316,20 @@ export default function EventsPage({ events, sponsors }) {
                       className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:opacity-100"></div>
-                    <div className="absolute px-3 py-1 text-sm font-medium text-white rounded-full top-4 right-4 bg-emerald-600">
+                    <div className="absolute px-3 py-1 text-sm font-medium text-white rounded-full top-4 right-4 bg-cyan-600">
                       Outdoor Stage
                     </div>
                   </div>
 
                   <div className="p-6">
                     <div className="flex items-center gap-2 mb-3">
-                      <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
-                      <span className="text-sm font-medium tracking-wide uppercase text-emerald-600">
+                      <div className="w-3 h-3 rounded-full bg-sky-500"></div>
+                      <span className="text-sm font-medium tracking-wide uppercase text-cyan-600">
                         {formatDate(event.date)}
                       </span>
                     </div>
 
-                    <h3 className="mb-2 text-xl font-bold text-gray-900 transition-colors duration-300 group-hover:text-emerald-600 line-clamp-2">
+                    <h3 className="mb-2 text-xl font-bold text-gray-900 transition-colors duration-300 group-hover:text-cyan-600 line-clamp-2">
                       {event.title}
                     </h3>
 
@@ -352,7 +352,7 @@ export default function EventsPage({ events, sponsors }) {
                 </Link>
 
                 <div className="px-6 pb-6 flex items-center justify-between gap-3">
-                  <Link href={`/events/${event.slug}`} className="flex items-center font-medium transition-colors text-emerald-600 hover:text-emerald-700">
+                  <Link href={`/events/${event.slug}`} className="flex items-center font-medium transition-colors text-cyan-600 hover:text-cyan-700">
                     <span className="mr-2">Learn More</span>
                     <svg className="w-4 h-4 transition-transform transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -363,7 +363,7 @@ export default function EventsPage({ events, sponsors }) {
                       href={event.ticketUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white transition-colors rounded-lg bg-emerald-600 hover:bg-emerald-700"
+                      className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white transition-colors rounded-lg bg-cyan-600 hover:bg-cyan-700"
                     >
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
@@ -405,16 +405,16 @@ export default function EventsPage({ events, sponsors }) {
 
           {/* Call to Action */}
           <div className="mt-20 text-center">
-            <div className="max-w-4xl p-8 mx-auto text-white bg-gradient-to-r from-emerald-600 to-blue-600 rounded-2xl">
+            <div className="max-w-4xl p-8 mx-auto text-white bg-gradient-to-r from-cyan-600 to-blue-600 rounded-2xl">
               <h3 className="mb-4 text-3xl font-bold">
                 Ready to Experience Our Outdoor Stage?
               </h3>
-              <p className="mb-6 text-lg text-emerald-100">
+              <p className="mb-6 text-lg text-sky-100">
                 Join us for an evening under the stars with live music and great food.
               </p>
               <Link
                 href="/contact"
-                className="px-8 py-3 font-bold transition-colors bg-white rounded-full shadow-lg text-emerald-600 hover:bg-emerald-50"
+                className="px-8 py-3 font-bold transition-colors bg-white rounded-full shadow-lg text-cyan-600 hover:bg-sky-50"
               >
                 Get Event Updates
               </Link>
