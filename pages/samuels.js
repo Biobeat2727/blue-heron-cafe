@@ -16,7 +16,7 @@ export default function SamuelsPage() {
   return (
     <>
       <SEO
-        title="Samuels Store | Blue Heron Café — Country Store Near Sandpoint, Idaho"
+        title="Samuels Store | Blue Heron Café, Country Store Near Sandpoint, Idaho"
         description="Visit the Samuels Store next to Blue Heron Café on US-95 near Sandpoint, Idaho. Local products, fuel, snacks, and small-town community charm."
         keywords="Samuels Store Idaho, US-95 country store, Bonner County Idaho store, near Sandpoint Idaho, Blue Heron Samuels"
         url="/samuels"

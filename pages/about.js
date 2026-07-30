@@ -41,7 +41,7 @@ export default function AboutPage() {
               Welcome to the Blue Heron Café
             </h1>
             <p className="text-white text-lg md:text-xl font-light drop-shadow-md">
-              A hidden gem tucked behind Samuels Store — fresh, elevated homestyle eats in a cozy, nature-inspired setting.
+              A hidden gem tucked behind Samuels Store. Fresh, elevated homestyle eats in a cozy, nature-inspired setting.
             </p>
           </div>
         </div>
@@ -59,7 +59,7 @@ export default function AboutPage() {
         <div>
           <h2 className="text-3xl font-bold text-cyan-800 mb-4 font-serif">About Us</h2>
           <p className="text-lg text-gray-700 leading-relaxed">
-            We are a hidden gem that most don’t even know about — tucked away behind The Samuels Store and gas station. We pride ourselves on fresh eats with a spin on traditional items. Our food reflects the care we put into every plate, combining elevated quality with homestyle comfort.
+            We are a hidden gem that most don’t even know about, tucked away behind The Samuels Store and gas station. We pride ourselves on fresh eats with a spin on traditional items. Our food reflects the care we put into every plate, combining elevated quality with homestyle comfort.
             <br /><br />
             The Blue Heron Café is more than just a place to eat; it’s a gathering place for our community. Inspired by the warmth of a family, we’ve created a welcoming space where friends and families come together over delicious meals. Rooted in a deep love for mother nature, we’re proud to share this experience with you.
           </p>

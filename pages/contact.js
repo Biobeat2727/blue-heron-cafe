@@ -40,7 +40,7 @@ export default function ContactPage() {
   return (
     <>
       <SEO
-        title="Contact Blue Heron Café | Samuels, Idaho — Event Booking & Hours"
+        title="Contact Blue Heron Café | Event Booking & Hours in Samuels, Idaho"
         description="Get in touch with Blue Heron Café in Samuels, Idaho. Book private events, ask about our outdoor patio, or find our hours and directions near Sandpoint."
         keywords="Blue Heron Café contact, Samuels Idaho restaurant hours, outdoor event booking near Sandpoint, cafe Bonner County Idaho"
         url="/contact"

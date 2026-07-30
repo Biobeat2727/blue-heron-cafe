@@ -160,7 +160,7 @@ export default function EventsPage({ events, sponsors }) {
     return (
       <>
         <SEO
-          title="Live Events | Blue Heron Café — Outdoor Stage in Samuels, Idaho"
+          title="Live Events | Blue Heron Café Outdoor Stage in Samuels, Idaho"
           description="Join us for live music, community gatherings, and seasonal events at Blue Heron Café's outdoor stage and patio in Samuels, Idaho near Sandpoint."
           keywords="live music near Sandpoint Idaho, outdoor events Samuels ID, Blue Heron Café events, North Idaho live music venue, concerts near Sandpoint"
           url="/events"
@@ -227,7 +227,7 @@ export default function EventsPage({ events, sponsors }) {
   return (
     <>
       <SEO
-        title="Live Events | Blue Heron Café — Outdoor Stage in Samuels, Idaho"
+        title="Live Events | Blue Heron Café Outdoor Stage in Samuels, Idaho"
         description="Join us for live music, community gatherings, and seasonal events at Blue Heron Café's outdoor stage and patio in Samuels, Idaho near Sandpoint."
         keywords="live music near Sandpoint Idaho, outdoor events Samuels ID, Blue Heron Café events, North Idaho live music venue, concerts near Sandpoint"
         url="/events"
