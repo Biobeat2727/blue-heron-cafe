@@ -213,7 +213,7 @@ const StableEventsShowcase = () => {
         <div className="max-w-3xl mx-auto mb-16">
           <button
             onClick={() => setSeasonPosterOpen(true)}
-            className="w-full focus:outline-none group"
+            className="w-full rounded-2xl group focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-400"
             aria-label="View full-size events poster"
           >
             <img

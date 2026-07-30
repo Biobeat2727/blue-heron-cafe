@@ -67,28 +67,33 @@ export default function ContactPage() {
             >
               <div className="grid gap-6 md:grid-cols-2">
                 <div>
-                  <label className="block mb-2 text-sm font-semibold text-gray-700">Name</label>
-                  <input 
-                    name="name" 
-                    required 
-                    className="w-full p-3 transition border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent" 
+                  <label htmlFor="contact-name" className="block mb-2 text-sm font-semibold text-gray-700">Name</label>
+                  <input
+                    id="contact-name"
+                    name="name"
+                    autoComplete="name"
+                    required
+                    className="w-full p-3 transition border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                   />
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-semibold text-gray-700">Email</label>
-                  <input 
-                    type="email" 
-                    name="email" 
-                    required 
-                    className="w-full p-3 transition border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent" 
+                  <label htmlFor="contact-email" className="block mb-2 text-sm font-semibold text-gray-700">Email</label>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    name="email"
+                    autoComplete="email"
+                    required
+                    className="w-full p-3 transition border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                   />
                 </div>
               </div>
               
               <div>
-                <label className="block mb-2 text-sm font-semibold text-gray-700">Event Type</label>
-                <select 
-                  name="eventType" 
+                <label htmlFor="contact-event-type" className="block mb-2 text-sm font-semibold text-gray-700">Event Type</label>
+                <select
+                  id="contact-event-type"
+                  name="eventType"
                   className="w-full p-3 transition border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                 >
                   <option>General Inquiry</option>
@@ -101,9 +106,10 @@ export default function ContactPage() {
               </div>
               
               <div>
-                <label className="block mb-2 text-sm font-semibold text-gray-700">Message</label>
-                <textarea 
-                  name="message" 
+                <label htmlFor="contact-message" className="block mb-2 text-sm font-semibold text-gray-700">Message</label>
+                <textarea
+                  id="contact-message"
+                  name="message"
                   rows="5" 
                   required 
                   className="w-full p-3 transition border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent" 
@@ -120,13 +126,13 @@ export default function ContactPage() {
 
               {/* Status Messages */}
               {submitStatus === "success" && (
-                <div className="px-4 py-3 text-green-700 border border-green-200 rounded-lg bg-green-50">
+                <div role="status" className="px-4 py-3 text-green-700 border border-green-200 rounded-lg bg-green-50">
                   Thank you! We'll get back to you soon.
                 </div>
               )}
               {submitStatus === "error" && (
-                <div className="px-4 py-3 text-red-700 border border-red-200 rounded-lg bg-red-50">
-                  Something went wrong. Please try again or call us directly.
+                <div role="alert" className="px-4 py-3 text-red-700 border border-red-200 rounded-lg bg-red-50">
+                  Something went wrong. Please try again or call us directly at (208) 263-1146.
                 </div>
               )}
             </form>
@@ -170,6 +176,7 @@ export default function ContactPage() {
               <h3 className="mb-4 text-lg font-semibold text-cyan-800">Find Us</h3>
               <div className="relative h-48 overflow-hidden rounded-lg">
                 <iframe
+                  title="Map showing Blue Heron Café at 486260 US-95"
                   className="w-full h-full"
                   src="https://maps.google.com/maps?width=100%25&amp;height=400&amp;hl=en&amp;q=486260%20US-95,%20Sandpoint,%20ID%2083864+(Blue%20Heron%20Cafe)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
                   allowFullScreen=""

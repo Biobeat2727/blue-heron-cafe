@@ -5,20 +5,11 @@ import { AnimatePresence, motion, useAnimation } from "framer-motion";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const [isDesktop, setIsDesktop] = useState(false);
   const controls = useAnimation();
   const [lastY, setLastY] = useState(0);
   const [scrollTimeout, setScrollTimeout] = useState(null);
 
   useEffect(() => {
-    // Check if desktop on mount and resize
-    const checkDesktop = () => {
-      setIsDesktop(window.innerWidth >= 1024);
-    };
-    
-    checkDesktop();
-    window.addEventListener('resize', checkDesktop);
-    
     const handleScroll = () => {
       const currentY = window.scrollY;
       const delta = currentY - lastY;
@@ -34,16 +25,13 @@ const Navbar = () => {
             transition: { duration: 0.2, ease: "easeOut" }
           });
         } else {
-          // Scrolling up
+          // Scrolling up: bring the nav back immediately
           if (scrollTimeout) clearTimeout(scrollTimeout);
-          const timeout = setTimeout(() => {
-            controls.start({ 
-              y: 0, 
-              opacity: 1,
-              transition: { duration: 0.3, ease: "easeOut" }
-            });
-          }, 50);
-          setScrollTimeout(timeout);
+          controls.start({
+            y: 0,
+            opacity: 1,
+            transition: { duration: 0.2, ease: "easeOut" }
+          });
         }
         setLastY(currentY);
       }
@@ -52,7 +40,6 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener('resize', checkDesktop);
       if (scrollTimeout) clearTimeout(scrollTimeout);
     };
   }, [lastY, controls, scrollTimeout]);
@@ -71,37 +58,32 @@ const Navbar = () => {
     >
       <div className="relative flex items-center justify-between h-full max-w-6xl px-6 mx-auto">
 
-        {/* Left Links - Desktop Only - FIXED: Force display on desktop */}
-        <div 
-          className="absolute gap-6 text-lg font-medium text-white left-6" 
-          style={{ display: isDesktop ? 'flex' : 'none' }}
-        >
-          <Link href="/menu" className="relative transition-all duration-300 group hover:text-sky-200">
+        {/* Left Links - Desktop Only */}
+        <div className="absolute hidden gap-6 text-lg font-medium text-white left-6 lg:flex">
+          <Link href="/menu" className="relative transition-all duration-300 group hover:text-sky-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 rounded-sm">
             <span className="relative z-10">Menu</span>
             <div className="absolute inset-0 transition-transform duration-300 scale-0 rounded-lg bg-sky-400/20 group-hover:scale-100 -z-10"></div>
             <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-sky-300 group-hover:w-full transition-all duration-300"></div>
           </Link>
-          <Link href="/events" className="relative transition-all duration-300 group hover:text-sky-200">
+          <Link href="/events" className="relative transition-all duration-300 group hover:text-sky-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 rounded-sm">
             <span className="relative z-10">Events</span>
             <div className="absolute inset-0 transition-transform duration-300 scale-0 rounded-lg bg-sky-400/20 group-hover:scale-100 -z-10"></div>
             <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-sky-300 group-hover:w-full transition-all duration-300"></div>
           </Link>
-          <Link href="/gallery" className="relative transition-all duration-300 group hover:text-sky-200">
+          <Link href="/gallery" className="relative transition-all duration-300 group hover:text-sky-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 rounded-sm">
             <span className="relative z-10">Gallery</span>
             <div className="absolute inset-0 transition-transform duration-300 scale-0 rounded-lg bg-sky-400/20 group-hover:scale-100 -z-10"></div>
             <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-sky-300 group-hover:w-full transition-all duration-300"></div>
           </Link>
         </div>
 
-        {/* Mobile Hamburger - RESTORED ORIGINAL POSITION */}
-        <div 
-          className="flex items-center" 
-          style={{ display: isDesktop ? 'none' : 'flex' }}
-        >
+        {/* Mobile Hamburger */}
+        <div className="flex items-center lg:hidden">
           <button
             onClick={toggleMenu}
-            className="p-2 text-white transition-all duration-200 border rounded-lg bg-sky-500/25 hover:bg-sky-500/40 border-sky-400/40 backdrop-blur-sm"
+            className="p-2 text-white transition-all duration-200 border rounded-lg bg-sky-500/25 hover:bg-sky-500/40 border-sky-400/40 backdrop-blur-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
             aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
           >
             <motion.div
               animate={{ rotate: isMenuOpen ? 90 : 0 }}
@@ -115,7 +97,11 @@ const Navbar = () => {
 
         {/* Centered Logo with Scaling and Hover Effects - RESTORED ORIGINAL SIZE & POSITION */}
         <div className="absolute top-0 z-50 transform -translate-x-1/2 left-1/2">
-          <Link href="/" className="block pointer-events-auto group">
+          <Link
+            href="/"
+            aria-label="Blue Heron Café home"
+            className="block rounded-lg pointer-events-auto group focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
+          >
             <motion.div
               className="relative"
               animate={{ 
@@ -137,22 +123,19 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Right Links - Desktop Only - FIXED: Force display on desktop */}
-        <div 
-          className="absolute gap-6 text-lg font-medium text-white right-6" 
-          style={{ display: isDesktop ? 'flex' : 'none' }}
-        >
-          <Link href="/about" className="relative transition-all duration-300 group hover:text-sky-200">
+        {/* Right Links - Desktop Only */}
+        <div className="absolute hidden gap-6 text-lg font-medium text-white right-6 lg:flex">
+          <Link href="/about" className="relative transition-all duration-300 group hover:text-sky-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 rounded-sm">
             <span className="relative z-10">About</span>
             <div className="absolute inset-0 transition-transform duration-300 scale-0 rounded-lg bg-sky-400/20 group-hover:scale-100 -z-10"></div>
             <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-sky-300 group-hover:w-full transition-all duration-300"></div>
           </Link>
-          <Link href="/contact" className="relative transition-all duration-300 group hover:text-sky-200">
+          <Link href="/contact" className="relative transition-all duration-300 group hover:text-sky-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 rounded-sm">
             <span className="relative z-10">Contact</span>
             <div className="absolute inset-0 transition-transform duration-300 scale-0 rounded-lg bg-sky-400/20 group-hover:scale-100 -z-10"></div>
             <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-sky-300 group-hover:w-full transition-all duration-300"></div>
           </Link>
-          <Link href="/samuels" className="relative transition-all duration-300 group hover:text-sky-200">
+          <Link href="/samuels" className="relative transition-all duration-300 group hover:text-sky-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 rounded-sm">
             <span className="relative z-10">Samuels Store</span>
             <div className="absolute inset-0 transition-transform duration-300 scale-0 rounded-lg bg-sky-400/20 group-hover:scale-100 -z-10"></div>
             <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-sky-300 group-hover:w-full transition-all duration-300"></div>
@@ -168,7 +151,7 @@ const Navbar = () => {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className={`bg-gradient-to-r from-sky-900/98 via-blue-800/98 to-cyan-800/98 backdrop-blur-lg border-t border-sky-400/40 overflow-hidden shadow-2xl ${isDesktop ? 'hidden' : ''}`}
+            className="bg-gradient-to-r from-sky-900/98 via-blue-800/98 to-cyan-800/98 backdrop-blur-lg border-t border-sky-400/40 overflow-hidden shadow-2xl lg:hidden"
           >
             <div className="px-6 py-6 space-y-2">
               {[

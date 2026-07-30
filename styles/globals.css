@@ -2,7 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* The site is designed light-only: declare it so browsers in dark mode
+   (or with forced/auto dark) never paint the canvas dark behind sections
+   that rely on the default background. */
+html {
+  color-scheme: light;
+}
+
 html, body {
   padding: 0;
   margin: 0;
+  background-color: #ffffff;
 }

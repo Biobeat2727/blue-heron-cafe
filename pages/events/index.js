@@ -256,7 +256,7 @@ export default function EventsPage({ events, sponsors }) {
             <div className="max-w-3xl mx-auto mb-8">
               <button
                 onClick={() => setPosterOpen(true)}
-                className="w-full focus:outline-none group"
+                className="w-full rounded-2xl group focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-400"
                 aria-label="View full-size events poster"
               >
                 <img
