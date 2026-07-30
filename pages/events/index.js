@@ -1,6 +1,7 @@
 import SEO from "@/components/SEO";
 import { generateBreadcrumbSchema } from "@/lib/structuredData";
 import Link from "next/link";
+import { Music, Phone, Mail, Leaf, Users } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { getAllEvents, getSponsors } from "@/lib/sanity";
 import imageUrlBuilder from "@sanity/image-url";
@@ -194,7 +195,7 @@ export default function EventsPage({ events, sponsors }) {
           {/* No Events Message */}
           <div className="max-w-4xl px-6 mx-auto text-center">
             <div className="p-12 bg-white border shadow-lg rounded-2xl border-sky-100">
-              <div className="mb-6 text-6xl">🎵</div>
+              <Music className="w-16 h-16 mx-auto mb-6 text-sky-500" aria-hidden="true" />
               <h2 className="mb-4 text-3xl font-bold text-gray-800">
                 No Upcoming Events Scheduled
               </h2>
@@ -208,13 +209,13 @@ export default function EventsPage({ events, sponsors }) {
                   href="tel:+12082631146" // Use your actual number
                   className="inline-flex items-center gap-2 px-6 py-3 font-semibold text-white transition rounded-lg bg-cyan-600 hover:bg-cyan-700"
                 >
-                  📞 Call for Event Info
+                  <Phone className="w-5 h-5" aria-hidden="true" /> Call for Event Info
                 </a>
                 <Link
                   href="/contact"
                   className="inline-flex items-center gap-2 px-6 py-3 font-semibold transition border-2 rounded-lg border-cyan-600 text-cyan-600 hover:bg-cyan-600 hover:text-white"
                 >
-                  📧 Contact Us
+                  <Mail className="w-5 h-5" aria-hidden="true" /> Contact Us
                 </Link>
               </div>
             </div>
@@ -274,13 +275,19 @@ export default function EventsPage({ events, sponsors }) {
             
             <div className="flex flex-wrap justify-center gap-4 mb-12">
               <div className="px-6 py-3 border rounded-lg shadow-lg bg-white/80 backdrop-blur-sm border-sky-100">
-                <span className="font-semibold text-cyan-600">🎵 Live Music</span>
+                <span className="inline-flex items-center gap-2 font-semibold text-cyan-600">
+                  <Music className="w-4 h-4" aria-hidden="true" /> Live Music
+                </span>
               </div>
               <div className="px-6 py-3 border rounded-lg shadow-lg bg-white/80 backdrop-blur-sm border-sky-100">
-                <span className="font-semibold text-cyan-600">🌿 Garden Patio</span>
+                <span className="inline-flex items-center gap-2 font-semibold text-cyan-600">
+                  <Leaf className="w-4 h-4" aria-hidden="true" /> Garden Patio
+                </span>
               </div>
               <div className="px-6 py-3 border rounded-lg shadow-lg bg-white/80 backdrop-blur-sm border-sky-100">
-                <span className="font-semibold text-cyan-600">🎭 Community Events</span>
+                <span className="inline-flex items-center gap-2 font-semibold text-cyan-600">
+                  <Users className="w-4 h-4" aria-hidden="true" /> Community Events
+                </span>
               </div>
             </div>
           </section>

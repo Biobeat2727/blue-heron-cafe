@@ -10,6 +10,7 @@ function urlFor(source) {
 }
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
+import { Music, Phone, X } from "lucide-react";
 
 const StableEventsShowcase = () => {
   const [events, setEvents] = useState([]);
@@ -359,7 +360,7 @@ const StableEventsShowcase = () => {
           /* No Events State */
           <div className="py-16 text-center">
             <div className="max-w-2xl p-12 mx-auto bg-white border border-gray-100 shadow-lg rounded-2xl">
-              <div className="mb-6 text-6xl">🎵</div>
+              <Music className="w-16 h-16 mx-auto mb-6 text-sky-500" aria-hidden="true" />
               <h3 className="mb-4 text-3xl font-bold text-gray-900">No Upcoming Events</h3>
               <p className="mb-8 text-lg text-gray-600">
                 We're planning some amazing events for our outdoor stage! 
@@ -379,7 +380,7 @@ const StableEventsShowcase = () => {
                   href="tel:+12082631146"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold text-gray-700 transition-colors bg-gray-100 rounded-lg hover:bg-gray-200"
                 >
-                  📞 Call Us
+                  <Phone className="w-5 h-5" aria-hidden="true" /> Call Us
                 </a>
               </div>
             </div>
@@ -491,9 +492,10 @@ const StableEventsShowcase = () => {
               {/* Close Button - Inside viewport */}
               <button
                 onClick={() => setSelectedPoster(null)}
-                className="absolute z-10 flex items-center justify-center w-10 h-10 text-xl font-bold text-white transition-all duration-200 rounded-full top-4 right-4 bg-black/60 backdrop-blur-sm hover:text-gray-300 hover:bg-black/80"
+                className="absolute z-10 flex items-center justify-center w-10 h-10 text-white transition-all duration-200 rounded-full top-4 right-4 bg-black/60 backdrop-blur-sm hover:text-gray-300 hover:bg-black/80"
+                aria-label="Close poster"
               >
-                ✕
+                <X className="w-5 h-5" aria-hidden="true" />
               </button>
               
               {/* Poster Image */}

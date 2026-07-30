@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getFeaturedMenuItems } from "@/lib/sanity";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { Star, EggFried, Salad, Utensils, CakeSlice } from "lucide-react";
 
 const MenuShowcase = () => {
   const [items, setItems] = useState([]);
@@ -15,11 +16,11 @@ const MenuShowcase = () => {
 
   // Group items by category
   const categories = [
-    { id: "all", name: "All Favorites", icon: "⭐" },
-    { id: "breakfast", name: "Breakfast", icon: "🥞" },
-    { id: "lunch", name: "Lunch", icon: "🥗" },
-    { id: "dinner", name: "Dinner", icon: "🍽️" },
-    { id: "desserts", name: "Desserts", icon: "🧁" }
+    { id: "all", name: "All Favorites", icon: Star },
+    { id: "breakfast", name: "Breakfast", icon: EggFried },
+    { id: "lunch", name: "Lunch", icon: Salad },
+    { id: "dinner", name: "Dinner", icon: Utensils },
+    { id: "desserts", name: "Desserts", icon: CakeSlice }
   ];
 
   const filteredItems = activeCategory === "all" 
@@ -90,7 +91,7 @@ const MenuShowcase = () => {
               }`}
             >
               <span className="flex items-center gap-2">
-                <span className="text-lg">{category.icon}</span>
+                <category.icon className="w-4 h-4" aria-hidden="true" />
                 {category.name}
               </span>
               {activeCategory === category.id && (

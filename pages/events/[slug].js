@@ -4,6 +4,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { motion, AnimatePresence } from "framer-motion";
+import { Music } from "lucide-react";
 import { client, getSponsors } from "@/lib/sanity";
 import imageUrlBuilder from "@sanity/image-url";
 
@@ -28,7 +29,7 @@ export default function EventDetail({ event, sponsors }) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-slate-50 to-cyan-50">
         <div className="max-w-md px-6 mx-auto text-center">
-          <div className="mb-6 text-6xl">🎵</div>
+          <Music className="w-16 h-16 mx-auto mb-6 text-sky-500" aria-hidden="true" />
           <h1 className="mb-4 text-2xl font-bold text-gray-900">Event Not Found</h1>
           <p className="mb-6 text-gray-600">This event may have been removed or the link is incorrect.</p>
           <Link

@@ -1,6 +1,7 @@
 // components/ReviewsSection.js
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { Star } from "lucide-react";
 
 const ReviewsSection = () => {
   const [reviews] = useState([
@@ -93,7 +94,7 @@ const ReviewsSection = () => {
           <div className="flex justify-center items-center gap-2 mb-4">
             <div className="flex">
               {[...Array(5)].map((_, i) => (
-                <span key={i} className="text-yellow-500 text-2xl">⭐</span>
+                <Star key={i} className="w-6 h-6 text-yellow-500 fill-current" aria-hidden="true" />
               ))}
             </div>
             <span className="text-lg font-semibold text-gray-700">5.0</span>
@@ -118,7 +119,7 @@ const ReviewsSection = () => {
               <div className="flex justify-between items-start mb-3">
                 <div className="flex">
                   {[...Array(review.rating)].map((_, i) => (
-                    <span key={i} className="text-yellow-500 text-lg">⭐</span>
+                    <Star key={i} className="w-5 h-5 text-yellow-500 fill-current" aria-hidden="true" />
                   ))}
                 </div>
                 <div className="flex items-center gap-1">

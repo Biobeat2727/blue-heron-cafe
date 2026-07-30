@@ -1,6 +1,14 @@
 // pages/menu.js - Enhanced with Section Navigation
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  EggFried,
+  Salad,
+  UtensilsCrossed,
+  Utensils,
+  CakeSlice,
+  CupSoda,
+} from "lucide-react";
 import MenuSection from "@/components/MenuSection";
 import SEO from "@/components/SEO";
 import { generateMenuSchema, generateBreadcrumbSchema } from "@/lib/structuredData";
@@ -18,16 +26,16 @@ export default function MenuPage({ menuItems }) {
   const [activeSection, setActiveSection] = useState("");
   const [showJumpButton, setShowJumpButton] = useState(false);
   const [showNavPanel, setShowNavPanel] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [scrollTimeout, setScrollTimeout] = useState(null);
+  const lastScrollYRef = useRef(0);
+  const scrollTimeoutRef = useRef(null);
 
   const menuSections = [
-  { id: "breakfast", title: "Breakfast", icon: "🥞", image: breakfastImg },
-  { id: "lunch", title: "Lunch", icon: "🥗", image: lunchImg },
-  { id: "tidbits", title: "Tidbits", icon: "🍤", image: tidbitsImg },
-  { id: "dinner", title: "Dinner", icon: "🍽️", image: dinnerImg },
-  { id: "desserts", title: "Desserts", icon: "🧁", image: dessertsImg },
-  { id: "drinks", title: "Drinks", icon: "🥤", image: drinksImg },
+  { id: "breakfast", title: "Breakfast", icon: EggFried, image: breakfastImg },
+  { id: "lunch", title: "Lunch", icon: Salad, image: lunchImg },
+  { id: "tidbits", title: "Tidbits", icon: UtensilsCrossed, image: tidbitsImg },
+  { id: "dinner", title: "Dinner", icon: Utensils, image: dinnerImg },
+  { id: "desserts", title: "Desserts", icon: CakeSlice, image: dessertsImg },
+  { id: "drinks", title: "Drinks", icon: CupSoda, image: drinksImg },
 ];
 
 
@@ -56,40 +64,37 @@ export default function MenuPage({ menuItems }) {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      
+
       // Show button after scrolling past hero
       if (scrollY > 400) {
         setShowJumpButton(true);
       }
-      
+
       // Hide button and panel after scrolling (with timeout)
-      if (Math.abs(scrollY - lastScrollY) > 50) {
+      if (Math.abs(scrollY - lastScrollYRef.current) > 50) {
         setShowNavPanel(false);
-        
-        // Clear existing timeout
-        if (scrollTimeout) {
-          clearTimeout(scrollTimeout);
+
+        if (scrollTimeoutRef.current) {
+          clearTimeout(scrollTimeoutRef.current);
         }
-        
-        // Set new timeout to hide button after 3 seconds of no scrolling
-        const timeout = setTimeout(() => {
+
+        // Hide the button after 3 seconds of no scrolling
+        scrollTimeoutRef.current = setTimeout(() => {
           setShowJumpButton(false);
         }, 3000);
-        
-        setScrollTimeout(timeout);
       }
-      
-      setLastScrollY(scrollY);
+
+      lastScrollYRef.current = scrollY;
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      if (scrollTimeout) {
-        clearTimeout(scrollTimeout);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
       }
     };
-  }, [lastScrollY, scrollTimeout]);
+  }, []);
 
   const toggleNavPanel = () => {
     setShowNavPanel(!showNavPanel);
@@ -161,9 +166,10 @@ export default function MenuPage({ menuItems }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.5 + (index * 0.1) }}
               >
-                <div className="mb-2 text-3xl transition-transform duration-200 group-hover:scale-110">
-                  {section.icon}
-                </div>
+                <section.icon
+                  className="w-8 h-8 mx-auto mb-2 text-sky-700 transition-transform duration-200 group-hover:scale-110"
+                  aria-hidden="true"
+                />
                 <div className="text-sm font-semibold text-gray-700 group-hover:text-sky-700">
                   {section.title}
                 </div>
@@ -213,7 +219,7 @@ export default function MenuPage({ menuItems }) {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <span className="text-lg">{section.icon}</span>
+                      <section.icon className="w-5 h-5" aria-hidden="true" />
                       <span className="flex-1 text-left">{section.title}</span>
                     </motion.button>
                   ))}

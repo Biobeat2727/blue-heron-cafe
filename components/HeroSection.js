@@ -50,6 +50,7 @@ const HeroSection = () => {
     <motion.section
       ref={ref}
       className="relative w-full h-screen overflow-hidden"
+      style={{ height: "100dvh" }}
       variants={sectionVariants}
       initial="hidden"
       animate="visible"
@@ -127,7 +128,6 @@ const HeroSection = () => {
                     <span className={`text-sm font-bold ${isToday ? "text-white" : "text-cyan-300"}`}>{day}</span>
                     <span className="text-white/40 text-xs">–</span>
                     <span className="text-sm text-white">{range}</span>
-                    {isToday && <span className="text-white/70 text-xs">★</span>}
                   </div>
                 );
               })}

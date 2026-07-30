@@ -1,48 +1,56 @@
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion, useAnimation } from "framer-motion";
+import {
+  Home,
+  ClipboardList,
+  Music,
+  Camera,
+  Info,
+  Phone,
+  Store,
+  Menu,
+  X,
+} from "lucide-react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const controls = useAnimation();
-  const [lastY, setLastY] = useState(0);
-  const [scrollTimeout, setScrollTimeout] = useState(null);
+  const lastYRef = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY;
-      const delta = currentY - lastY;
-      
+      const delta = currentY - lastYRef.current;
+
       setScrollY(currentY); // Track scroll position for logo scaling
 
       if (Math.abs(delta) > 25) {
         if (delta > 0 && currentY > 100) {
           // Scrolling down
-          controls.start({ 
-            y: -100, 
+          controls.start({
+            y: -100,
             opacity: 0,
             transition: { duration: 0.2, ease: "easeOut" }
           });
         } else {
           // Scrolling up: bring the nav back immediately
-          if (scrollTimeout) clearTimeout(scrollTimeout);
           controls.start({
             y: 0,
             opacity: 1,
             transition: { duration: 0.2, ease: "easeOut" }
           });
         }
-        setLastY(currentY);
+        lastYRef.current = currentY;
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      if (scrollTimeout) clearTimeout(scrollTimeout);
     };
-  }, [lastY, controls, scrollTimeout]);
+  }, [controls]);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   
@@ -88,9 +96,12 @@ const Navbar = () => {
             <motion.div
               animate={{ rotate: isMenuOpen ? 90 : 0 }}
               transition={{ duration: 0.2 }}
-              className="text-2xl"
             >
-              {isMenuOpen ? "✕" : "☰"}
+              {isMenuOpen ? (
+                <X className="w-6 h-6" aria-hidden="true" />
+              ) : (
+                <Menu className="w-6 h-6" aria-hidden="true" />
+              )}
             </motion.div>
           </button>
         </div>
@@ -155,13 +166,13 @@ const Navbar = () => {
           >
             <div className="px-6 py-6 space-y-2">
               {[
-                { label: "Home", href: "/", icon: "🏠" },
-                { label: "Menu", href: "/menu", icon: "📋" },
-                { label: "Events", href: "/events", icon: "🎵" },
-                { label: "Gallery", href: "/gallery", icon: "📸" },
-                { label: "About", href: "/about", icon: "ℹ️" },
-                { label: "Contact", href: "/contact", icon: "📞" },
-                { label: "Samuels Store", href: "/samuels", icon: "🏪" }
+                { label: "Home", href: "/", icon: Home },
+                { label: "Menu", href: "/menu", icon: ClipboardList },
+                { label: "Events", href: "/events", icon: Music },
+                { label: "Gallery", href: "/gallery", icon: Camera },
+                { label: "About", href: "/about", icon: Info },
+                { label: "Contact", href: "/contact", icon: Phone },
+                { label: "Samuels Store", href: "/samuels", icon: Store }
               ].map((item, index) => (
                 <motion.div
                   key={item.label}
@@ -174,7 +185,10 @@ const Navbar = () => {
                     onClick={toggleMenu}
                     className="flex items-center gap-3 px-4 py-4 text-lg font-semibold text-white transition-all duration-300 border border-transparent hover:text-sky-200 hover:bg-gradient-to-r hover:from-sky-400/25 hover:to-cyan-400/25 rounded-xl hover:border-sky-400/40 backdrop-blur-sm group"
                   >
-                    <span className="text-xl transition-transform duration-200 group-hover:scale-110">{item.icon}</span>
+                    <item.icon
+                      className="w-5 h-5 transition-transform duration-200 group-hover:scale-110"
+                      aria-hidden="true"
+                    />
                     <span className="flex-1">{item.label}</span>
                     <svg className="w-5 h-5 transition-all duration-200 transform translate-x-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

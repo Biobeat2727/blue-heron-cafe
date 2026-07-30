@@ -1,5 +1,6 @@
 // pages/contact.js - Fixed Mobile Layout with Correct Hours and Full-Width Footer
 import { useState } from "react";
+import { MapPin, Clock, Phone } from "lucide-react";
 import SEO from "@/components/SEO";
 import { generateBreadcrumbSchema } from "@/lib/structuredData";
 
@@ -142,14 +143,14 @@ export default function ContactPage() {
           <div className="space-y-6">
             <div className="p-6 bg-white shadow-xl rounded-2xl">
               <h2 className="flex items-center mb-4 text-xl font-bold text-cyan-800">
-                <span className="mr-2">📍</span>
+                <MapPin className="w-5 h-5 mr-2" aria-hidden="true" />
                 Visit Us
               </h2>
               <p className="mb-2 text-gray-700">486260 US-95</p>
               <p className="mb-4 text-gray-700">Sandpoint, ID 83864</p>
               
               <h3 className="flex items-center mb-3 text-lg font-semibold text-cyan-800">
-                <span className="mr-2">🕒</span>
+                <Clock className="w-5 h-5 mr-2" aria-hidden="true" />
                 Hours
               </h3>
               <div className="mb-4 space-y-1 text-gray-700">
@@ -163,7 +164,7 @@ export default function ContactPage() {
               </div>
               
               <h3 className="flex items-center mb-2 text-lg font-semibold text-cyan-800">
-                <span className="mr-2">📞</span>
+                <Phone className="w-5 h-5 mr-2" aria-hidden="true" />
                 Phone
               </h3>
               <a href="tel:+12082631146" className="text-lg font-semibold text-cyan-600 hover:text-cyan-700">
