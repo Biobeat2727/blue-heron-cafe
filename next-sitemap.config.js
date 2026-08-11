@@ -60,6 +60,22 @@ module.exports = {
       };
     }
 
+    if (path === '/highlights') {
+      return {
+        ...defaultTransform,
+        priority: 0.8,
+        changefreq: 'weekly',
+      };
+    }
+
+    if (path.startsWith('/highlights/')) {
+      return {
+        ...defaultTransform,
+        priority: 0.6,
+        changefreq: 'monthly',
+      };
+    }
+
     if (path === '/gallery' || path === '/contact' || path === '/samuels') {
       return {
         ...defaultTransform,

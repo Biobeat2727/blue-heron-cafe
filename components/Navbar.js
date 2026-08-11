@@ -5,6 +5,7 @@ import {
   Home,
   ClipboardList,
   Music,
+  Newspaper,
   Camera,
   Info,
   Phone,
@@ -75,6 +76,11 @@ const Navbar = () => {
           </Link>
           <Link href="/events" className="relative transition-all duration-300 group hover:text-sky-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 rounded-sm">
             <span className="relative z-10">Events</span>
+            <div className="absolute inset-0 transition-transform duration-300 scale-0 rounded-lg bg-sky-400/20 group-hover:scale-100 -z-10"></div>
+            <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-sky-300 group-hover:w-full transition-all duration-300"></div>
+          </Link>
+          <Link href="/highlights" className="relative transition-all duration-300 group hover:text-sky-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 rounded-sm">
+            <span className="relative z-10">Highlights</span>
             <div className="absolute inset-0 transition-transform duration-300 scale-0 rounded-lg bg-sky-400/20 group-hover:scale-100 -z-10"></div>
             <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-sky-300 group-hover:w-full transition-all duration-300"></div>
           </Link>
@@ -169,6 +175,7 @@ const Navbar = () => {
                 { label: "Home", href: "/", icon: Home },
                 { label: "Menu", href: "/menu", icon: ClipboardList },
                 { label: "Events", href: "/events", icon: Music },
+                { label: "Highlights", href: "/highlights", icon: Newspaper },
                 { label: "Gallery", href: "/gallery", icon: Camera },
                 { label: "About", href: "/about", icon: Info },
                 { label: "Contact", href: "/contact", icon: Phone },

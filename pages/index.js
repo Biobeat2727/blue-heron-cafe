@@ -4,12 +4,14 @@ import { generateRestaurantSchema, generateFAQSchema } from "@/lib/structuredDat
 import HeroSection from "../components/HeroSection";
 import MenuShowcase from "@/components/MenuShowcase";
 import StableEventsShowcase from "@/components/StableEventsShowcase";
+import HeronHighlightsFeature from "@/components/HeronHighlightsFeature";
 import AboutSection from "@/components/AboutSection";
 import GallerySection from "@/components/GallerySection";
 import Footer from "@/components/Footer";
 import ReviewsSection from "@/components/ReviewSection";
+import { getFeaturedHighlight } from "@/lib/sanity";
 
-export default function Home() {
+export default function Home({ highlight }) {
   const restaurantSchema = generateRestaurantSchema();
 
   return (
@@ -27,9 +29,19 @@ export default function Home() {
       <HeroSection />
       <MenuShowcase />
       <StableEventsShowcase />
+      <HeronHighlightsFeature highlight={highlight} />
       <AboutSection />
       <GallerySection />
       <ReviewsSection />
     </>
   );
+}
+
+export async function getStaticProps() {
+  const highlight = await getFeaturedHighlight();
+
+  return {
+    props: { highlight },
+    revalidate: 60,
+  };
 }
