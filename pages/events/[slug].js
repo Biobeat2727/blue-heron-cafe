@@ -46,6 +46,7 @@ export default function EventDetail({ event, sponsors }) {
   const {
     title,
     subtitle,
+    synopsis,
     description,
     date,
     time,
@@ -138,9 +139,9 @@ export default function EventDetail({ event, sponsors }) {
     <>
       <Head>
         <title>{title} | Blue Heron Café</title>
-        <meta name="description" content={metaDescription || description?.slice(0, 150)} />
+        <meta name="description" content={metaDescription || synopsis || description?.slice(0, 150)} />
         <meta property="og:title" content={title} />
-        <meta property="og:description" content={metaDescription || description?.slice(0, 150)} />
+        <meta property="og:description" content={metaDescription || synopsis || description?.slice(0, 150)} />
         {openGraphImage && (
           <meta property="og:image" content={urlFor(openGraphImage).width(1200).url()} />
         )}
@@ -263,6 +264,10 @@ export default function EventDetail({ event, sponsors }) {
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
                 <h2 className="mb-6 font-serif text-2xl font-bold text-gray-900">Event Details</h2>
+                {synopsis && (
+                  <p className="mb-6 text-xl leading-relaxed text-gray-800">{synopsis}</p>
+                )}
+
                 {description && (
                   <div className="mb-8 leading-relaxed prose prose-lg text-gray-700">
                     {description.split('\n').map((paragraph, index) => (
@@ -571,6 +576,7 @@ export async function getStaticProps({ params }) {
   const eventQuery = `*[_type == "event" && slug.current == $slug][0]{
     title,
     subtitle,
+    synopsis,
     description,
     date,
     time,
