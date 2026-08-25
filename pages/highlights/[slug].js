@@ -25,6 +25,14 @@ function urlFor(source) {
   return builder.image(source);
 }
 
+// Accepts watch, share, shorts, live, and embed style YouTube links.
+function getYouTubeId(url) {
+  const match = (url || "").match(
+    /(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([\w-]{11})/
+  );
+  return match ? match[1] : null;
+}
+
 const portableTextComponents = {
   types: {
     image: ({ value }) =>
@@ -43,6 +51,31 @@ const portableTextComponents = {
           )}
         </figure>
       ) : null,
+    youtube: ({ value }) => {
+      const id = getYouTubeId(value?.url);
+      if (!id) return null;
+      return (
+        <figure className="my-8">
+          {/* aspect-video reserves the space so the embed can't shift layout */}
+          <div className="overflow-hidden shadow-md rounded-2xl aspect-video">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${id}`}
+              title={value.caption || "YouTube video"}
+              className="w-full h-full"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            ></iframe>
+          </div>
+          {value.caption && (
+            <figcaption className="mt-3 text-sm text-center text-gray-500">
+              {value.caption}
+            </figcaption>
+          )}
+        </figure>
+      );
+    },
   },
   block: {
     normal: ({ children }) => (
