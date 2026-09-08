@@ -138,7 +138,7 @@ export default function EventDetail({ event, sponsors }) {
   return (
     <>
       <Head>
-        <title>{title} | Blue Heron Café</title>
+        <title>{`${title} | Blue Heron Café`}</title>
         <meta name="description" content={metaDescription || synopsis || description?.slice(0, 150)} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={metaDescription || synopsis || description?.slice(0, 150)} />
