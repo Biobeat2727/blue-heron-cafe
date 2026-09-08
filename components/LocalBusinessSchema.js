@@ -1,3 +1,4 @@
+import { cafeAddress } from '../lib/eventSchema';
 // components/LocalBusinessSchema.js
 export default function LocalBusinessSchema() {
   const schema = {
@@ -9,19 +10,7 @@ export default function LocalBusinessSchema() {
     "url": "https://blueheronsamuels.com",
     "logo": "https://blueheronsamuels.com/images/blue-heron-vertical-logo.png",
     "image": "https://blueheronsamuels.com/images/blue-heron-hero.jpg",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "486260 US-95",
-      "addressLocality": "Samuels", 
-      "addressRegion": "ID",
-      "postalCode": "83864",
-      "addressCountry": "US"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 48.3686,
-      "longitude": -116.5535
-    },
+    "address": cafeAddress,
     "telephone": "(208) 263-1146",
     "email": "info@blueheronsamuels.com",
     "openingHoursSpecification": [

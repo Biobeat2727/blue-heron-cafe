@@ -1,6 +1,7 @@
 // pages/events/[slug].js - Enhanced with Working Poster Lightbox
 import { useState } from "react";
-import Head from "next/head";
+import SEO from "@/components/SEO";
+import { generateEventSchema, generateBreadcrumbSchema } from "@/lib/structuredData";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { motion, AnimatePresence } from "framer-motion";
@@ -130,6 +131,15 @@ export default function EventDetail({ event, sponsors }) {
     return today.toDateString() === eventDate.toDateString();
   };
 
+  const eventUrl = `https://www.blueheronsamuels.com/events/${encodeURIComponent(event.slug)}`;
+  const eventImage = openGraphImage || image;
+  const imageUrl = eventImage ? urlFor(eventImage).width(1920).url() : undefined;
+  const eventSchema = generateEventSchema({ ...event, imageUrl });
+  const breadcrumbs = generateBreadcrumbSchema([
+    { name: "Home", url: "https://www.blueheronsamuels.com/" },
+    { name: "Events", url: "https://www.blueheronsamuels.com/events" },
+    { name: title, url: eventUrl },
+  ]);
   const isToday = isEventToday(date);
   const eventDate = new Date(date);
   const today = new Date();
@@ -137,15 +147,14 @@ export default function EventDetail({ event, sponsors }) {
 
   return (
     <>
-      <Head>
-        <title>{`${title} | Blue Heron Café`}</title>
-        <meta name="description" content={metaDescription || synopsis || description?.slice(0, 150)} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={metaDescription || synopsis || description?.slice(0, 150)} />
-        {openGraphImage && (
-          <meta property="og:image" content={urlFor(openGraphImage).width(1200).url()} />
-        )}
-      </Head>
+      <SEO
+        title={`${title} | Blue Heron Café`}
+        description={metaDescription || synopsis || description?.slice(0, 150)}
+        url={eventUrl}
+        canonical={eventUrl}
+        image={imageUrl || "/images/og-image.jpg"}
+        jsonLd={[eventSchema, breadcrumbs].filter(Boolean)}
+      />
 
       <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50">
         {/* Hero Section */}
@@ -378,7 +387,7 @@ export default function EventDetail({ event, sponsors }) {
                         <p className="text-sm font-medium text-gray-500">Location</p>
                         <p className="font-semibold text-gray-900">Blue Heron Café</p>
                         <p className="text-sm text-gray-600">Outdoor Stage & Patio</p>
-                        <p className="text-sm text-gray-600">486260 US-95, Sandpoint, ID</p>
+                        <p className="text-sm text-gray-600">486260 US-95, Sandpoint, ID 83864</p>
                       </div>
                     </div>
                   </div>
@@ -574,6 +583,8 @@ export default function EventDetail({ event, sponsors }) {
 
 export async function getStaticProps({ params }) {
   const eventQuery = `*[_type == "event" && slug.current == $slug][0]{
+    "slug": slug.current,
+    isPrivate,
     title,
     subtitle,
     synopsis,
@@ -594,6 +605,8 @@ export async function getStaticProps({ params }) {
     getSponsors(),
   ]);
 
+  if (!event) return { notFound: true, revalidate: 60 };
+
   return {
     props: { event, sponsors },
     revalidate: 60,
@@ -601,12 +614,12 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  const query = `*[_type == "event"]{ "slug": slug.current }`;
+  const query = `*[_type == "event" && defined(slug.current)]{ "slug": slug.current }`;
   const slugs = await client.fetch(query);
 
   const paths = slugs.map((s) => ({
     params: { slug: s.slug },
   }));
 
-  return { paths, fallback: true };
+  return { paths, fallback: "blocking" };
 }

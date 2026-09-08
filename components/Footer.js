@@ -30,7 +30,7 @@ const Footer = () => {
         {/* Contact / Hours */}
         <div>
           <h3 className="mb-2 text-lg font-semibold">Contact</h3>
-          <p className="text-sm">486260 US-95, Samuels, ID 83864</p>
+          <p className="text-sm">486260 US-95, Sandpoint, ID 83864</p>
           <div className="mt-1 space-y-0.5 text-sm">
             <p>Sun &amp; Mon: 6am – 2pm</p>
             <p>Tue – Thu: 6am – 7:30pm</p>

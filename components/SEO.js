@@ -52,12 +52,10 @@ export default function SEO({
       
       {/* Geographic SEO */}
       <meta name="geo.region" content="US-ID" />
-      <meta name="geo.placename" content="Samuels, Idaho" />
-      <meta name="geo.position" content="48.3686;-116.5535" />
-      <meta name="ICBM" content="48.3686, -116.5535" />
+      <meta name="geo.placename" content="Sandpoint, Idaho" />
       
       {/* Business/Restaurant specific */}
-      <meta property="business:contact_data:locality" content="Samuels" />
+      <meta property="business:contact_data:locality" content="Sandpoint" />
       <meta property="business:contact_data:region" content="Idaho" />
       <meta property="business:contact_data:postal_code" content="83864" />
       <meta property="business:contact_data:country_name" content="United States" />
@@ -74,7 +72,7 @@ export default function SEO({
         <script
           key={i}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }}
         />
       ))}
     </Head>
