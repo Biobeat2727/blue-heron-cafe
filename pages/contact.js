@@ -156,11 +156,11 @@ export default function ContactPage() {
               <div className="mb-4 space-y-1 text-gray-700">
                 <p><span className="font-medium">Sunday:</span> 6:00am – 2:00pm</p>
                 <p><span className="font-medium">Monday:</span> 6:00am – 2:00pm</p>
-                <p><span className="font-medium">Tuesday:</span> 6:00am – 7:30pm</p>
-                <p><span className="font-medium">Wednesday:</span> 6:00am – 7:30pm</p>
-                <p><span className="font-medium">Thursday:</span> 6:00am – 7:30pm</p>
-                <p><span className="font-medium">Friday:</span> 6:00am – 8:30pm</p>
-                <p><span className="font-medium">Saturday:</span> 6:00am – 8:30pm</p>
+                <p><span className="font-medium">Tuesday:</span> 6:00am – 7:00pm</p>
+                <p><span className="font-medium">Wednesday:</span> 6:00am – 7:00pm</p>
+                <p><span className="font-medium">Thursday:</span> 6:00am – 7:00pm</p>
+                <p><span className="font-medium">Friday:</span> 6:00am – 8:00pm</p>
+                <p><span className="font-medium">Saturday:</span> 6:00am – 8:00pm</p>
               </div>
               
               <h3 className="flex items-center mb-2 text-lg font-semibold text-cyan-800">

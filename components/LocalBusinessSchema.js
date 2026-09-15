@@ -24,13 +24,13 @@ export default function LocalBusinessSchema() {
         "@type": "OpeningHoursSpecification",
         "dayOfWeek": ["Tuesday", "Wednesday", "Thursday"],
         "opens": "06:00",
-        "closes": "19:30"
+        "closes": "19:00"
       },
       {
         "@type": "OpeningHoursSpecification",
         "dayOfWeek": ["Friday", "Saturday"],
         "opens": "06:00",
-        "closes": "20:30"
+        "closes": "20:00"
       }
     ],
     "servesCuisine": ["American", "Country", "Farm-to-table"],

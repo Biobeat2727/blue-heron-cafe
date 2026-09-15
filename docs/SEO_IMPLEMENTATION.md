@@ -41,11 +41,11 @@ Coords:   48.3686, -116.5535
 ```
 Sunday:    6:00am – 2:00pm
 Monday:    6:00am – 2:00pm
-Tuesday:   6:00am – 7:30pm
-Wednesday: 6:00am – 7:30pm
-Thursday:  6:00am – 7:30pm
-Friday:    6:00am – 8:30pm
-Saturday:  6:00am – 8:30pm
+Tuesday:   6:00am – 7:00pm
+Wednesday: 6:00am – 7:00pm
+Thursday:  6:00am – 7:00pm
+Friday:    6:00am – 8:00pm
+Saturday:  6:00am – 8:00pm
 ```
 
 ### Target Keywords (primary)
@@ -242,13 +242,13 @@ Schema.org markup in JSON-LD format tells Google exactly what a page is about. F
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": ["Tuesday", "Wednesday", "Thursday"],
     "opens": "06:00",
-    "closes": "19:30"
+    "closes": "19:00"
   },
   {
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": ["Friday", "Saturday"],
     "opens": "06:00",
-    "closes": "20:30"
+    "closes": "20:00"
   }
 ]
 ```

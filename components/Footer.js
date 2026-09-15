@@ -33,8 +33,8 @@ const Footer = () => {
           <p className="text-sm">486260 US-95, Sandpoint, ID 83864</p>
           <div className="mt-1 space-y-0.5 text-sm">
             <p>Sun &amp; Mon: 6am – 2pm</p>
-            <p>Tue – Thu: 6am – 7:30pm</p>
-            <p>Fri &amp; Sat: 6am – 8:30pm</p>
+            <p>Tue – Thu: 6am – 7pm</p>
+            <p>Fri &amp; Sat: 6am – 8pm</p>
           </div>
           <a href="tel:+12082631146" className="mt-1 inline-block text-sm">Phone: (208) 263-1146</a>
         </div>

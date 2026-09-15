@@ -6,11 +6,11 @@ import { useRef } from "react";
 const HOURS = [
   { day: "Sun", range: "6am – 2pm" },
   { day: "Mon", range: "6am – 2pm" },
-  { day: "Tue", range: "6am – 7:30pm" },
-  { day: "Wed", range: "6am – 7:30pm" },
-  { day: "Thu", range: "6am – 7:30pm" },
-  { day: "Fri", range: "6am – 8:30pm" },
-  { day: "Sat", range: "6am – 8:30pm" },
+  { day: "Tue", range: "6am – 7pm" },
+  { day: "Wed", range: "6am – 7pm" },
+  { day: "Thu", range: "6am – 7pm" },
+  { day: "Fri", range: "6am – 8pm" },
+  { day: "Sat", range: "6am – 8pm" },
 ];
 
 const TODAY_SHORT = new Date().toLocaleDateString("en-US", { weekday: "short" });
