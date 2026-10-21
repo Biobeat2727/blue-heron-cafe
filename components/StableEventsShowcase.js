@@ -12,6 +12,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { Music, Phone, X } from "lucide-react";
 
+// Flip to true (and swap the image path) when next season's poster is ready.
+const SHOW_SEASON_POSTER = false;
+
 const StableEventsShowcase = () => {
   const [events, setEvents] = useState([]);
   const [sponsors, setSponsors] = useState([]);
@@ -210,7 +213,22 @@ const StableEventsShowcase = () => {
           </p>
         </div>
 
+        {/* End of Season Thank You (shown while the season poster is off) */}
+        {!SHOW_SEASON_POSTER && (
+          <div className="max-w-3xl p-10 mx-auto mb-16 text-center bg-white border shadow-xl md:p-12 border-sky-100 rounded-2xl">
+            <Music className="w-12 h-12 mx-auto mb-6 text-sky-500" aria-hidden="true" />
+            <h3 className="mb-4 font-serif text-3xl font-bold md:text-4xl text-cyan-700">
+              Thank you for an amazing summer
+            </h3>
+            <p className="text-lg leading-relaxed text-gray-600">
+              Thanks to everyone who came out for the shows and stuck around the patio until the sun went down.
+              We're already cooking up some amazing musical and community events for the summer of 2027, so stay tuned.
+            </p>
+          </div>
+        )}
+
         {/* Season Poster */}
+        {SHOW_SEASON_POSTER && (
         <div className="max-w-3xl mx-auto mb-16">
           <button
             onClick={() => setSeasonPosterOpen(true)}
@@ -225,6 +243,7 @@ const StableEventsShowcase = () => {
             <p className="mt-2 text-sm font-medium text-cyan-600">Tap to view full size</p>
           </button>
         </div>
+        )}
 
         {/* Sponsors Strip */}
         {sponsors.length > 0 && (
