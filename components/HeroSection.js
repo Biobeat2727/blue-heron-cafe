@@ -61,7 +61,7 @@ const HeroSection = () => {
         style={{ y, opacity }}
       >
         <img
-          src="/images/blue-heron-hero2.webp"
+          src="/images/blue-heron-hero2-1920.webp"
           alt="Blue Heron Café outdoor patio and live music stage in Samuels, Idaho near Sandpoint"
           className="w-full h-full object-cover"
           loading="eager"

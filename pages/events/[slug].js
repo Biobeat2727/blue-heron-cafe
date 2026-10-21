@@ -162,7 +162,7 @@ export default function EventDetail({ event, sponsors }) {
           {image && (
             <div className="relative h-[70vh] w-full">
               <motion.img
-                src={urlFor(image).width(1200).url()}
+                src={urlFor(image).width(1200).fit("max").auto("format").quality(75).url()}
                 alt={title}
                 className="object-cover w-full h-full filter blur-sm"
                 initial={{ scale: 1.1, opacity: 0 }}
@@ -310,7 +310,7 @@ export default function EventDetail({ event, sponsors }) {
                       }}
                     >
                       <img
-                        src={urlFor(image).width(600).url()}
+                        src={urlFor(image).width(600).fit("max").auto("format").quality(75).url()}
                         alt={`${title} Event Poster`}
                         className="w-full max-w-md mx-auto transition-all duration-300 shadow-lg rounded-xl group-hover:shadow-2xl group-hover:scale-105"
                       />
@@ -561,7 +561,7 @@ export default function EventDetail({ event, sponsors }) {
 
               {/* Poster Image */}
               <img
-                src={urlFor(image).width(1200).url()}
+                src={urlFor(image).width(1200).fit("max").auto("format").quality(75).url()}
                 alt={`${title} Event Poster`}
                 className="w-full h-auto max-h-[90vh] object-contain rounded-lg shadow-2xl"
               />

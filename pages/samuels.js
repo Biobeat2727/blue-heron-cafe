@@ -30,7 +30,7 @@ export default function SamuelsPage() {
       {/* Hero Section */}
       <section ref={heroRef} className="relative w-full h-[60vh] overflow-hidden">
         <motion.img
-          src="/images/samuels/hero.jpg"
+          src="/images/samuels/hero.webp"
           alt="Samuels Store"
           style={{ scale, opacity }}
           className="w-full h-full object-cover"

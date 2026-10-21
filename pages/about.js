@@ -51,7 +51,7 @@ export default function AboutPage() {
       <section className="max-w-5xl mx-auto px-6 py-24 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div>
           <img
-            src="/images/about-cafe.jpg"
+            src="/images/about-cafe.webp"
             alt="Inside Blue Heron Café"
             className="w-full h-auto rounded-xl shadow-lg"
           />

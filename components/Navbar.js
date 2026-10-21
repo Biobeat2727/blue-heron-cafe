@@ -130,7 +130,7 @@ const Navbar = () => {
               <div className="absolute inset-0 transition-opacity duration-500 rounded-full opacity-0 bg-gradient-to-r from-sky-300/40 via-blue-300/40 to-cyan-300/40 blur-xl group-hover:opacity-100"></div>
               
               <motion.img
-                src="/images/blue-heron-vertical-logo.png"
+                src="/images/blue-heron-vertical-logo.webp"
                 alt="Blue Heron Café, restaurant and live music venue in Samuels, Idaho near Sandpoint"
                 className="relative z-10 w-auto transition-all duration-300 drop-shadow-2xl h-28 filter group-hover:brightness-110"
                 whileHover={{ scale: 1.05 }}
