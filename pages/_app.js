@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import Head from "next/head";
 import { MotionConfig } from "framer-motion";
 import LocalBusinessSchema from "@/components/LocalBusinessSchema";
+import EventPopup from "@/components/EventPopup";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -26,6 +27,7 @@ export default function App({ Component, pageProps }) {
         <Component {...pageProps} />
       </main>
       <Footer />
+      <EventPopup />
     </MotionConfig>
   );
 }
