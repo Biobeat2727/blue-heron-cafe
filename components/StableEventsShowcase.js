@@ -13,7 +13,8 @@ import Link from "next/link";
 import { Music, Phone, X } from "lucide-react";
 
 // Flip to true (and swap the image path) when next season's poster is ready.
-const SHOW_SEASON_POSTER = false;
+// Also controls the poster on the /events page.
+export const SHOW_SEASON_POSTER = false;
 
 const StableEventsShowcase = () => {
   const [events, setEvents] = useState([]);

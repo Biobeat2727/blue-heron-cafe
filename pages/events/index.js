@@ -12,6 +12,7 @@ function urlFor(source) {
   return builder.image(source);
 }
 import EventsCalendar from "@/components/EventsCalendar";
+import { SHOW_SEASON_POSTER } from "@/components/StableEventsShowcase";
 
 export default function EventsPage({ events, sponsors }) {
   // Use events directly since backend filtering now handles date logic properly
@@ -254,6 +255,7 @@ export default function EventsPage({ events, sponsors }) {
             </h1>
 
             {/* Season Poster */}
+            {SHOW_SEASON_POSTER && (
             <div className="max-w-3xl mx-auto mb-8">
               <button
                 onClick={() => setPosterOpen(true)}
@@ -268,6 +270,7 @@ export default function EventsPage({ events, sponsors }) {
                 <p className="mt-2 text-sm font-medium text-cyan-600">Tap to view full size</p>
               </button>
             </div>
+            )}
 
             <p className="max-w-3xl mx-auto mb-8 text-xl leading-relaxed text-gray-700">
               Join us at the outdoor stage and patio for live music and community events in the heart of Samuels, Idaho.
